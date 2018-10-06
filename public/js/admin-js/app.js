@@ -61026,11 +61026,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "hidden-sm-down logo"
   }, [_c('img', {
     attrs: {
-      "src": "/images/logo_blue.svg",
+      "src": "/images/logo.png",
       "alt": "logo",
       "width": "100%"
     }
-  }), _vm._v(" "), _c('strong', [_vm._v("CREX")])])
+  }), _vm._v(" "), _c('strong', [_vm._v("R2H-Live")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

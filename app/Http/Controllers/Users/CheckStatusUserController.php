@@ -15,8 +15,9 @@ class CheckStatusUserController extends Controller
     public function checkUserStatus()
     {
 
-        // Get user
+        // get user
         $user = Auth::user();
+
 
         // Check location And Set Language
         $checkLocation = $this->checkLocation();
@@ -26,77 +27,36 @@ class CheckStatusUserController extends Controller
                 'message' => 'Please confirm the new location from your mail to access to your account'], 401);
         }
 
-        // Get Site Info
-        $getSiteInfo = Siteinfo::first()->payment_status;
+        // if has StripeId
+        if ($user->hasBraintreeId()) {
 
-        // If has BraintreeId
-        // if payment status is true check the payment
-
-        if(!$getSiteInfo) {
-            if ($user->hasBraintreeId()) {
-
-                $payment_details = Auth::user()->subscription('main')->asBraintreeSubscription();
+            // $payment_details = Auth::user()->subscription('main')->asBraintreeSubscription();
 
 
-                if ($user->period_end >= date("Y-m-d")) {
-                    $cancel_time = $user->subscription('main')->ends_at;
-                    if ($cancel_time !== null) {
-                        $user->period_end = $cancel_time;
-                        $user->save();
+            // if ($user->period_end >= date("Y-m-d")) {
+            //     $cancel_time = $user->subscription('main')->ends_at;
+            //     if ($cancel_time !== null) {
+            //         $user->period_end = $cancel_time;
+            //         $user->save();
+            //         return response()->json([
+            //             'name' => $user->name,
+            //             'email' => $user->email,
+            //             'language' => $user->language,
+            //             'status' => 'cancel',
+            //             'cancel_time' => $user->subscription('main')->ends_at,
+            //             'caption' => $user->caption,
+            //         ]);
+            //     } else {
+
+                    // When the mail is not confirmed
+                    if ($user->confirmed === 0) {
                         return response()->json([
-                            'name' => $user->name,
-                            'email' => $user->email,
+                            'name' => Auth::user()->name,
+                            'email' => Auth::user()->email,
+                            'status' => 'confirm_step',
                             'language' => $user->language,
-                            'status' => 'cancel',
-                            'cancel_time' => $user->subscription('main')->ends_at,
-                            'caption' => $user->caption,
-                        ]);
+                            'caption' => $user->caption]);
                     } else {
-
-                        // When the mail is not confirmed
-                        if ($user->confirmed === 0) {
-                            return response()->json([
-                                'name' => Auth::user()->name,
-                                'email' => Auth::user()->email,
-                                'status' => 'confirm_step',
-                                'language' => $user->language,
-                                'caption' => $user->caption]);
-                        } else {
-                            return response()->json([
-                                'name' => $user->name,
-                                'email' => $user->email,
-                                'status' => 'active',
-                                'language' => $user->language,
-                                'caption' => $user->caption]);
-                        }
-                    }
-                } else {
-                    // Get subscription details
-
-                    $period_end_date = $payment_details->billingPeriodEndDate->format('Y-m-d');
-
-                    $detect_status = $payment_details->status;
-
-                    //When an invoice payment on a subscription fails, the subscription becomes past_due.
-                    //After Braintree exhausts all payment retry attempts, the subscription remains past_due or moves to a status of either canceled or unpaid, depending upon your retry settings.
-                    //https://stripe.com/docs/subscriptions/lifecycle
-
-                    if ($detect_status === 'past_due' || $detect_status === 'canceled' || $detect_status === 'unpaid') {
-                        $user->save();
-                        return response()->json([
-                            'plan' => '1',
-                            'email' => $user->email,
-                            'name' => $user->name,
-                            'status' => 'payment_reactive',
-                            'language' => 'en',
-                        ]);
-                    }
-
-                    // When subscription is active
-
-                    if ($detect_status === 'active' || $detect_status === 'trialing' && $period_end_date >= date("Y-m-d")) {
-                        $user->period_end = $period_end_date;
-                        $user->save();
                         return response()->json([
                             'name' => $user->name,
                             'email' => $user->email,
@@ -104,42 +64,71 @@ class CheckStatusUserController extends Controller
                             'language' => $user->language,
                             'caption' => $user->caption]);
                     }
-                }
-            }
-            elseif ($user->period_end >= date("Y-m-d"))
-            {
-                if ($user->period_end >= date("Y-m-d")) {
+                }else{
                     return response()->json([
-                        'name' => Auth::user()->name,
-                        'email' => Auth::user()->email,
-                        'status' => 'active',
-                        'language' => $user->language,
-                        'caption' => $user->caption], 200);
-                } else {
-                    return response()->json([
-                        'name' => Auth::user()->name,
-                        'email' => Auth::user()->email,
-                        'status' => 'payment_reactive',
-                        'language' => $user->language,
-                        'caption' => $user->caption], 200);
-                }
-            }
-            else {
-                return response()->json([
                     'name' => Auth::user()->name,
                     'email' => Auth::user()->email,
                     'status' => 'payment_step',
-                    'language' => $user->language,
-                    'caption' => $user->caption], 200);
-            }
-        }else{
-            return response()->json([
-                'name' => $user->name,
-                'email' => $user->email,
-                'status' => 'active',
-                'language' => $user->language,
-                'caption' => $user->caption], 200);
-        }
+                    'language' => 'en'], 200);   
+                }
+        //     } else {
+        //         // Get subscription details
+
+        //         $period_end_date = $payment_details->billingPeriodEndDate->format('Y-m-d');
+
+        //         $detect_status  = $payment_details->status;
+
+        //         //When an invoice payment on a subscription fails, the subscription becomes past_due.
+        //         //After Braintree exhausts all payment retry attempts, the subscription remains past_due or moves to a status of either canceled or unpaid, depending upon your retry settings.
+        //         //https://stripe.com/docs/subscriptions/lifecycle
+
+        //         if ($detect_status === 'past_due' || $detect_status === 'canceled' || $detect_status === 'unpaid') {
+        //             $user->save();
+        //             return response()->json([
+        //                 'plan' => '1',
+        //                 'email' => $user->email,
+        //                 'name' => $user->name,
+        //                 'status' => 'payment_reactive',
+        //                 'language' => 'en',
+        //             ]);
+        //         }
+
+        //         // When subscription is active
+
+        //         if ($detect_status === 'active' || $detect_status === 'trialing' && $period_end_date >= date("Y-m-d")) {
+        //             $user->period_end = $period_end_date;
+        //             $user->save();
+        //             return response()->json([
+        //                 'name' => $user->name,
+        //                 'email' => $user->email,
+        //                 'status' => 'active',
+        //                 'language' => $user->language,
+        //                 'caption' => $user->caption]);
+        //         }
+        //     }
+        // } elseif (Auth::user()->status == 1005) {
+        //     if ($user->period_end >= date("Y-m-d")) {
+        //         return response()->json([
+        //             'name' => Auth::user()->name,
+        //             'email' => Auth::user()->email,
+        //             'status' => 'active',
+        //             'payment' => 1005,
+        //             'language' => 'en'], 200);
+        //     } else {
+        //         return response()->json([
+        //             'name' => Auth::user()->name,
+        //             'email' => Auth::user()->email,
+        //             'status' => 'payment_reactive',
+        //             'payment' => 1005,
+        //             'language' => 'en'], 200);
+        //     }
+        // } else {
+        //     return response()->json([
+        //         'name' => Auth::user()->name,
+        //         'email' => Auth::user()->email,
+        //         'status' => 'payment_step',
+        //         'language' => 'en'], 200);
+        // }
     }
 
     /**

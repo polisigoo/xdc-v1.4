@@ -23,6 +23,7 @@
         "paypal/rest-api-sdk-php": "^1.13",
         "pbmedia/laravel-ffmpeg": "^2.1",
         "pusher/pusher-php-server": "^3.2",
+        "razorpay/razorpay": "2.*",
         "spatie/laravel-backup": "^5.10",
         "webpatser/laravel-uuid": "^3.0"
     },

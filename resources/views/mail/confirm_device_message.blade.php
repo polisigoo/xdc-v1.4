@@ -53,7 +53,7 @@
     <div class="footer" style="margin-top: 100px;background: #e8e8e8;padding: 20px;">
         <p>Please do not reply to this email. Emails sent to this address will not be answered.
         </p>
-        <p>Copyright © 1999-2017 {{ config('app.name') }}  </p>
+        <p>Copyright © {{ date('Y') }} {{ config('app.name') }}  </p>
     </div>
 </div>
 </body>

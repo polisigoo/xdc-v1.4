@@ -42,4 +42,8 @@ class User extends Authenticatable
     public function AauthAcessToken(){
         return $this->hasMany('\App\OauthAccessToken');
     }
+
+    public function subscription(){
+        return $this->hasOne('App\Subscription', 'uid');
+    }
 }

@@ -11,6 +11,7 @@
         <link rel="icon" sizes="192x192" href="/images/logo.png">
         <link rel="stylesheet" href="/css/app.css">
         <link rel="stylesheet" href="/player/skin/skin.css">
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     </head>
   <body id="root">
    <!--  container content: START -->

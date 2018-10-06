@@ -71,9 +71,9 @@
                 </div>
                 <div class="col-12 col-sm-4 col-lg-4 mt-5 p-3 address">
                     <ul class="list-unstyled">
-                        <li>{{$t('footer.email')}}: contact@cinemirna.com</li>
-                        <li>{{$t('footer.phone_number')}}: +880023123</li>
-                        <li>{{$t('footer.address')}}: San Jose, CA 000xxx</li>
+                        <li>{{$t('footer.email')}}: contact@r2h-live.com</li>
+                        <li>{{$t('footer.phone_number')}}: +91 981981 9323</li>
+                        <li>{{$t('footer.address')}}: ACME Tower, Malad West, Mumbai, INDIA</li>
                     </ul>
                 </div>
             </div>

@@ -58,28 +58,40 @@ class Helpers
      */
     public static function getIp()
     {
-        $ip = getenv('REMOTE_ADDR');;
-        $query = unserialize(file_get_contents('http://ip-api.com/php/' . $ip));
+        $ip = file_get_contents('https://api.ipify.org/');;
+        $query = json_decode(file_get_contents('https://ipapi.co/' . $ip . '/json'));
         if ($query) {
-            return $query;
+            $location['country'] = $query->country_name;
+            $location['countryCode'] = $query->country;
+            $location['city']  = $query->city;
+            $location['query'] = $query->ip;
+            $location['isp'] = $query->org;
+            $location['zip'] = $query->postal === null ? "": $query->postal ;
+            return $location;
         }
     }
 
     public static function checkUserPayment($user)
     {
-        $getSiteInfo = Siteinfo::first()->payment_status;
+        // $getSiteInfo = Siteinfo::first()->payment_status;
 
-        if ($getSiteInfo) {
+        // if ($getSiteInfo) {
+        //     return true;
+        // } else {
+        //     if (is_null($user['period_end'])) {
+        //         abort(401, 'Unauthorized action.');
+        //     } else {
+        //         if ($user->period_end < date("Y-m-d")) {
+        //             abort(401, 'Unauthorized action.');
+        //         }
+        //         return true;
+        //     }
+        // }
+         if (!is_null($user->braintree_id)) {
             return true;
-        } else {
-            if (is_null($user['period_end'])) {
-                abort(401, 'Unauthorized action.');
-            } else {
-                if ($user->period_end < date("Y-m-d")) {
-                    abort(401, 'Unauthorized action.');
-                }
-                return true;
-            }
+        }
+        else{
+            abort(401, $message = 'Unauthorized action');
         }
 
     }

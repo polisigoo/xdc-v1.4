@@ -86,6 +86,14 @@
 
         <!-- END SIDEBAR IPAD col-sm -->
 
+        <default-alert v-if="
+                         $route.name ==='discover'    ||
+                         $route.name ==='series'  ||
+                         $route.name ==='collection' ||
+                         $route.name ==='kids'    ||
+                         $route.name ==='movies'    ||
+                         $route.name ==='channels' ? true : false"></default-alert>
+
 
         <end-footer v-if="
                          $route.name ==='discover'    ||
@@ -113,7 +121,8 @@
     import ads_notifcation from "./control/notification/ads.vue";
     import footer from "./control/footer.vue";
     import swal from "sweetalert";
-    import searchPage from './control/search/search.vue'
+    import searchPage from './control/search/search.vue';
+    import default_alert from './control/notification/default.vue';
 
     const moment = require("moment");
 
@@ -126,7 +135,8 @@
             message,
             'end-footer': footer,
             'ads-notifcation': ads_notifcation,
-            'search-page': searchPage
+            'search-page': searchPage,
+            'default-alert': default_alert
         },
 
         data() {

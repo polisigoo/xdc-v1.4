@@ -18,7 +18,7 @@ export default function (Vue) {
         },
         // braintree public key
         sandbox_key() {
-            return 'sandbox_44t7tjz7_ks67rf2322vb7knd';
+            return 'sandbox_pms8xmff_hmpkz8zbk5pwdd9s';
         },
         current_theme() {
             const theme = document.body.firstElementChild.className;

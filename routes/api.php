@@ -36,6 +36,7 @@ Route::middleware('throttle:60,1')->group(function () {
     Route::get('/v1/register/verify/{token}', 'Users\RegisterController@codeConfirmed')->name('email_confiem');
     Route::post('/v1/create/register', 'Users\RegisterController@register');
     Route::post('/v1/check/register/email', 'Users\RegisterController@sendForgetPassword');
+    Route::post('/v1/subscription/create', 'RazorController@createSubscription');
     Route::post('/v1/register/forget/checkhash', 'Users\RegisterController@forgetCheckHash');
     Route::post('/v1/update/register/password', 'Users\RegisterController@recoverPassword');
 

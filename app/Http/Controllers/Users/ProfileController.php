@@ -123,9 +123,9 @@ class ProfileController extends Controller
         }
 
         $user = Auth::user();
-        $subscription = $user->subscription('main')->asBraintreeSubscription();
+        $subscription = $user->subscription;
 
-        return response()->json(['status' => 'success', 'subscription_plan' => $subscription->planId, 'subscription_status' => $subscription->status, 'cancel' => $subscription->neverExpires ,'card_number' => $user->card_last_four, 'card_brand' => $user->card_brand]);
+        return response()->json(['status' => 'success', 'subscription_plan' => $subscription->braintree_plan, 'subscription_status' => 'Active', 'cancel' => $subscription->neverExpires ,'card_number' => $user->card_last_four, 'card_brand' => $user->card_brand]);
     }
 
     /**

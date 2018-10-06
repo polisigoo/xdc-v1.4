@@ -8,11 +8,13 @@ use App\Location_log;
 use App\Mail\ActivityAccount;
 use App\Mail\ForgetAccount;
 use App\User;
+use App\Subscription;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Braintree;
 
 class RegisterController extends Controller
 {
@@ -193,26 +195,30 @@ class RegisterController extends Controller
         $request->validate([
             'plan' => 'required|min:1|max:40',
         ]);
-
+        $plan = Braintree::where('plan_id', $request->plan)->firstOrFail();
         $user = Auth::user();
 
-        $user->newSubscription('main', $request->plan)
-                ->create($request->token);
+        $subscription = new Subscription;
+        $subscription->name = $plan->plan_name;
+        $subscription->payment_id  = $request->payment;
+        $subscription->braintree_plan = $request->plan;
+        $subscription->quantity = 1;
+        $subscription->trial_ends_at = Carbon::now()->addDays(7)->timestamp;
+        $subscription->ends_at = null;
+        $subscription->uid = Auth::id();
+        $subscription->save();
 
-        $details = $user->subscription('main')->asBraintreeSubscription();
-
-        if($details->status == 'Active') {
-
-            $user->period_end = $details->billingPeriodEndDate->format('Y-m-d');
+        if($subscription){
+            $user->braintree_id = $request->payment;
             $user->save();
-            return response()->json(['status' => 'success', 'name' => $user->name, 'email' => $user->email,  'card_number' => $user->card_last_four, 'card_brand' => $user->card_brand]);
+            return response()->json(['status' => 'success', 'name' => $user->name, 'email' => $user->email,  'card_number' => $user->card_last_four, 'card_brand' => $user->card_brand, 'subscription_id'=>$subscription->id]);
+        }else{
+            return response()->json(['status' => 'failed', 'message' => 'Failed to accept payment'], 401);
         }
 
 
-        return response()->json(['status' => 'failed', 'message' => 'Failed to accept payment'], 401);
-
-
     }
+
 
     /**
      * Confirm Device
