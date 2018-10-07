@@ -58,7 +58,7 @@
                                  :key="index" @click="plan = item.plan_id">
                                 <div class="card-plan" :class="{active_plan: plan === item.plan_id}">
                                     <h3>{{item.plan_name}}</h3>
-                                    <h1>${{item.plan_amount}}
+                                    <h1>₹{{item.plan_amount}}
                                         <small>/mo</small>
                                     </h1>
                                     <i v-if="item.plan_trial !== null">{{item.plan_trial}}
