@@ -3,7 +3,7 @@
         <div class="background-image"></div>
 
         <div class="nav-list">
-            <router-link :to="{name: 'discover'}">Browse Titles</router-link>
+            <router-link :to="{name: 'discover'}">{{$t('register.discover')}}</router-link>
             <router-link :to="{name: 'privacy'}">{{$t('register.privacy')}}</router-link>
             <router-link :to="{name: 'about-us'}">{{$t('register.aboutus')}}</router-link>
             <router-link :to="{name: 'contact-us'}">{{$t('register.contactus')}}</router-link>

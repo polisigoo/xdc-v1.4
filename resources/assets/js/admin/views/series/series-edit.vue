@@ -81,7 +81,7 @@
                                              @click="ADD_ACTOR(index,'default')">
 
                                             <div class="image">
-                                                <img :src="md_cast + item.image" :id="'preview_'+item.id" width="100%" class="img-rounded" v-if="item.cloud == 'local'">
+                                                <img :src="item.image" :id="'preview_'+item.id" width="100%" class="img-rounded" v-if="item.cloud == 'local'">
                                                 <img :src="md_cast + item.image" :id="'preview_'+item.id" width="100%" class="img-rounded" v-if="item.cloud == 'aws' ">
                                                 <p>{{item.name}}</p>
                                             </div>
@@ -96,7 +96,7 @@
                                              @click="ADD_ACTOR(index, 'search')">
 
                                             <div class="image">
-                                                <img :src="md_cast + item.image" :id="'preview_'+item.id" width="100%" class="img-rounded" v-if="item.cloud == 'local'">
+                                                <img :src="item.image" :id="'preview_'+item.id" width="100%" class="img-rounded" v-if="item.cloud == 'local'">
                                                 <img :src="md_cast + item.image" :id="'preview_'+item.id" width="100%" class="img-rounded" v-if="item.cloud == 'aws' ">
                                                 <p>{{item.name}}</p>
 
@@ -243,7 +243,7 @@
                                         <i class="fa fa-times-circle" @click="DELETE_ACTOR(key)"></i>
                                     </div>
                                     <div class="image">
-                                        <img :src="md_cast + item.image" :id="'preview_'+item.id" width="100%" class="img-rounded" v-if="item.cloud == 'local'">
+                                        <img :src=" item.image" :id="'preview_'+item.id" width="100%" class="img-rounded" v-if="item.cloud == 'local'">
                                         <img :src="md_cast + item.image" :id="'preview_'+item.id" width="100%" class="img-rounded" v-if="item.cloud == 'aws' ">
                                         <p>{{item.name}}</p>
                                     </div>

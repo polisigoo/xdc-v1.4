@@ -190,10 +190,17 @@
                                     {{item.email}}
                                 </td>
                                 <td>
-                                    <span class="badge badge-warning"
-                                          v-if="item.confirmed === 0">Unconfirmed mail</span>
-                                    <span class="badge badge-success" v-if="new Date(item.period_end) > new Date()">Activity</span>
-                                    <span class="badge badge-danger" v-if="new Date(item.period_end) < new Date()">Inactivity</span>
+                                    <span class="badge badge-warning" v-if="item.confirmed === 0">Unconfirmed mail</span>
+                                    <span v-if="item.period_end == null">
+                                        <span class="badge badge-success">Active (non-payment)</span>
+
+                                    </span>
+                                    <span v-else>
+
+                                    <span class="badge badge-success" v-if="new Date(item.period_end) > new Date()">Active</span>
+                                    <span class="badge badge-danger" v-if="new Date(item.period_end) < new Date()">Inactive</span>
+                                    </span>
+
                                 </td>
                                 <td>{{item.created_at}}</td>
                                 <td>{{item.updated_at}}</td>
@@ -206,9 +213,12 @@
                                         <button class="btn btn-sm btn-danger btn-sm mr-2" @click="DELETE(item.id,index)"
                                                 :id="item.id">Delete
                                         </button>
-                                        <button class="btn btn-sm btn-danger btn-sm mr-2" data-toggle="modal"
+                                        <button class="btn btn-sm btn-danger mr-2" data-toggle="modal"
                                                 data-target="#CreateUserModal" @click="BILLING(item.id)"
                                                 v-if="item.braintree_id != null && item.card_brand != null">Billing
+                                        </button>
+                                        <button class="btn btn-sm btn-secondary mr-2"
+                                                v-if="item.braintree_id == null && item.card_brand == null" data-toggle="tooltip" data-placement="top" title="The user have not billing because the payment gateway is disabled" disabled >Billing
                                         </button>
                                     </div>
                                 </td>

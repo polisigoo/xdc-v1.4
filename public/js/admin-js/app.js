@@ -11590,6 +11590,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -61026,11 +61036,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "hidden-sm-down logo"
   }, [_c('img', {
     attrs: {
-      "src": "/images/logo.png",
+      "src": "/images/logo_blue.svg",
       "alt": "logo",
       "width": "100%"
     }
-  }), _vm._v(" "), _c('strong', [_vm._v("R2H-Live")])])
+  }), _vm._v(" "), _c('strong', [_vm._v("CREX")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -61651,7 +61661,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [(item.cloud == 'local') ? _c('img', {
       staticClass: "img-rounded",
       attrs: {
-        "src": _vm.md_cast + item.image,
+        "src": item.image,
         "id": 'preview_' + item.id,
         "width": "100%"
       }
@@ -61679,7 +61689,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [(item.cloud == 'local') ? _c('img', {
       staticClass: "img-rounded",
       attrs: {
-        "src": _vm.md_cast + item.image,
+        "src": item.image,
         "id": 'preview_' + item.id,
         "width": "100%"
       }
@@ -62004,7 +62014,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [(item.cloud == 'local') ? _c('img', {
       staticClass: "img-rounded",
       attrs: {
-        "src": _vm.md_cast + item.image,
+        "src": item.image,
         "id": 'preview_' + item.id,
         "width": "100%"
       }
@@ -63098,11 +63108,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       key: index
     }, [_c('td', [_vm._v(_vm._s(item.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v("\n                                " + _vm._s(item.email) + "\n                            ")]), _vm._v(" "), _c('td', [(item.confirmed === 0) ? _c('span', {
       staticClass: "badge badge-warning"
-    }, [_vm._v("Unconfirmed mail")]) : _vm._e(), _vm._v(" "), (new Date(item.period_end) > new Date()) ? _c('span', {
+    }, [_vm._v("Unconfirmed mail")]) : _vm._e(), _vm._v(" "), (item.period_end == null) ? _c('span', [_c('span', {
       staticClass: "badge badge-success"
-    }, [_vm._v("Activity")]) : _vm._e(), _vm._v(" "), (new Date(item.period_end) < new Date()) ? _c('span', {
+    }, [_vm._v("Active (non-payment)")])]) : _c('span', [(new Date(item.period_end) > new Date()) ? _c('span', {
+      staticClass: "badge badge-success"
+    }, [_vm._v("Active")]) : _vm._e(), _vm._v(" "), (new Date(item.period_end) < new Date()) ? _c('span', {
       staticClass: "badge badge-danger"
-    }, [_vm._v("Inactivity")]) : _vm._e()]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.created_at))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.updated_at))]), _vm._v(" "), _c('td', [_c('div', {
+    }, [_vm._v("Inactive")]) : _vm._e()])]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.created_at))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.updated_at))]), _vm._v(" "), _c('td', [_c('div', {
       staticClass: "btn-group",
       attrs: {
         "role": "group"
@@ -63129,7 +63141,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }, [_vm._v("Delete\n                                    ")]), _vm._v(" "), (item.braintree_id != null && item.card_brand != null) ? _c('button', {
-      staticClass: "btn btn-sm btn-danger btn-sm mr-2",
+      staticClass: "btn btn-sm btn-danger mr-2",
       attrs: {
         "data-toggle": "modal",
         "data-target": "#CreateUserModal"
@@ -63138,6 +63150,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "click": function($event) {
           _vm.BILLING(item.id)
         }
+      }
+    }, [_vm._v("Billing\n                                    ")]) : _vm._e(), _vm._v(" "), (item.braintree_id == null && item.card_brand == null) ? _c('button', {
+      staticClass: "btn btn-sm btn-secondary mr-2",
+      attrs: {
+        "data-toggle": "tooltip",
+        "data-placement": "top",
+        "title": "The user have not billing because the payment gateway is disabled",
+        "disabled": ""
       }
     }, [_vm._v("Billing\n                                    ")]) : _vm._e()], 1)])])
   }))])]), _vm._v(" "), _c('nav', {
@@ -65686,7 +65706,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('div', {
       staticClass: "card-body"
     }, [_c('div', {
-      staticClass: "form-group"
+      staticClass: "form-group video-player"
     }, [(_vm.data.movie.type !== 'embed') ? _c('video', {
       attrs: {
         "width": "100%",
@@ -65695,7 +65715,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('source', {
       attrs: {
         "src": item.video_url,
-        "type": "video/mp4"
+        "type": "application/x-mpegurl"
       }
     }), _vm._v("\n                                                Your browser does not support the video tag.\n                                            ")]) : _c('iframe', {
       attrs: {
@@ -69946,7 +69966,7 @@ window.Pusher = __webpack_require__("./node_modules/pusher-js/dist/web/pusher.js
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_8_laravel_echo___default.a({
     broadcaster: 'pusher',
-    key: 'be8ccb5bb2f79a62ec85',
+    key: '4d7db658a17a069c7236',
     cluster: 'eu'
 });
 
@@ -70645,19 +70665,12 @@ var module = {
             axios.put('/api/admin/streaming/channel/' + id).then(function (response) {
                 if (response.status === 200) {
 
-                    if (response.data.streaming_status) {
-                        alertify.logPosition('top right');
-                        alertify.success('Successful Start Streaming');
-                        commit('STREAMING_STATUE', {
-                            'key': key, 'status': 1
-                        });
-                    } else {
-                        alertify.logPosition('top right');
-                        alertify.success('Successful Start Streaming');
-                        commit('STREAMING_STATUE', {
-                            'key': key, 'status': 0
-                        });
-                    }
+                    alertify.logPosition('top right');
+                    alertify.success(response.data.message);
+                    commit('STREAMING_STATUE', {
+                        'key': key, 'status': response.data.streaming_status
+                    });
+
                     commit('BUTTON_CLEAN');
                 }
             }, function (error) {

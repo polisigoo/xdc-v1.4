@@ -114,7 +114,7 @@ const module = {
                 const parsedCaption = JSON.parse(localStorage.getItem('caption'));
                 let css;
                 if (parsedCaption !== null && parsedCaption !== 'null' && parsedCaption !== undefined) {
-                    css = ` .flowplayer.custom-subtitles .fp-captions p {
+                    css = ` .flowplayer .fp-captions p {
                                     color:` + parsedCaption['color'] + ` !important;
                                     background-color: ` + parsedCaption['background-color'] + ` !important;
                                     font-size: ` + parseInt(parsedCaption['font-size']) * 2 + `px;
@@ -122,7 +122,7 @@ const module = {
                                    }`;
 
                 } else {
-                    css = `.flowplayer.custom-subtitles .fp-captions p {
+                    css = `.flowplayer .fp-captions p {
                                     color:#fff !important;
                                     background-color:  transparent !important;
                                     font-size: 35px;
@@ -142,7 +142,7 @@ const module = {
                 head.appendChild(style);
             }
             else {
-                let css = ` .flowplayer.custom-subtitles .fp-captions p {
+                let css = ` .flowplayer .fp-captions p {
                                     color:#fff !important;
                                     background-color:  transparent !important;
                                     font-size: 35px;
@@ -458,7 +458,7 @@ const module = {
                 const parsedCaption = JSON.parse(localStorage.getItem('caption'));
                 let css;
                 if (parsedCaption !== null && parsedCaption !== 'null' && parsedCaption !== undefined) {
-                    css = ` .flowplayer.custom-subtitles .fp-captions p {
+                    css = `.flowplayer .fp-captions p {
                                     color:` + parsedCaption['color'] + ` !important;
                                     background-color: ` + parsedCaption['background-color'] + ` !important;
                                     font-size: ` + parseInt(parsedCaption['font-size']) * 2 + `px;
@@ -466,7 +466,7 @@ const module = {
                                    }`;
 
                 } else {
-                    css = `.flowplayer.custom-subtitles .fp-captions p {
+                    css = `.flowplayer .fp-captions p {
                                     color:#fff !important;
                                     background-color:  transparent !important;
                                     font-size: 35px;
@@ -486,7 +486,7 @@ const module = {
                 head.appendChild(style);
             }
             else {
-                let css = ` .flowplayer.custom-subtitles .fp-captions p {
+                let css = `.flowplayer .fp-captions p{
                                     color:#fff !important;
                                     background-color:  transparent !important;
                                     font-size: 35px;
@@ -547,7 +547,7 @@ const module = {
             // Import subtitle to array
             let TextTrack = [];
             if (data.data.subtitle !== null) {
-                for (var i = 0; i < data.subtitle.length; i++) {
+                for (var i = 0; i < data.data.subtitle.length; i++) {
                     TextTrack.push(
                         {
                             kind: 'subtitles',
@@ -1078,7 +1078,7 @@ const module = {
             // If the HLS is form External Link
             if (state.data.video[0].streaming_transcoding == 1) {
                 VideoList = [{
-                    src: '/storage/iptv/' + state.data.video[0].id + '/' + state.data.video[0].streaming_name + '.m3u8',
+                    src: '/storage/iptv/' + state.data.video[0].id + '/' + state.data.video[0].streaming_name,
                     type: 'application/x-mpegURL',
                 }];
 

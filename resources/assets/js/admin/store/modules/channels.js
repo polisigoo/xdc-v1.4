@@ -59,19 +59,12 @@ const module = {
             axios.put('/api/admin/streaming/channel/' + id).then(response => {
               if (response.status === 200) {
 
-                if(response.data.streaming_status) {
-                    alertify.logPosition('top right');
-                    alertify.success('Successful Start Streaming');  
-                    commit('STREAMING_STATUE', {
-                        'key': key, 'status': 1
-                    });
-                } else {
-                    alertify.logPosition('top right');
-                    alertify.success('Successful Start Streaming');  
-                    commit('STREAMING_STATUE', {
-                        'key': key, 'status': 0
-                    });
-                }
+                  alertify.logPosition('top right');
+                  alertify.success(response.data.message);
+                  commit('STREAMING_STATUE', {
+                      'key': key, 'status': response.data.streaming_status
+                  });
+
                 commit('BUTTON_CLEAN');
               }
             },error => {

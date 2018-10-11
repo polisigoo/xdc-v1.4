@@ -473,8 +473,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_sweetalert__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__control_search_search_vue__ = __webpack_require__("./resources/assets/js/users/views/default/control/search/search.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__control_search_search_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__control_search_search_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__control_notification_default_vue__ = __webpack_require__("./resources/assets/js/users/views/default/control/notification/default.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__control_notification_default_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__control_notification_default_vue__);
 //
 //
 //
@@ -580,15 +578,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 
 
@@ -610,8 +599,7 @@ var moment = __webpack_require__("./node_modules/moment/moment.js");
         message: __WEBPACK_IMPORTED_MODULE_3__control_notification_message_vue___default.a,
         'end-footer': __WEBPACK_IMPORTED_MODULE_5__control_footer_vue___default.a,
         'ads-notifcation': __WEBPACK_IMPORTED_MODULE_4__control_notification_ads_vue___default.a,
-        'search-page': __WEBPACK_IMPORTED_MODULE_7__control_search_search_vue___default.a,
-        'default-alert': __WEBPACK_IMPORTED_MODULE_8__control_notification_default_vue___default.a
+        'search-page': __WEBPACK_IMPORTED_MODULE_7__control_search_search_vue___default.a
     },
 
     data: function data() {
@@ -6660,79 +6648,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   }
 });
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/users/views/default/control/notification/default.vue":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function($) {//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "default_alert",
-  data: function data() {
-    return {
-      data: []
-    };
-  },
-
-  methods: {
-    close_alert: function close_alert() {
-      $('#alert-notification').fadeOut('fast');
-      // alert('clicked')
-    }
-  }
-});
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
@@ -27326,21 +27241,6 @@ exports.push([module.i, "\n.table-inverse a[data-v-2caa6272] {\n    color: #2196
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3273a526\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/users/views/default/control/notification/default.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.ads-noticaiton[data-v-3273a526] {\n  position: fixed;\n  right: 10px;\n  bottom: 0px;\n  z-index: 1000000;\n  background-color: #313131;\n  padding: 10px;\n  cursor: pointer;\n}\n.ads-noticaiton p[data-v-3273a526] {\n  word-break: break-all;\n}\n.cancel[data-v-3273a526]{\n  color: white;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3482f672\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/users/views/default/errors/404.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45998,12 +45898,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     _vm.$route.name === 'collection' ||
     _vm.$route.name === 'kids' ||
     _vm.$route.name === 'movies' ||
-    _vm.$route.name === 'channels' ? true : false) ? _c('default-alert') : _vm._e(), _vm._v(" "), (
-    _vm.$route.name === 'discover' ||
-    _vm.$route.name === 'series' ||
-    _vm.$route.name === 'collection' ||
-    _vm.$route.name === 'kids' ||
-    _vm.$route.name === 'movies' ||
     _vm.$route.name === 'channels' ? true : false) ? _c('end-footer') : _vm._e(), _vm._v(" "), (_vm.getShowPagePath != null) ? _c('router-view', {
     key: _vm.getShowPagePath
   }) : _vm._e()], 1)
@@ -49677,125 +49571,6 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-3273a526\",\"hasScoped\":true}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/users/views/default/control/notification/default.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-12 alert-notification",
-    attrs: {
-      "id": "alert-notification"
-    }
-  }, [_c('button', {
-    staticClass: "close cancel",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": _vm.close_alert
-    }
-  }, [_c('span', {
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('div', {
-    staticClass: "offset-sm-1 offset-lg-1 email-confirmed"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-3 col-sm-2 col-lg-1 icon"
-  }, [_c('svg', {
-    staticClass: "alert-svg",
-    staticStyle: {
-      "enable-background": "new 0 0 60 60"
-    },
-    attrs: {
-      "version": "1.1",
-      "width": "100%",
-      "xmlns": "http://www.w3.org/2000/svg",
-      "xmlns:xlink": "http://www.w3.org/1999/xlink",
-      "x": "0px",
-      "y": "0px",
-      "viewBox": "0 0 60 60",
-      "xml:space": "preserve"
-    }
-  }, [_c('path', {
-    staticStyle: {
-      "fill": "none",
-      "stroke": "#DC9628",
-      "stroke-width": "2",
-      "stroke-linecap": "round",
-      "stroke-linejoin": "round",
-      "stroke-miterlimit": "10"
-    },
-    attrs: {
-      "d": "M34,12\n          V8c0-2.209-1.791-4-4-4s-4,1.791-4,4v4.072"
-    }
-  }), _vm._v(" "), _c('path', {
-    staticStyle: {
-      "fill": "#EEAF4B"
-    },
-    attrs: {
-      "d": "M16.491,50.638c10.701,1.847,16.658,1.847,27.36,0L53.341,49l0,0c-4.685-4.657-7.317-10.415-7.317-17\n              v-9c0.038-6.047-3.957-10.478-7.946-12.301c-4.999-2.285-10.815-2.294-15.806,0.008C18.319,12.53,14.038,16.958,14,23v9\n              c0,6.585-2.315,12.343-7,17l0,0L16.491,50.638z"
-    }
-  }), _vm._v(" "), _c('path', {
-    staticStyle: {
-      "fill": "#FBD490"
-    },
-    attrs: {
-      "d": "M19,25.991c-0.002,0-0.004,0-0.006,0c-0.552-0.004-0.997-0.454-0.994-1.006\n              c0.03-4.682,3.752-7.643,5.948-8.654c3.849-1.775,8.594-1.772,12.469-0.002c0.502,0.229,0.723,0.822,0.494,1.325\n              c-0.229,0.502-0.822,0.724-1.326,0.493c-3.354-1.533-7.469-1.537-10.799,0c-1.767,0.814-4.762,3.173-4.785,6.85\n              C19.997,25.547,19.549,25.991,19,25.991z"
-    }
-  }), _vm._v(" "), _c('path', {
-    staticStyle: {
-      "fill": "#DC9628"
-    },
-    attrs: {
-      "d": "M21.906,51.46C23.35,54.728,26.508,57,30.183,57c3.676,0,6.834-2.273,8.278-5.543\n              C32.533,52.209,27.83,52.21,21.906,51.46z"
-    }
-  }), _vm._v(" "), _c('path', {
-    staticStyle: {
-      "fill": "#F2ECBF"
-    },
-    attrs: {
-      "d": "M4.095,39.967c-0.256,0-0.512-0.098-0.707-0.293C1.203,37.489,0,34.58,0,31.483\n              c0-3.098,1.203-6.006,3.388-8.19c0.391-0.391,1.023-0.391,1.414,0s0.391,1.023,0,1.414C2.995,26.514,2,28.92,2,31.483\n              c0,2.563,0.995,4.969,2.802,6.776c0.391,0.391,0.391,1.023,0,1.414C4.606,39.869,4.351,39.967,4.095,39.967z"
-    }
-  }), _vm._v(" "), _c('path', {
-    staticStyle: {
-      "fill": "#F2ECBF"
-    },
-    attrs: {
-      "d": "M8.305,37.69c-0.256,0-0.512-0.098-0.707-0.293c-3.337-3.337-3.337-8.768,0-12.104\n              c0.391-0.391,1.023-0.391,1.414,0s0.391,1.023,0,1.414c-2.558,2.558-2.558,6.719,0,9.276c0.391,0.391,0.391,1.023,0,1.414\n              C8.817,37.593,8.561,37.69,8.305,37.69z"
-    }
-  }), _vm._v(" "), _c('path', {
-    staticStyle: {
-      "fill": "#F2ECBF"
-    },
-    attrs: {
-      "d": "M55.905,39.967c-0.256,0-0.512-0.098-0.707-0.293c-0.391-0.391-0.391-1.023,0-1.414\n              C57.005,36.452,58,34.046,58,31.483c0-2.563-0.995-4.97-2.802-6.776c-0.391-0.391-0.391-1.023,0-1.414s1.023-0.391,1.414,0\n              C58.797,25.478,60,28.386,60,31.483c0,3.097-1.203,6.006-3.388,8.19C56.417,39.869,56.161,39.967,55.905,39.967z"
-    }
-  }), _vm._v(" "), _c('path', {
-    staticStyle: {
-      "fill": "#F2ECBF"
-    },
-    attrs: {
-      "d": "M51.695,37.69c-0.256,0-0.512-0.098-0.707-0.293c-0.391-0.391-0.391-1.023,0-1.414\n              c2.558-2.558,2.558-6.719,0-9.276c-0.391-0.391-0.391-1.023,0-1.414s1.023-0.391,1.414,0c3.337,3.337,3.337,8.768,0,12.104\n              C52.207,37.593,51.951,37.69,51.695,37.69z"
-    }
-  })])]), _vm._v(" "), _vm._m(0, false, false)])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-7 col-sm-10 col-lg-10 "
-  }, [_c('h3', [_vm._v(" Notice")]), _vm._v(" "), _c('p', [_vm._v("All the content listed on the website are only for its beta testing purpose of the App. No commercials are being involved.\n          ")])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-3273a526", module.exports)
-  }
-}
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-3482f672\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/users/views/default/errors/404.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -53021,7 +52796,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         name: 'discover'
       }
     }
-  }, [_vm._v("Browse Titles")]), _vm._v(" "), _c('router-link', {
+  }, [_vm._v(_vm._s(_vm.$t('register.discover')))]), _vm._v(" "), _c('router-link', {
     attrs: {
       "to": {
         name: 'privacy'
@@ -57781,33 +57556,6 @@ if(false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3273a526\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/users/views/default/control/notification/default.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3273a526\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/users/views/default/control/notification/default.vue");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("6180a5b4", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3273a526\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./default.vue", function() {
-     var newContent = require("!!../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3273a526\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./default.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3482f672\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/users/views/default/errors/404.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -61248,9 +60996,9 @@ var module = {
                 var parsedCaption = JSON.parse(localStorage.getItem('caption'));
                 var css = void 0;
                 if (parsedCaption !== null && parsedCaption !== 'null' && parsedCaption !== undefined) {
-                    css = ' .flowplayer.custom-subtitles .fp-captions p {\n                                    color:' + parsedCaption['color'] + ' !important;\n                                    background-color: ' + parsedCaption['background-color'] + ' !important;\n                                    font-size: ' + parseInt(parsedCaption['font-size']) * 2 + 'px;\n                                    font-weight: ' + parsedCaption['font-weight'] + '\n                                   }';
+                    css = ' .flowplayer .fp-captions p {\n                                    color:' + parsedCaption['color'] + ' !important;\n                                    background-color: ' + parsedCaption['background-color'] + ' !important;\n                                    font-size: ' + parseInt(parsedCaption['font-size']) * 2 + 'px;\n                                    font-weight: ' + parsedCaption['font-weight'] + '\n                                   }';
                 } else {
-                    css = '.flowplayer.custom-subtitles .fp-captions p {\n                                    color:#fff !important;\n                                    background-color:  transparent !important;\n                                    font-size: 35px;\n                                    font-weight: 600;\n                                   }';
+                    css = '.flowplayer .fp-captions p {\n                                    color:#fff !important;\n                                    background-color:  transparent !important;\n                                    font-size: 35px;\n                                    font-weight: 600;\n                                   }';
                 }
                 var head = document.head || document.getElementsByTagName('head')[0];
                 var style = document.createElement('style');
@@ -61264,7 +61012,7 @@ var module = {
 
                 head.appendChild(style);
             } else {
-                var _css = ' .flowplayer.custom-subtitles .fp-captions p {\n                                    color:#fff !important;\n                                    background-color:  transparent !important;\n                                    font-size: 35px;\n                                    font-weight: 600;\n                                   }';
+                var _css = ' .flowplayer .fp-captions p {\n                                    color:#fff !important;\n                                    background-color:  transparent !important;\n                                    font-size: 35px;\n                                    font-weight: 600;\n                                   }';
                 var _head = document.head || document.getElementsByTagName('head')[0];
                 var _style = document.createElement('style');
 
@@ -61525,9 +61273,9 @@ var module = {
                 var parsedCaption = JSON.parse(localStorage.getItem('caption'));
                 var css = void 0;
                 if (parsedCaption !== null && parsedCaption !== 'null' && parsedCaption !== undefined) {
-                    css = ' .flowplayer.custom-subtitles .fp-captions p {\n                                    color:' + parsedCaption['color'] + ' !important;\n                                    background-color: ' + parsedCaption['background-color'] + ' !important;\n                                    font-size: ' + parseInt(parsedCaption['font-size']) * 2 + 'px;\n                                    font-weight: ' + parsedCaption['font-weight'] + '\n                                   }';
+                    css = '.flowplayer .fp-captions p {\n                                    color:' + parsedCaption['color'] + ' !important;\n                                    background-color: ' + parsedCaption['background-color'] + ' !important;\n                                    font-size: ' + parseInt(parsedCaption['font-size']) * 2 + 'px;\n                                    font-weight: ' + parsedCaption['font-weight'] + '\n                                   }';
                 } else {
-                    css = '.flowplayer.custom-subtitles .fp-captions p {\n                                    color:#fff !important;\n                                    background-color:  transparent !important;\n                                    font-size: 35px;\n                                    font-weight: 600;\n                                   }';
+                    css = '.flowplayer .fp-captions p {\n                                    color:#fff !important;\n                                    background-color:  transparent !important;\n                                    font-size: 35px;\n                                    font-weight: 600;\n                                   }';
                 }
                 var head = document.head || document.getElementsByTagName('head')[0];
                 var style = document.createElement('style');
@@ -61541,7 +61289,7 @@ var module = {
 
                 head.appendChild(style);
             } else {
-                var _css2 = ' .flowplayer.custom-subtitles .fp-captions p {\n                                    color:#fff !important;\n                                    background-color:  transparent !important;\n                                    font-size: 35px;\n                                    font-weight: 600;\n                                   }';
+                var _css2 = '.flowplayer .fp-captions p{\n                                    color:#fff !important;\n                                    background-color:  transparent !important;\n                                    font-size: 35px;\n                                    font-weight: 600;\n                                   }';
                 var _head2 = document.head || document.getElementsByTagName('head')[0];
                 var _style2 = document.createElement('style');
 
@@ -61591,7 +61339,7 @@ var module = {
             // Import subtitle to array
             var TextTrack = [];
             if (data.data.subtitle !== null) {
-                for (var i = 0; i < data.subtitle.length; i++) {
+                for (var i = 0; i < data.data.subtitle.length; i++) {
                     TextTrack.push({
                         kind: 'subtitles',
                         srclang: 'en',
@@ -61976,7 +61724,7 @@ var module = {
             // If the HLS is form External Link
             if (state.data.video[0].streaming_transcoding == 1) {
                 VideoList = [{
-                    src: '/storage/iptv/' + state.data.video[0].id + '/' + state.data.video[0].streaming_name + '.m3u8',
+                    src: '/storage/iptv/' + state.data.video[0].id + '/' + state.data.video[0].streaming_name,
                     type: 'application/x-mpegURL'
                 }];
             } else {
@@ -64249,51 +63997,6 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-8fceab48", Component.options)
   } else {
     hotAPI.reload("data-v-8fceab48", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ "./resources/assets/js/users/views/default/control/notification/default.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3273a526\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/users/views/default/control/notification/default.vue")
-}
-var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
-  /* script */
-  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/users/views/default/control/notification/default.vue"),
-  /* template */
-  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-3273a526\",\"hasScoped\":true}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/users/views/default/control/notification/default.vue"),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  "data-v-3273a526",
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "C:\\Users\\HP\\Downloads\\CinemaRex V1.4\\CinemaRex V1.4\\resources\\assets\\js\\users\\views\\default\\control\\notification\\default.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] default.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3273a526", Component.options)
-  } else {
-    hotAPI.reload("data-v-3273a526", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

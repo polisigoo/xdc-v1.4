@@ -327,9 +327,9 @@
                                 <div :id="'collapse'+ index" class="collapse show" :aria-labelledby="'heading' + index"
                                      data-parent="#accordion">
                                     <div class="card-body">
-                                        <div class="form-group">
+                                        <div class="form-group video-player">
                                             <video width="100%" controls v-if="data.movie.type !== 'embed'">
-                                                <source :src="item.video_url" type="video/mp4">
+                                                <source :src="item.video_url" type="application/x-mpegurl">
                                                 Your browser does not support the video tag.
                                             </video>
                                             <iframe v-else width="100%" height="100%" :src="item.video_url"
