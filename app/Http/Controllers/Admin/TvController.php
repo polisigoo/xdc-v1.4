@@ -105,6 +105,13 @@ class TvController extends Controller
             return response()->json(['status' => 'failed', 'message' => 'There is no id'], 422);
         }
 
+        // Kill FFmpeg if is runniung
+        if ($delete->streaming_status) {
+            $process = new Process('kill ' . $delete->streaming_pid);
+            $process->run();
+        }
+
+
         $delete->delete();
         return response()->json(['status' => 'success', 'message' => 'Successful delete']);
     }
@@ -203,7 +210,7 @@ class TvController extends Controller
                 $check->streaming_pid = null;
                 $check->save();
 
-                $process = new Process('kill ' . $check->streaming_pid);
+                $process = new Process('kill -9 ' . $check->streaming_pid);
                 $process->run();
                 // executes after the command finishes
                 if ($process->isSuccessful()) {

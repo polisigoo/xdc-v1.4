@@ -9,6 +9,7 @@ use Auth;
 use App\Siteinfo;
 use Razorpay\Api\Api;
 
+
 class BraintreeController extends Controller
 {
 
@@ -36,26 +37,19 @@ class BraintreeController extends Controller
      */
     public function getAllPlans()
     {
-     //   \Stripe\Stripe::setApiKey(config('app.stripe_private'));
+        try {
+            $getPlanFromApi = $this->razor->plan->all()->toArray()['items'];
+            $getPlanFromDB = Braintree::select('plan_id')->get();
+            $arrayPlan = [];
+            $fPDB = [];
 
-        $getPlanFromApi = $this->razor->plan->all()->toArray()['items'];
-        $getPlanFromDB = Braintree::select('plan_id')->get();
-        $arrayPlan = [];
-        $fPDB = [];
+            foreach ($getPlanFromDB as $k => $v) {
+                array_push($fPDB, $v->plan_id);
+            }
 
-        foreach ($getPlanFromDB as $k => $v) {
-            array_push($fPDB, $v->plan_id);
-        }
-
-
-        if(count($getPlanFromApi) > 0) {
+            if(count($getPlanFromApi) > 0) {
 
                 foreach ($getPlanFromApi as $apiKey => $value) {
-                    $value = json_decode(json_encode($value));
-                    $value->price = $value->item->amount / 100;
-                    $value->price = $value->price.".00";
-                    $value->name = $value->item->name;
-                    $value->currencyIsoCode = $value->item->currency;
                     if (in_array($value->id, $fPDB)) {
                         $arrayPlan[$apiKey] = ['active' => true, 'plan' => $value];
                     } else {
@@ -64,15 +58,26 @@ class BraintreeController extends Controller
 
                 }
 
-        }else {
-            $arrayPlan = null;
+            }else {
+                $arrayPlan = null;
+            }
+
+
+            return response()->json([
+                'status' => 'success',
+                'data' =>  $arrayPlan,
+                'payment_gateway_status' => Siteinfo::find(1)->payment_status
+            ], 200);
+
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' =>  "Braintree is not connected, Please check your Braintree account info is correct in .env file",
+            ], 200);
         }
 
 
-        return response()->json([
-            'status' => 'success',
-            'data' =>  $arrayPlan
-        ], 200);
     }
 
   /**

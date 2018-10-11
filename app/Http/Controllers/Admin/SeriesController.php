@@ -570,9 +570,9 @@ class SeriesController extends Controller
 
         if ($delete->t_cloud == 'aws') {
             // Remove video
-            Storage::disk('s3')->deleteDirectory('videos/' . $delete->t_name . '/' .  $delete->name . '_' . $delete->season_number . '_' . $delete->episode_number . '/');
+            Storage::disk('s3')->deleteDirectory('videos/' . $delete->t_name . '/' . $delete->name . '_' . $delete->season_number . '_' . $delete->episode_number . '/');
             // Remove subtitle
-            Storage::disk('s3')->deleteDirectory('subtitles/' . $delete->t_name .'/' . $delete->name . '_' . $delete->season_number . '_' . $delete->episode_number . '/');
+            Storage::disk('s3')->deleteDirectory('subtitles/' . $delete->t_name . '/' . $delete->name . '_' . $delete->season_number . '_' . $delete->episode_number . '/');
 
             $delete->delete();
         } else {
@@ -584,7 +584,7 @@ class SeriesController extends Controller
             $delete->delete();
         }
 
-            return response()->json(['status' => 'success', 'message' => 'Successful delete'], 200);
+        return response()->json(['status' => 'success', 'message' => 'Successful delete'], 200);
 
     }
 
@@ -1465,7 +1465,7 @@ class SeriesController extends Controller
         $listVideoNameAndId = [];
 
 
-        if ($request->video_link !== "empty") {
+        if ($request->has('video_link')) {
 
             $addtype = Episode::find($idEpisodeList[0]->id);
             $addtype->type = 'link';
@@ -1555,7 +1555,6 @@ class SeriesController extends Controller
                         $video->episode_id = $videoValue['id'];
                         $video->resolution = '720';
                         $video->video_url = '/storage/videos/' . $path_upload . $newNameM3U8;
-                        $video->type = 'local';
                         $video->save();
 
                     } else {
@@ -1622,7 +1621,6 @@ class SeriesController extends Controller
                             $video->episode_id = $videoValue['id'];
                             $video->resolution = '4k';
                             $video->video_url = '/storage/videos/' . $path_upload . '/' . $newNameMP4;
-                            $video->type = 'local';
                             $video->save();
                         }
 
@@ -1656,7 +1654,6 @@ class SeriesController extends Controller
                             $video->episode_id = $videoValue['id'];
                             $video->resolution = '1080';
                             $video->video_url = '/storage/videos/' . $path_upload . '/' . $newNameMP4;
-                            $video->type = 'local';
                             $video->save();
                         }
 
@@ -1691,7 +1688,6 @@ class SeriesController extends Controller
                             $video->episode_id = $videoValue['id'];
                             $video->resolution = '720';
                             $video->video_url = '/storage/videos/' . $path_upload . '/' . $newNameMP4;
-                            $video->type = 'local';
                             $video->save();
                         }
 
@@ -1726,7 +1722,6 @@ class SeriesController extends Controller
                             $video->episode_id = $videoValue['id'];
                             $video->resolution = '480';
                             $video->video_url = '/storage/videos/' . $path_upload . '/' . $newNameMP4;
-                            $video->type = 'local';
                             $video->save();
                         }
 
@@ -1761,7 +1756,6 @@ class SeriesController extends Controller
                             $video->episode_id = $videoValue['id'];
                             $video->resolution = '320';
                             $video->video_url = '/storage/videos/' . $path_upload . '/' . $newNameMP4;
-                            $video->type = 'local';
                             $video->save();
                         }
                     }
@@ -1798,7 +1792,7 @@ class SeriesController extends Controller
         $idEpisodeList = json_decode($request->id);
         $listVideoNameAndId = [];
 
-        if ($request->video_link !== "empty") {
+        if ($request->has('video_link')) {
 
             $addtype = Episode::find($idEpisodeList[0]->id);
             $addtype->type = 'link';
@@ -1889,7 +1883,6 @@ class SeriesController extends Controller
                         $video->episode_id = $videoValue['id'];
                         $video->resolution = '720';
                         $video->video_url = '/videos/' . $path_upload . $newNameM3U8;
-                        $video->type = 'local';
                         $video->save();
 
 
@@ -1963,7 +1956,7 @@ class SeriesController extends Controller
                             $video->episode_id = $videoValue['id'];
                             $video->resolution = '4k';
                             $video->video_url = '/videos/' . $path_upload . $newNameMP4;
-                            $video->type = 'local';
+
                             $video->save();
                         }
 
@@ -1997,7 +1990,7 @@ class SeriesController extends Controller
                             $video->episode_id = $videoValue['id'];
                             $video->resolution = '1080';
                             $video->video_url = '/videos/' . $path_upload . $newNameMP4;
-                            $video->type = 'local';
+
                             $video->save();
                         }
 
@@ -2032,7 +2025,7 @@ class SeriesController extends Controller
                             $video->episode_id = $videoValue['id'];
                             $video->resolution = '720';
                             $video->video_url = '/videos/' . $path_upload . $newNameMP4;
-                            $video->type = 'local';
+
                             $video->save();
                         }
 
@@ -2067,7 +2060,7 @@ class SeriesController extends Controller
                             $video->episode_id = $videoValue['id'];
                             $video->resolution = '480';
                             $video->video_url = '/videos/' . $path_upload . $newNameMP4;
-                            $video->type = 'local';
+
                             $video->save();
                         }
 
@@ -2102,7 +2095,7 @@ class SeriesController extends Controller
                             $video->episode_id = $videoValue['id'];
                             $video->resolution = '320';
                             $video->video_url = '/videos/' . $path_upload . $newNameMP4;
-                            $video->type = 'local';
+
                             $video->save();
                         }
                     }

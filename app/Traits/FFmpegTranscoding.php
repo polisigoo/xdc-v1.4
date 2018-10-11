@@ -642,16 +642,16 @@ trait FFmpegTranscoding
 
 
         if ($resolution === '1080') {
-            $veryHighBitrate = ' ffmpeg -i ' . $link . ' -c:a aac -ar 48000 -c:v h264 -profile:v main -sc_threshold 0 -g 48  -hls_time 4 -hls_flags delete_segments -b:v 5000k -maxrate 5350k -bufsize 7500k -b:a 192k ' . storage_path('app/public/iptv/' . $this->id . '/' . $name . '_1080.m3u8 ');
+            $veryHighBitrate = ' ffmpeg -i ' . $link . ' -c:a aac -ar 48000 -c:v h264 -profile:v main -sc_threshold 0 -g 48  -hls_time 4 -hls_flags delete_segments -b:v 5000k -maxrate 5350k -bufsize 7500k -b:a 192k ' . storage_path('app/public/iptv/' . $this->id . '/' . $name );
         }
         if ($resolution === '720') {
-            $highBitrate = ' ffmpeg -i ' . $link . ' -c:a aac -ar 48000 -c:v h264 -profile:v main -sc_threshold 0 -g 48  -hls_time 4 -hls_flags delete_segments -b:v 2800k -maxrate 2996k -bufsize 4200k -b:a 128 ' . storage_path('app/public/iptv/' . $this->id . '/' . $name . '_720.m3u8 ');
+            $highBitrate = ' ffmpeg -i ' . $link . ' -c:a aac -ar 48000 -c:v h264 -profile:v main -sc_threshold 0 -g 48  -hls_time 4 -hls_flags delete_segments -b:v 2800k -maxrate 2996k -bufsize 4200k -b:a 128 ' . storage_path('app/public/iptv/' . $this->id . '/' . $name );
         }
         if ($resolution === '480') {
-            $midBitrate = ' ffmpeg -i ' . $link . ' -c:a aac -ar 48000 -c:v h264 -profile:v main -sc_threshold 0 -g 48  -hls_time 4 -hls_flags delete_segments -b:v 1400k -maxrate 1498k -bufsize 2100k -b:a 128 ' . storage_path('app/public/iptv/' . $this->id . '/' . $name . '.m3u8');
+            $midBitrate = ' ffmpeg -i ' . $link . ' -c:a aac -ar 48000 -c:v h264 -profile:v main -sc_threshold 0 -g 48  -hls_time 4 -hls_flags delete_segments -b:v 1400k -maxrate 1498k -bufsize 2100k -b:a 128 ' . storage_path('app/public/iptv/' . $this->id . '/' . $name );
         }
         if ($resolution === '360') {
-            $lowBitrate = ' ffmpeg -i ' . $link . ' -c:a aac -ar 48000 -c:v h264 -profile:v main -sc_threshold 0 -g 48  -hls_time 4 -hls_flags delete_segments  -b:v 800k -maxrate 856k -bufsize 1200k -b:a 96k ' . storage_path('app/public/iptv/' . $this->id . '/' . $name . '.m3u8');
+            $lowBitrate = ' ffmpeg -i ' . $link . ' -c:a aac -ar 48000 -c:v h264 -profile:v main -sc_threshold 0 -g 48  -hls_time 4 -hls_flags delete_segments  -b:v 800k -maxrate 856k -bufsize 1200k -b:a 96k ' . storage_path('app/public/iptv/' . $this->id . '/' . $name );
         }
 
         // Set FFmpeg Command
@@ -664,7 +664,6 @@ trait FFmpegTranscoding
         $pid = exec($ffmpegCommand . ' > /dev/null 2>&1 & echo $!; ', $output);
 
         Log::info($ffmpegCommand);
-
 
         // Create Master Playlist Before FFmepg run
         $createMasterPlaylist = $this->createMasterPlaylistLive($lowBitrate, $midBitrate, $highBitrate, $veryHighBitrate, 'iptv/' . $id, $name);

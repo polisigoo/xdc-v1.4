@@ -84,7 +84,7 @@ class DashboardController extends Controller
             ->union($activeUserYear)
             ->get();
 
-        // Top movie and seris
+        // Top movie and series
     
         // Hourly
         $getTopEpisodeDay = DB::table('recently_watcheds')

@@ -153,7 +153,7 @@ class VideoPlayerController extends Controller
                     'version' => '2014-11-06'
                 ]);
                 // Set up parameter values for the resource
-                $resourceKey = config('aws.cloudfront_private_url') . '/videos/' . $checkAlreadyMovie->m_name . '/*';
+                $resourceKey = config('aws.cloudfront_private_url') . '/videos/*';
                 $resourceKey2 = config('aws.cloudfront_private_url') . '/videos/' . $getMovieVideo[0]->video;
                 $expires = time() + (86400 * 30);
 
@@ -424,7 +424,7 @@ POLICY;
                     'version' => '2014-11-06'
                 ]);
                 // Set up parameter values for the resource
-                $resourceKey = config('aws.cloudfront_private_url') . '/videos/' . $checkAlreadySeries->t_name . '/*';
+                $resourceKey = config('aws.cloudfront_private_url') . '/videos/*';
                 $resourceKey2 = config('aws.cloudfront_private_url') . '/videos/' . $getEpisodeVideo[0]->video;
                 $expires = time() + (86400 * 30);
 
@@ -527,6 +527,7 @@ POLICY;
             $getEpisodeVideo = DB::select('
                                 SELECT
                                 episodes.id AS id,
+                                episodes.type,
                                 episodes.name AS name,
                                 episodes.backdrop AS backdrop,
                                 episodes.series_id AS series_id,
@@ -536,7 +537,6 @@ POLICY;
                                 videos.v_id AS video_id,
                                 videos.video_url AS video,
                                 videos.resolution AS resolution,
-                                videos.type,
                                 videos.duration,
                                 recently_watcheds.current_time,
                                 recently_watcheds.duration_time

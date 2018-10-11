@@ -35,6 +35,7 @@ class UsersController extends Controller
     {
         $getAllUsers = DB::table('users')
             ->selectRaw('id,name,email,created_at,confirmed,period_end,braintree_id,card_brand,created_at,updated_at')
+            ->orderBy('created_at', 'DESC')
             ->paginate(15);
 
         // Check if empty result
@@ -59,8 +60,9 @@ class UsersController extends Controller
     public function getInactivityUsers()
     {
         $getInactivityUsers = DB::table('users')
-            ->selectRaw('id,name,email,image,created_at,confirmed,period_end,created_at,updated_at')
-            ->whereRaw('period_end < NOW() ')
+            ->selectRaw('id,name,email,created_at,confirmed,period_end,created_at,updated_at')
+            ->whereRaw('period_end < '. date("Y/m/d"))
+            ->orderBy('created_at', 'DESC')
             ->paginate(15);
 
         // Check if empty result
@@ -85,8 +87,9 @@ class UsersController extends Controller
     public function getActivityUsers()
     {
         $getActitivyUsers = DB::table('users')
-            ->selectRaw('id,name,email,image,created_at,confirmed,period_end,created_at,updated_at')
-            ->whereRaw('period_end > NOW() ')
+            ->selectRaw('id,name,email,created_at,confirmed,period_end,created_at,updated_at')
+            ->whereRaw('period_end >'. date("Y/m/d"))
+            ->orderBy('created_at', 'DESC')
             ->paginate(15);
 
         // Check if empty result
@@ -219,7 +222,7 @@ class UsersController extends Controller
             $getUsers = null;
         } else {
             $getUsers = DB::table('users')
-                ->selectRaw('id,name,email,image,created_at,confirmed,period_end,created_at,updated_at')
+                ->selectRaw('id,name,email,created_at,confirmed,period_end,created_at,updated_at')
                 ->where('email', 'like', $request->input('query') . '%')
                 ->orWhere('name', 'like', $request->input('query') . '%')
                 ->limit(10)
