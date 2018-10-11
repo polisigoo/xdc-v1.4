@@ -205,7 +205,7 @@ const messages = {
     /* Hindi language
      *****************/
     in: {
-        app_name: 'CinemaRex',
+        app_name: 'R2H-Live',
 
         nav: {
             logout: "लोग आउट"
