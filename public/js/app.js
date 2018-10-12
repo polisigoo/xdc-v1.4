@@ -48259,7 +48259,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       class: {
         active_plan: _vm.plan === item.plan_id
       }
-    }, [_c('h3', [_vm._v(_vm._s(item.plan_name))]), _vm._v(" "), _c('h1', [_vm._v("$" + _vm._s(item.plan_amount) + "\n                                            "), _c('small', [_vm._v("/mo")])]), _vm._v(" "), (item.plan_trial !== null) ? _c('i', [_vm._v(_vm._s(item.plan_trial) + " days free")]) : _vm._e()])])
+    }, [_c('h3', [_vm._v(_vm._s(item.plan_name))]), _vm._v(" "), _c('h1', [_vm._v("₹" + _vm._s(item.plan_amount) + "\n                                            "), _c('small', [_vm._v("/mo")])]), _vm._v(" "), (item.plan_trial !== null) ? _c('i', [_vm._v(_vm._s(item.plan_trial) + " days free")]) : _vm._e()])])
   }))]), _vm._v(" "), _c('hr')]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: " col-lg-10 offset-lg-1 "
   }, [_c('div', {
