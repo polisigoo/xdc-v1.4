@@ -470,6 +470,12 @@
                         <li class="nav-item">
                             <router-link class="nav-link" :to="{name: 'channels'}">{{$t('home.tv')}} </router-link>
                         </li>
+                        <li class="nav-item"> 
+                            <a href="http://xaansa.com" class="nav-link">{{$t('home.media')}}</a>
+                        </li>
+                        <!-- <li>
+                            <button class="nav-link" style="background-color: #fd0002; color: #FFFFFF; width: 100px; border: none;" >R2H Live</button>
+                        </li> -->
 
                         <li class="nav-item" v-if="collections.length > 0">
 
@@ -488,9 +494,9 @@
 
 
                 <div class="right-side">
-
                     <div class="register">
                         <div class="sec1" v-if="$auth.isAuthenticated() !== 'active'">
+
                             <router-link class="login" :to="{name: 'login'}">{{$t('register.login')}}</router-link>
                             <span id="line">|</span>
                             <router-link class="singup" :to="{name: 'plan'}" v-if="!$Helper.getIntGatewayStatus('int_gateway')">{{$t('register.signup')}}</router-link>

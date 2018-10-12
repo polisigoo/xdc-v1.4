@@ -143,6 +143,17 @@ let routes = [
             title: 'Movies'
         },
     },
+    
+    // {
+    //     name: 'media',
+    //     path: 'http://xaansa.com',
+    //     component: require('../views/' + themeName + '/control/home'),
+    //     meta: {
+    //         allAuth: true,
+    //         title: 'Media'
+    //     }
+    // },
+
     {
         name: 'show-movie',
         path: '/app/show/:id',

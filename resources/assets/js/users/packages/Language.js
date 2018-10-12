@@ -24,6 +24,7 @@ const messages = {
             tv: "LIVE TV",
             browser: 'Browser',
             collection: 'MY COLLLECTION',
+            media: 'R2H MEDIA',
             // Trending
             trending: "Trending",
             year: "Year",
@@ -155,7 +156,7 @@ const messages = {
             message_two: "and will not be charged, to cancel go to your account setting  and Cancel Membership",
             account_details: "Your account details",
             payment_info: "Payment Information",
-            discover: "Discover",
+            discover: "Browse Titles",
             privacy: "Privacy",
             aboutus: "About us",
             contactus: "Contact us"
@@ -221,6 +222,7 @@ const messages = {
             tv: "लाइव टीवी",
             browser: 'ब्राउज़र',
             collection: 'संग्रह',
+            media: 'R2H MEDIA',
             // Trending
             trending: "रुझान",
             year: "साल",

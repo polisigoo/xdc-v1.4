@@ -6531,6 +6531,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -52612,7 +52618,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         name: 'channels'
       }
     }
-  }, [_vm._v(_vm._s(_vm.$t('home.tv')) + " ")])], 1), _vm._v(" "), (_vm.collections.length > 0) ? _c('li', {
+  }, [_vm._v(_vm._s(_vm.$t('home.tv')) + " ")])], 1), _vm._v(" "), _c('li', {
+    staticClass: "nav-item"
+  }, [_c('a', {
+    staticClass: "nav-link",
+    attrs: {
+      "href": "http://xaansa.com"
+    }
+  }, [_vm._v(_vm._s(_vm.$t('home.media')))])]), _vm._v(" "), (_vm.collections.length > 0) ? _c('li', {
     staticClass: "nav-item"
   }, [_c('div', {
     staticClass: "dropdown"
@@ -58269,6 +58282,7 @@ var messages = {
             tv: "LIVE TV",
             browser: 'Browser',
             collection: 'MY COLLLECTION',
+            media: 'R2H MEDIA',
             // Trending
             trending: "Trending",
             year: "Year",
@@ -58399,7 +58413,7 @@ var messages = {
             message_two: "and will not be charged, to cancel go to your account setting  and Cancel Membership",
             account_details: "Your account details",
             payment_info: "Payment Information",
-            discover: "Discover",
+            discover: "Browse Titles",
             privacy: "Privacy",
             aboutus: "About us",
             contactus: "Contact us"
@@ -58465,6 +58479,7 @@ var messages = {
             tv: "लाइव टीवी",
             browser: 'ब्राउज़र',
             collection: 'संग्रह',
+            media: 'R2H MEDIA',
             // Trending
             trending: "रुझान",
             year: "साल",
@@ -58766,7 +58781,19 @@ var routes = [{
         allAuth: true,
         title: 'Movies'
     }
-}, {
+},
+
+// {
+//     name: 'media',
+//     path: 'http://xaansa.com',
+//     component: require('../views/' + themeName + '/control/home'),
+//     meta: {
+//         allAuth: true,
+//         title: 'Media'
+//     }
+// },
+
+{
     name: 'show-movie',
     path: '/app/show/:id',
     component: __webpack_require__("./resources/assets/js/users/views recursive ^\\.\\/.*\\/control\\/movie\\/show$")("./" + themeName + '/control/movie/show'),
