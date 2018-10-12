@@ -15,8 +15,8 @@
                <div class="hidden-md-up collapse" @click="mobile_sidebar = !mobile_sidebar"></div>
 
                 <div class="hidden-sm-down logo">
-                <img src="/images/logo_blue.svg" alt="logo" width="100%">
-                <strong>CREX</strong>
+                <img src="/images/logo.png" alt="logo" style="margin-top: 7px; height: 30px" width="100%">
+                <strong>R2H-Live</strong>
             </div>
 
                 <div class="profile float-right">
