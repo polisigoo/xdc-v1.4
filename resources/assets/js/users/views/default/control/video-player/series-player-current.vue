@@ -163,6 +163,23 @@
                     md_backdrop: this.md_backdrop
                 });
             }
+
+            var myInt = setInterval(function(){
+            if(document.querySelector('.fp-engine') != null ){
+                    if(!document.querySelector('.fp-engine').paused ){
+                        CLEAR()
+                    }else{
+                        CLEAR()
+                    }  
+                }    
+            }, 10);
+            function CLEAR(){
+                document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                document.querySelector('.fp-player>a').style.height ="100px";
+                document.querySelector('.fp-player>a').style.width ="200px";
+                document.querySelector('.fp-player>a').href ="/";
+                document.querySelector('.fp-player>a').style.left ="5%";
+            }
         },
 
         watch: {
@@ -190,6 +207,23 @@
                     });
 
                 }
+
+                var myInt = setInterval(function(){
+                if(document.querySelector('.fp-engine') != null ){
+                        if(!document.querySelector('.fp-engine').paused ){
+                            CLEAR()
+                        }else{
+                            CLEAR()
+                        }  
+                    }    
+                }, 10);
+                function CLEAR(){
+                    document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                    document.querySelector('.fp-player>a').style.height ="100px";
+                    document.querySelector('.fp-player>a').style.width ="200px";
+                    document.querySelector('.fp-player>a').href ="/";
+                    document.querySelector('.fp-player>a').style.left ="5%";
+                }
             },
 
             // onclick change
@@ -214,6 +248,23 @@
                 md_backdrop: this.md_backdrop
                     });
                 }
+
+                var myInt = setInterval(function(){
+                if(document.querySelector('.fp-engine') != null ){
+                        if(!document.querySelector('.fp-engine').paused ){
+                            CLEAR()
+                        }else{
+                            CLEAR()
+                        }  
+                    }    
+                }, 10);
+                function CLEAR(){
+                    document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                    document.querySelector('.fp-player>a').style.height ="100px";
+                    document.querySelector('.fp-player>a').style.width ="200px";
+                    document.querySelector('.fp-player>a').href ="/";
+                    document.querySelector('.fp-player>a').style.left ="5%";
+                }
             },
 
             // Onclick  Playlist
@@ -232,6 +283,24 @@
                             lg_backdrop: this.lg_backdrop,
                             md_backdrop: this.md_backdrop
                         });
+
+                        var myInt = setInterval(function(){
+                        if(document.querySelector('.fp-engine') != null ){
+                                if(!document.querySelector('.fp-engine').paused ){
+                                    CLEAR()
+                                }else{
+                                    CLEAR()
+                                }  
+                            }    
+                        }, 10);
+                        function CLEAR(){
+                            document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                            document.querySelector('.fp-player>a').style.height ="100px";
+                            document.querySelector('.fp-player>a').style.width ="200px";
+                            document.querySelector('.fp-player>a').href ="/";
+                            document.querySelector('.fp-player>a').style.left ="5%";
+                        }
+                        
                     }
                 }
             }
@@ -244,6 +313,23 @@
                     lg_backdrop: this.lg_backdrop,
                     md_backdrop: this.md_backdrop
                 });
+                
+                var myInt = setInterval(function(){
+                if(document.querySelector('.fp-engine') != null ){
+                        if(!document.querySelector('.fp-engine').paused ){
+                            CLEAR()
+                        }else{
+                            CLEAR()
+                        }  
+                    }    
+                }, 10);
+                function CLEAR(){
+                    document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                    document.querySelector('.fp-player>a').style.height ="100px";
+                    document.querySelector('.fp-player>a').style.width ="200px";
+                    document.querySelector('.fp-player>a').href ="/";
+                    document.querySelector('.fp-player>a').style.left ="5%";
+                }
             },
 
             SEND_REPORT() {

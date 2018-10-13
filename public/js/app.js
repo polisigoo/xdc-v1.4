@@ -11611,6 +11611,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                 md_backdrop: this.md_backdrop
             });
         }
+
+        var myInt = setInterval(function () {
+            if (document.querySelector('.fp-engine') != null) {
+                if (!document.querySelector('.fp-engine').paused) {
+                    CLEAR();
+                } else {
+                    CLEAR();
+                }
+            }
+        }, 10);
+        function CLEAR() {
+            document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+            document.querySelector('.fp-player>a').style.height = "100px";
+            document.querySelector('.fp-player>a').style.width = "200px";
+            document.querySelector('.fp-player>a').href = "/";
+            document.querySelector('.fp-player>a').style.left = "5%";
+        }
     },
 
 
@@ -11637,6 +11654,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                     md_backdrop: this.md_backdrop
                 });
             }
+
+            var myInt = setInterval(function () {
+                if (document.querySelector('.fp-engine') != null) {
+                    if (!document.querySelector('.fp-engine').paused) {
+                        CLEAR();
+                    } else {
+                        CLEAR();
+                    }
+                }
+            }, 10);
+            function CLEAR() {
+                document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                document.querySelector('.fp-player>a').style.height = "100px";
+                document.querySelector('.fp-player>a').style.width = "200px";
+                document.querySelector('.fp-player>a').href = "/";
+                document.querySelector('.fp-player>a').style.left = "5%";
+            }
         },
 
 
@@ -11662,21 +11696,62 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                     md_backdrop: this.md_backdrop
                 });
             }
+
+            var myInt = setInterval(function () {
+                if (document.querySelector('.fp-engine') != null) {
+                    if (!document.querySelector('.fp-engine').paused) {
+                        CLEAR();
+                    } else {
+                        CLEAR();
+                    }
+                }
+            }, 10);
+            function CLEAR() {
+                document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                document.querySelector('.fp-player>a').style.height = "100px";
+                document.querySelector('.fp-player>a').style.width = "200px";
+                document.querySelector('.fp-player>a').href = "/";
+                document.querySelector('.fp-player>a').style.left = "5%";
+            }
         },
 
 
         // Onclick  Playlist
         next_episode_playlist: function next_episode_playlist(val) {
+            var _this = this;
+
             for (var index = 0; index < this.season[this.season_playlist_active].length; index++) {
                 if (this.season[this.season_playlist_active][index].id == val) {
-                    this.$store.commit('FLOWPLAYER_DESTORY', 'series');
-                    this.$store.dispatch("LOAD_SERIES_PLAYER", {
-                        episode_id: this.season[this.season_playlist_active][index].id,
-                        type: "sp",
-                        series_id: this.season[this.season_playlist_active][index].series_id,
-                        lg_backdrop: this.lg_backdrop,
-                        md_backdrop: this.md_backdrop
-                    });
+                    var myInt;
+
+                    (function () {
+                        var CLEAR = function CLEAR() {
+                            document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                            document.querySelector('.fp-player>a').style.height = "100px";
+                            document.querySelector('.fp-player>a').style.width = "200px";
+                            document.querySelector('.fp-player>a').href = "/";
+                            document.querySelector('.fp-player>a').style.left = "5%";
+                        };
+
+                        _this.$store.commit('FLOWPLAYER_DESTORY', 'series');
+                        _this.$store.dispatch("LOAD_SERIES_PLAYER", {
+                            episode_id: _this.season[_this.season_playlist_active][index].id,
+                            type: "sp",
+                            series_id: _this.season[_this.season_playlist_active][index].series_id,
+                            lg_backdrop: _this.lg_backdrop,
+                            md_backdrop: _this.md_backdrop
+                        });
+
+                        myInt = setInterval(function () {
+                            if (document.querySelector('.fp-engine') != null) {
+                                if (!document.querySelector('.fp-engine').paused) {
+                                    CLEAR();
+                                } else {
+                                    CLEAR();
+                                }
+                            }
+                        }, 10);
+                    })();
                 }
             }
         }
@@ -11689,27 +11764,44 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                 lg_backdrop: this.lg_backdrop,
                 md_backdrop: this.md_backdrop
             });
+
+            var myInt = setInterval(function () {
+                if (document.querySelector('.fp-engine') != null) {
+                    if (!document.querySelector('.fp-engine').paused) {
+                        CLEAR();
+                    } else {
+                        CLEAR();
+                    }
+                }
+            }, 10);
+            function CLEAR() {
+                document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                document.querySelector('.fp-player>a').style.height = "100px";
+                document.querySelector('.fp-player>a').style.width = "200px";
+                document.querySelector('.fp-player>a').href = "/";
+                document.querySelector('.fp-player>a').style.left = "5%";
+            }
         },
         SEND_REPORT: function SEND_REPORT() {
-            var _this = this;
+            var _this2 = this;
 
             this.$validator.validateAll().then(function (result) {
                 if (result) {
-                    _this.report_button = true;
+                    _this2.report_button = true;
                     axios.post("/api/v1/create/report/series", {
-                        type: _this.report_problem_type,
-                        details: _this.report_details,
-                        episode_id: _this.data.id,
-                        series_id: _this.data.series_id
+                        type: _this2.report_problem_type,
+                        details: _this2.report_details,
+                        episode_id: _this2.data.id,
+                        series_id: _this2.data.series_id
                     }).then(function (res) {
                         if (res.data.status === "success") {
-                            _this.report_button = false;
-                            _this.$store.commit("CLOSE_REPORT");
+                            _this2.report_button = false;
+                            _this2.$store.commit("CLOSE_REPORT");
                             alertify.logPosition("top right");
                             alertify.success("Successful Send, our team will check it soon");
                         }
                     }, function (error) {
-                        _this.report_button = false;
+                        _this2.report_button = false;
                     });
                 }
             });
