@@ -117,6 +117,23 @@
 
         mounted() {
             this.$store.dispatch('LOAD_MOVIE_PLAYER', {id: this.$route.params.id, lg_backdrop: this.lg_backdrop, md_backdrop: this.md_backdrop});
+
+            var myInt = setInterval(function(){
+            if(document.querySelector('.fp-engine') != null ){
+                    if(!document.querySelector('.fp-engine').paused ){
+                        CLEAR()
+                    }else{
+                        CLEAR()
+                    }  
+                }    
+            }, 10);
+            function CLEAR(){
+                document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                document.querySelector('.fp-player>a').style.height ="100px";
+                document.querySelector('.fp-player>a').style.width ="200px";
+                document.querySelector('.fp-player>a').href ="/";
+                document.querySelector('.fp-player>a').style.left ="10%";
+            }
         },
 
         beforeRouteLeave(to, from, next) {
@@ -135,6 +152,23 @@
                     }else {
                         this.$router.push({name: 'movie-player-embed', params: {id: this.suggestion.id }})
                     }
+
+                    var myInt = setInterval(function(){
+                    if(document.querySelector('.fp-engine') != null ){
+                            if(!document.querySelector('.fp-engine').paused ){
+                                CLEAR()
+                            }else{
+                                CLEAR()
+                            }  
+                        }    
+                    }, 10);
+                    function CLEAR(){
+                        document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                        document.querySelector('.fp-player>a').style.height ="100px";
+                        document.querySelector('.fp-player>a').style.width ="200px";
+                        document.querySelector('.fp-player>a').href ="/";
+                        document.querySelector('.fp-player>a').style.left ="10%";
+                    }
                 }
             },
         },
@@ -142,7 +176,25 @@
             // Change movie
             CHANGE_MOVIE(id) {
                 this.$store.dispatch('LOAD_MOVIE_PLAYER', {id, lg_backdrop: this.lg_backdrop, md_backdrop: this.md_backdrop});
+                var myInt = setInterval(function(){
+                if(document.querySelector('.fp-engine') != null ){
+                        if(!document.querySelector('.fp-engine').paused ){
+                            CLEAR()
+                        }else{
+                            CLEAR()
+                        }  
+                    }    
+                }, 10);
+                function CLEAR(){
+                    document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                    document.querySelector('.fp-player>a').style.height ="100px";
+                    document.querySelector('.fp-player>a').style.width ="200px";
+                    document.querySelector('.fp-player>a').href ="/";
+                    document.querySelector('.fp-player>a').style.left ="10%";
+                }
             },
+
+            
 
             SEND_REPORT() {
                 this.$validator.validateAll().then((result) => {
