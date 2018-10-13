@@ -11327,7 +11327,7 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
             document.querySelector('.fp-player>a').style.height = "100px";
             document.querySelector('.fp-player>a').style.width = "200px";
             document.querySelector('.fp-player>a').href = "/";
-            document.querySelector('.fp-player>a').style.left = "10%";
+            document.querySelector('.fp-player>a').style.left = "5%";
         }
     },
     beforeRouteLeave: function beforeRouteLeave(to, from, next) {
@@ -11344,7 +11344,7 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                     document.querySelector('.fp-player>a').style.height = "100px";
                     document.querySelector('.fp-player>a').style.width = "200px";
                     document.querySelector('.fp-player>a').href = "/";
-                    document.querySelector('.fp-player>a').style.left = "10%";
+                    document.querySelector('.fp-player>a').style.left = "5%";
                 };
 
                 this.$store.commit('FLOWPLAYER_DESTORY', 'movie');
@@ -11385,7 +11385,7 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                 document.querySelector('.fp-player>a').style.height = "100px";
                 document.querySelector('.fp-player>a').style.width = "200px";
                 document.querySelector('.fp-player>a').href = "/";
-                document.querySelector('.fp-player>a').style.left = "10%";
+                document.querySelector('.fp-player>a').style.left = "5%";
             }
         },
         SEND_REPORT: function SEND_REPORT() {
@@ -12349,7 +12349,7 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
             document.querySelector('.fp-player>a').style.width = "200px";
             document.querySelector('.fp-player>a').style.display = "inline";
             document.querySelector('.fp-player>a').href = "/";
-            document.querySelector('.fp-player>a').style.left = "10%";
+            document.querySelector('.fp-player>a').style.left = "5%";
         }
     },
 

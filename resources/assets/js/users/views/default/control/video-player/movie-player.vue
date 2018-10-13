@@ -132,7 +132,7 @@
                 document.querySelector('.fp-player>a').style.height ="100px";
                 document.querySelector('.fp-player>a').style.width ="200px";
                 document.querySelector('.fp-player>a').href ="/";
-                document.querySelector('.fp-player>a').style.left ="10%";
+                document.querySelector('.fp-player>a').style.left ="5%";
             }
         },
 
@@ -167,7 +167,7 @@
                         document.querySelector('.fp-player>a').style.height ="100px";
                         document.querySelector('.fp-player>a').style.width ="200px";
                         document.querySelector('.fp-player>a').href ="/";
-                        document.querySelector('.fp-player>a').style.left ="10%";
+                        document.querySelector('.fp-player>a').style.left ="5%";
                     }
                 }
             },
@@ -190,7 +190,7 @@
                     document.querySelector('.fp-player>a').style.height ="100px";
                     document.querySelector('.fp-player>a').style.width ="200px";
                     document.querySelector('.fp-player>a').href ="/";
-                    document.querySelector('.fp-player>a').style.left ="10%";
+                    document.querySelector('.fp-player>a').style.left ="5%";
                 }
             },
 

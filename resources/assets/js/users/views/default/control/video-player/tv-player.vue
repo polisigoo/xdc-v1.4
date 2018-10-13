@@ -216,7 +216,7 @@
                 document.querySelector('.fp-player>a').style.width ="200px";
                 document.querySelector('.fp-player>a').style.display ="inline";
                 document.querySelector('.fp-player>a').href ="/";
-                document.querySelector('.fp-player>a').style.left ="10%";
+                document.querySelector('.fp-player>a').style.left ="5%";
             }
         },
 
