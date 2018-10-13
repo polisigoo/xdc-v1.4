@@ -12334,6 +12334,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
         setTimeout(function () {
             _this.$store.dispatch("LOAD_TV", _this.$route.params.id);
         }, 200);
+        var myInt = setInterval(function () {
+            if (document.querySelector('.fp-engine') != null) {
+                if (!document.querySelector('.fp-engine').paused) {
+                    CLEAR();
+                } else {
+                    CLEAR();
+                }
+            }
+        }, 10);
+        function CLEAR() {
+            document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+            document.querySelector('.fp-player>a').style.height = "100px";
+            document.querySelector('.fp-player>a').style.width = "200px";
+            document.querySelector('.fp-player>a').style.display = "inline";
+            document.querySelector('.fp-player>a').href = "/";
+            document.querySelector('.fp-player>a').style.left = "10%";
+        }
     },
 
 
