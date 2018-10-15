@@ -52941,6 +52941,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('a', {
     staticClass: "navbar-brand hidden-sm-down"
   }, [_c('img', {
+    staticStyle: {
+      "height": "40px",
+      "width": "80px"
+    },
     attrs: {
       "src": "/images/logo.png",
       "alt": "logo",
@@ -52955,7 +52959,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('button', {
     staticClass: "btn d-flex justify-content-center align-items-center py-0 mr-2",
     staticStyle: {
-      "height": "30px",
+      "height": "28px",
       "border-radius": "3px!important",
       "background-color": "#fd0000",
       "color": "#ffffff",

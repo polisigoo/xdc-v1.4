@@ -450,7 +450,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="navbar-brand hidden-sm-down">
-                    <img src="/images/logo.png" alt="logo" width="100%">
+                    <img src="/images/logo.png" alt="logo" width="100%" style="height: 40px; width: 80px">
                 </a>
 
                 <div class="offset-xl-1 collapse navbar-collapse " id="navbarTogglerDemo02">
@@ -492,7 +492,7 @@
                     </ul>
                     <ul class="navbar-nav mr-4">
                         <li class="nav-link">
-                            <button class="btn d-flex justify-content-center align-items-center py-0 mr-2" style="height:30px; border-radius:3px!important; background-color:#fd0000; color:#ffffff; border:1px solid #991218">R2H Live</button>
+                            <button class="btn d-flex justify-content-center align-items-center py-0 mr-2" style="height:28px; border-radius:3px!important; background-color:#fd0000; color:#ffffff; border:1px solid #991218">R2H Live</button>
                         </li>
                     </ul>
                 </div>
