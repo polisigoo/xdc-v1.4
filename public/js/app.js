@@ -6655,6 +6655,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -27569,7 +27570,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.phone_nav-cont{\n    position: absolute;\n    top: 82;\n    left: 0;\n    width: 130px;\n    background-color:#1495b4;\n}\n.phone_nav-cont li{\n    display: block;\n    padding: 5px ;\n    color: #ffffff;\n}\n.phone_nav-icon_container{\n    display: inline-block;\n    cursor: pointer;\n}\n.bar1, .bar2, .bar3 {\nwidth: 35px;\nheight: 5px;\nbackground-color: #ffffff;\nmargin: 6px 0;\ntransition: 0.4s;\nborder-radius: 4px;\n}\n.bar2{\n    width: 28px;\n}\n.change .bar1 {\n    -webkit-transform: rotate(-45deg) translate(-9px, 6px);\n    transform: rotate(-45deg) translate(-9px, 6px);\n}\n.change .bar2 {opacity: 0;\n}\n.change .bar3 {\n    -webkit-transform: rotate(45deg) translate(-8px, -8px);\n    transform: rotate(45deg) translate(-8px, -8px);\n}\n", ""]);
+exports.push([module.i, "\n.phone_nav-cont{\n    position: absolute;\n    top: 82;\n    left: 0;\n    width: 130px;\n    background-color:#1495b4; \n    z-index: 100000;\n}\n.phone_nav-cont li{\n    display: block;\n    padding: 5px ;\n    color: #ffffff;\n}\n.phone_nav-icon_container{\n    display: inline-block;\n    cursor: pointer;\n}\n.bar1, .bar2, .bar3 {\nwidth: 35px;\nheight: 5px;\nbackground-color: #ffffff;\nmargin: 6px 0;\ntransition: 0.4s;\nborder-radius: 4px;\n}\n.bar2{\n    width: 28px;\n}\n.change .bar1 {\n    -webkit-transform: rotate(-45deg) translate(-9px, 6px);\n    transform: rotate(-45deg) translate(-9px, 6px);\n}\n.change .bar2 {opacity: 0;\n}\n.change .bar3 {\n    -webkit-transform: rotate(45deg) translate(-8px, -8px);\n    transform: rotate(45deg) translate(-8px, -8px);\n}\n", ""]);
 
 // exports
 
@@ -52153,7 +52154,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "alt": "logo"
     }
   })]), _vm._v(" "), _c('div', {
-    staticClass: "d-flex justify-content-end"
+    staticClass: "d-flex justify-content-between"
   }, [(_vm.$auth.isAuthenticated() === 'active') ? _c('div', {
     staticClass: "col-3 float-left settings-sm-icon mr-3"
   }, [_c('div', {

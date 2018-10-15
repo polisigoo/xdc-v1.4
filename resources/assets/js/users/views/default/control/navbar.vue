@@ -200,7 +200,7 @@
                         </div>
                         <img src="/images/r2h_white.png" class="ml-3" alt="logo"  style="width: 90px; height: 40px;"> 
                     </div>
-                    <div class="d-flex justify-content-end">
+                    <div class="d-flex justify-content-between">
                         <div class="col-3 float-left settings-sm-icon mr-3" v-if="$auth.isAuthenticated() === 'active' ">
                             <div class="icon" @click="show_sidebar = !show_sidebar">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 268.765 268.765"  class="sm-search-svg"
@@ -623,6 +623,7 @@
         left: 0;
         width: 130px;
         background-color:#1495b4; 
+        z-index: 100000;
     }
     .phone_nav-cont li{
         display: block;
