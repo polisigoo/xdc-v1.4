@@ -6537,6 +6537,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -52736,7 +52741,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
-    staticClass: "nav-link",
+    staticClass: "nav-link mb-0 pt-3",
     attrs: {
       "to": {
         name: 'discover'
@@ -52745,7 +52750,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.$t('home.home')))])], 1), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
-    staticClass: "nav-link",
+    staticClass: "nav-link mb-0 pt-3",
     attrs: {
       "to": {
         name: 'movies'
@@ -52754,7 +52759,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.$t('home.movies')))])], 1), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
-    staticClass: "nav-link",
+    staticClass: "nav-link mb-0 pt-3",
     attrs: {
       "to": {
         name: 'series'
@@ -52763,7 +52768,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.$t('home.series')))])], 1), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
-    staticClass: "nav-link",
+    staticClass: "nav-link mb-0 pt-3",
     attrs: {
       "to": {
         name: 'kids'
@@ -52772,7 +52777,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.$t('home.kids')))])], 1), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
-    staticClass: "nav-link",
+    staticClass: "nav-link mb-0 pt-3",
     attrs: {
       "to": {
         name: 'channels'
@@ -52781,7 +52786,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.$t('home.tv')) + " ")])], 1), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('a', {
-    staticClass: "nav-link",
+    staticClass: "nav-link mb-0 pt-3",
     attrs: {
       "href": "http://xaansa.com"
     }
@@ -52790,7 +52795,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "dropdown"
   }, [_c('a', {
-    staticClass: "nav-link",
+    staticClass: "nav-link  mb-0 pt-3",
     attrs: {
       "id": "dropdownCollection",
       "data-toggle": "dropdown",
@@ -52805,7 +52810,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.collections), function(item, index) {
     return _c('router-link', {
       key: index,
-      staticClass: "dropdown-item",
+      staticClass: "dropdown-item ",
       attrs: {
         "to": {
           name: 'collection',
@@ -52815,7 +52820,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }, [_vm._v(_vm._s(item.name))])
-  }))])]) : _vm._e()])]), _vm._v(" "), _c('div', {
+  }))])]) : _vm._e()]), _vm._v(" "), _vm._m(3, false, false)]), _vm._v(" "), _c('div', {
     staticClass: "right-side"
   }, [_c('div', {
     staticClass: "register"
@@ -52942,6 +52947,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "width": "100%"
     }
   })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
+    staticClass: "navbar-nav mr-4"
+  }, [_c('li', {
+    staticClass: "nav-link"
+  }, [_c('button', {
+    staticClass: "btn d-flex justify-content-center align-items-center py-0 mr-2",
+    staticStyle: {
+      "height": "30px",
+      "border-radius": "3px!important",
+      "background-color": "#fd0000",
+      "color": "#ffffff",
+      "border": "1px solid #991218"
+    }
+  }, [_vm._v("R2H Live")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

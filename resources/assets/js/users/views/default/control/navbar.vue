@@ -456,22 +456,22 @@
                 <div class="offset-xl-1 collapse navbar-collapse " id="navbarTogglerDemo02">
                     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
                         <li class="nav-item">
-                            <router-link class="nav-link" :to="{name: 'discover'}">{{$t('home.home')}}</router-link>
+                            <router-link class="nav-link mb-0 pt-3" :to="{name: 'discover'}">{{$t('home.home')}}</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" :to="{name: 'movies'}">{{$t('home.movies')}}</router-link>
+                            <router-link class="nav-link mb-0 pt-3" :to="{name: 'movies'}">{{$t('home.movies')}}</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" :to="{name: 'series'}">{{$t('home.series')}}</router-link>
+                            <router-link class="nav-link mb-0 pt-3" :to="{name: 'series'}">{{$t('home.series')}}</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" :to="{name: 'kids'}">{{$t('home.kids')}}</router-link>
+                            <router-link class="nav-link mb-0 pt-3" :to="{name: 'kids'}">{{$t('home.kids')}}</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" :to="{name: 'channels'}">{{$t('home.tv')}} </router-link>
+                            <router-link class="nav-link mb-0 pt-3" :to="{name: 'channels'}">{{$t('home.tv')}} </router-link>
                         </li>
                         <li class="nav-item"> 
-                            <a href="http://xaansa.com" class="nav-link">{{$t('home.media')}}</a>
+                            <a href="http://xaansa.com" class="nav-link mb-0 pt-3">{{$t('home.media')}}</a>
                         </li>
                         <!-- <li>
                             <button class="nav-link" style="background-color: #fd0002; color: #FFFFFF; width: 100px; border: none;" >R2H Live</button>
@@ -481,17 +481,22 @@
 
                             <div class="dropdown">
 
-                                <a class="nav-link" id="dropdownCollection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$t('home.collection')}}</a>
+                                <a class="nav-link  mb-0 pt-3" id="dropdownCollection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$t('home.collection')}}</a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownCollection">
-                                    <router-link class="dropdown-item" v-for="(item, index) in collections" :key="index" :to="{name: 'collection', params:{id:item.id}}">{{ item.name }}</router-link>
+                                    <router-link class="dropdown-item " v-for="(item, index) in collections" :key="index" :to="{name: 'collection', params:{id:item.id}}">{{ item.name }}</router-link>
                                 </div>
                             </div>
 
                         </li>
 
                     </ul>
+                    <ul class="navbar-nav mr-4">
+                        <li class="nav-link">
+                            <button class="btn d-flex justify-content-center align-items-center py-0 mr-2" style="height:30px; border-radius:3px!important; background-color:#fd0000; color:#ffffff; border:1px solid #991218">R2H Live</button>
+                        </li>
+                    </ul>
                 </div>
-
+ 
 
                 <div class="right-side">
                     <div class="register">
