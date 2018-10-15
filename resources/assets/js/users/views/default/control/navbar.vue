@@ -15,7 +15,7 @@
                        ? false : true">
                 <div class="row p-0 section1">
 
-                    <div class="col-3 float-left settings-sm-icon" v-if="$auth.isAuthenticated() === 'active' ">
+                    <!-- <div class="col-3 float-left settings-sm-icon" v-if="$auth.isAuthenticated() === 'active' ">
                         <div class="icon" @click="show_sidebar = !show_sidebar">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 268.765 268.765"  class="sm-search-svg"
                                 style="enable-background:new 0 0 268.765 268.765;" xml:space="preserve" width="100%">
@@ -27,18 +27,18 @@
                                 </g>
                             </svg>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="col-6 text-center" :class="{'offset-3': ! $auth.isAuthenticated()}">
+                    <!-- <div class="col-6 text-center" :class="{'offset-3': ! $auth.isAuthenticated()}">
                         <div class="logo">
                             <img src="/images/logo.png" alt="logo" width="100%">
 
                         </div>
-                    </div>
+                    </div> -->
                     <!-- Icon -->
 
                     <!-- END Avatar -->
-                    <div class="col-3 float-right search"  @click="SHOW_SEARCH_PAGE">
+                    <!-- <div class="col-3 float-right search"  @click="SHOW_SEARCH_PAGE">
                             <div class="search-icon" v-if="!showSearchPageEvent">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                 viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
@@ -50,23 +50,23 @@
 
                             <div class="search-icon" v-if="showSearchPageEvent">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 22.135 22.135" style="enable-background:new 0 0 22.135 22.135;" xml:space="preserve" width="100%" class="sm-search-svg">
-                            <g>
-                                <g>
-                                    <path d="M0,18.723L14.879,3.089c0,0,1.949-2.114,6.341-1.597c0,0,0.753,0.599,0.915,1.755L7.179,19.24    c0,0-1.236,1.558-6.461,1.438C0.717,20.678,0.2,20.438,0,18.723z" fill="#FFFFFF"/>
-                                    <path d="M0,3.412l14.879,15.634c0,0,1.949,2.114,6.341,1.597c0,0,0.753-0.598,0.915-1.758L7.179,2.891    c0,0-1.236-1.556-6.461-1.436C0.717,1.456,0.2,1.696,0,3.412z" fill="#FFFFFF"/>
-                                </g>
-                            </g>
-                            </svg>
+                                    <g>
+                                        <g>
+                                            <path d="M0,18.723L14.879,3.089c0,0,1.949-2.114,6.341-1.597c0,0,0.753,0.599,0.915,1.755L7.179,19.24    c0,0-1.236,1.558-6.461,1.438C0.717,20.678,0.2,20.438,0,18.723z" fill="#FFFFFF"/>
+                                            <path d="M0,3.412l14.879,15.634c0,0,1.949,2.114,6.341,1.597c0,0,0.753-0.598,0.915-1.758L7.179,2.891    c0,0-1.236-1.556-6.461-1.436C0.717,1.456,0.2,1.696,0,3.412z" fill="#FFFFFF"/>
+                                        </g>
+                                    </g>
+                                </svg>
                             </div>
-                        </div>
+                        </div> -->
 
                     <!-- END Search -->
                 </div>
 
                 <!-- END section1 -->
 
-                <div class="section2">
-                    <div class="row">
+                <div class="section2 d-flex justify-content-between">
+                    <!-- <div class="row">
 
                         <div class="col-2 tv">
                             <router-link :to="{name: 'channels'}">
@@ -191,10 +191,81 @@
                                 </div>
                             </router-link>
                         </div>
+                    </div> -->
+                    <div class="d-flex justify-content-start">
+                       <div class="phone_nav-icon_container" @click="showPhoneNav()">
+                            <div class="bar1"></div>
+                            <div class="bar2"></div>
+                            <div class="bar3"></div>
+                        </div>
+                        <img src="/images/r2h_white.png" class="ml-3" alt="logo"  style="width: 90px; height: 40px;"> 
                     </div>
+                    <div class="d-flex justify-content-end">
+                        <div class="col-3 float-left settings-sm-icon mr-3" v-if="$auth.isAuthenticated() === 'active' ">
+                            <div class="icon" @click="show_sidebar = !show_sidebar">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 268.765 268.765"  class="sm-search-svg"
+                                    style="enable-background:new 0 0 268.765 268.765;" xml:space="preserve" width="100%">
+                                    <g>
+                                        <g>
+                                            <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M267.92,119.461c-0.425-3.778-4.83-6.617-8.639-6.617    c-12.315,0-23.243-7.231-27.826-18.414c-4.682-11.454-1.663-24.812,7.515-33.231c2.889-2.641,3.24-7.062,0.817-10.133    c-6.303-8.004-13.467-15.234-21.289-21.5c-3.063-2.458-7.557-2.116-10.213,0.825c-8.01,8.871-22.398,12.168-33.516,7.529    c-11.57-4.867-18.866-16.591-18.152-29.176c0.235-3.953-2.654-7.39-6.595-7.849c-10.038-1.161-20.164-1.197-30.232-0.08    c-3.896,0.43-6.785,3.786-6.654,7.689c0.438,12.461-6.946,23.98-18.401,28.672c-10.985,4.487-25.272,1.218-33.266-7.574    c-2.642-2.896-7.063-3.252-10.141-0.853c-8.054,6.319-15.379,13.555-21.74,21.493c-2.481,3.086-2.116,7.559,0.802,10.214    c9.353,8.47,12.373,21.944,7.514,33.53c-4.639,11.046-16.109,18.165-29.24,18.165c-4.261-0.137-7.296,2.723-7.762,6.597    c-1.182,10.096-1.196,20.383-0.058,30.561c0.422,3.794,4.961,6.608,8.812,6.608c11.702-0.299,22.937,6.946,27.65,18.415    c4.698,11.454,1.678,24.804-7.514,33.23c-2.875,2.641-3.24,7.055-0.817,10.126c6.244,7.953,13.409,15.19,21.259,21.508    c3.079,2.481,7.559,2.131,10.228-0.81c8.04-8.893,22.427-12.184,33.501-7.536c11.599,4.852,18.895,16.575,18.181,29.167    c-0.233,3.955,2.67,7.398,6.595,7.85c5.135,0.599,10.301,0.898,15.481,0.898c4.917,0,9.835-0.27,14.752-0.817    c3.897-0.43,6.784-3.786,6.653-7.696c-0.451-12.454,6.946-23.973,18.386-28.657c11.059-4.517,25.286-1.211,33.281,7.572    c2.657,2.89,7.047,3.239,10.142,0.848c8.039-6.304,15.349-13.534,21.74-21.494c2.48-3.079,2.13-7.559-0.803-10.213    c-9.353-8.47-12.388-21.946-7.529-33.524c4.568-10.899,15.612-18.217,27.491-18.217l1.662,0.043    c3.853,0.313,7.398-2.655,7.865-6.588C269.044,139.917,269.058,129.639,267.92,119.461z M134.595,179.491    c-24.718,0-44.824-20.106-44.824-44.824c0-24.717,20.106-44.824,44.824-44.824c24.717,0,44.823,20.107,44.823,44.824    C179.418,159.385,159.312,179.491,134.595,179.491z"
+                                                fill="#FFFFFF" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="col-3 mt-2 mr-2  search" style=""  @click="SHOW_SEARCH_PAGE">
+                            <div class="search-icon" v-if="!showSearchPageEvent">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                                width="100%" class="sm-search-svg">
+                                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"
+                                        fill="#FFFFFF" />
+                                </svg>
+                            </div>
+
+                            <div class="search-icon" v-if="showSearchPageEvent">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 22.135 22.135" style="enable-background:new 0 0 22.135 22.135;" xml:space="preserve" width="100%" class="sm-search-svg">
+                                    <g>
+                                        <g>
+                                            <path d="M0,18.723L14.879,3.089c0,0,1.949-2.114,6.341-1.597c0,0,0.753,0.599,0.915,1.755L7.179,19.24    c0,0-1.236,1.558-6.461,1.438C0.717,20.678,0.2,20.438,0,18.723z" fill="#FFFFFF"/>
+                                            <path d="M0,3.412l14.879,15.634c0,0,1.949,2.114,6.341,1.597c0,0,0.753-0.598,0.915-1.758L7.179,2.891    c0,0-1.236-1.556-6.461-1.436C0.717,1.456,0.2,1.696,0,3.412z" fill="#FFFFFF"/>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+
                 </div>
             </nav>
-
+            <div class="phone_nav-cont" v-if="phone_nav">
+                <div class="sidebar">
+                    <div class="phone_nav-elem_container">
+                        <ul class="list-unstyled">
+                            <li class="nav-item">
+                                <router-link class="nav-link" :to="{name: 'discover'}">{{$t('home.home')}}</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link " :to="{name: 'movies'}">{{$t('home.movies')}}</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link" :to="{name: 'series'}">{{$t('home.series')}}</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link" :to="{name: 'kids'}">{{$t('home.kids')}}</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link " :to="{name: 'channels'}">{{$t('home.tv')}} </router-link>
+                            </li>
+                            <li class="nav-item"> 
+                                <a href="http://xaansa.com" class="nav-link ">{{$t('home.media')}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="col-3 sidebar-content sidebar-sm" v-if="show_sidebar && $auth.isAuthenticated() === 'active' ">
                 <div class="sidebar">
                     <div class="sidebar__log">
@@ -545,6 +616,48 @@
 
 </template>
 
+<style>
+    .phone_nav-cont{
+        position: absolute;
+        top: 82;
+        left: 0;
+        width: 130px;
+        background-color:#1495b4; 
+    }
+    .phone_nav-cont li{
+        display: block;
+        padding: 5px ;
+        color: #ffffff;
+    }
+    .phone_nav-icon_container{
+        display: inline-block;
+        cursor: pointer;
+    }
+    .bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #ffffff;
+    margin: 6px 0;
+    transition: 0.4s;
+    border-radius: 4px;
+    }
+    .bar2{
+        width: 28px;
+    }
+
+    .change .bar1 {
+        -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+        transform: rotate(-45deg) translate(-9px, 6px);
+    }
+
+    .change .bar2 {opacity: 0;}
+
+    .change .bar3 {
+        -webkit-transform: rotate(45deg) translate(-8px, -8px);
+        transform: rotate(45deg) translate(-8px, -8px);
+    }
+</style>
+
 <script>
     import {
         mapState
@@ -553,6 +666,7 @@
     export default {
         data() {
             return {
+                phone_nav: false,
                 show_sidebar: false,
                 showNavBackground: false,
             }
@@ -601,6 +715,12 @@
 
             SHOW_SEARCH_PAGE(){
                 this.$store.commit("SHOW_SEARCH_PAGE");
+            },
+
+            showPhoneNav(){
+                var cont = document.querySelector('.phone_nav-icon_container')
+                cont.classList.toggle("change");
+                this.phone_nav = !this.phone_nav;
             }
         },
         filters: {
