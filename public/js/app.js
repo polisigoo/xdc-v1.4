@@ -52125,8 +52125,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     false : true) ? _c('nav', {
     staticClass: "navbar navbar-sm"
   }, [_c('div', {
-    staticClass: "row p-0 section1"
-  }), _vm._v(" "), _c('div', {
     staticClass: "section2 d-flex justify-content-between"
   }, [_c('div', {
     staticClass: "d-flex justify-content-start"

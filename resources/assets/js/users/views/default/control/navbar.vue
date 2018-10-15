@@ -13,7 +13,7 @@
                    $route.name === 'support-inbox' ||
                    $route.name === 'support-request'
                        ? false : true">
-                <div class="row p-0 section1">
+                <!-- <div class="row p-0 section1"> -->
 
                     <!-- <div class="col-3 float-left settings-sm-icon" v-if="$auth.isAuthenticated() === 'active' ">
                         <div class="icon" @click="show_sidebar = !show_sidebar">
@@ -61,7 +61,7 @@
                         </div> -->
 
                     <!-- END Search -->
-                </div>
+                <!-- </div> -->
 
                 <!-- END section1 -->
 
