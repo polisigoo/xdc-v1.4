@@ -52154,7 +52154,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "alt": "logo"
     }
   })]), _vm._v(" "), _c('div', {
-    staticClass: "d-flex justify-content-between"
+    staticClass: "d-flex justify-content-end"
   }, [(_vm.$auth.isAuthenticated() === 'active') ? _c('div', {
     staticClass: "col-3 float-left settings-sm-icon mr-3"
   }, [_c('div', {
@@ -52189,7 +52189,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "fill": "#FFFFFF"
     }
   })])])])])]) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "col-3 mt-2 mr-2  search",
+    staticClass: "col-3 mt-2 mr-2 search",
     on: {
       "click": _vm.SHOW_SEARCH_PAGE
     }

@@ -200,7 +200,7 @@
                         </div>
                         <img src="/images/r2h_white.png" class="ml-3" alt="logo"  style="width: 90px; height: 40px;"> 
                     </div>
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-end">
                         <div class="col-3 float-left settings-sm-icon mr-3" v-if="$auth.isAuthenticated() === 'active' ">
                             <div class="icon" @click="show_sidebar = !show_sidebar">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 268.765 268.765"  class="sm-search-svg"
@@ -214,7 +214,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <div class="col-3 mt-2 mr-2  search" style=""  @click="SHOW_SEARCH_PAGE">
+                        <div class="col-3 mt-2 mr-2 search" style=""  @click="SHOW_SEARCH_PAGE">
                             <div class="search-icon" v-if="!showSearchPageEvent">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                 viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
