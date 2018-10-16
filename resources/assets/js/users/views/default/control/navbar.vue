@@ -198,7 +198,7 @@
                             <div class="bar2"></div>
                             <div class="bar3"></div>
                         </div>
-                        <img src="/images/r2h_white.png" class="ml-3" alt="logo"  style="width: 90px; height: 40px;"> 
+                        <img src="/images/r2h_white.png" class="ml-3" alt="logo"  style="width: 65px; height: 40px;"> 
                     </div>
                     <div class="d-flex justify-content-end">
                         <div class="col-3 float-left settings-sm-icon mr-3" v-if="$auth.isAuthenticated() === 'active' ">
@@ -619,7 +619,7 @@
 <style>
     .phone_nav-cont{
         position: absolute;
-        top: 82;
+        top: 70;
         left: 0;
         width: 130px;
         background-color:#1495b4; 
