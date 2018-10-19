@@ -636,7 +636,7 @@
     }
     .bar1, .bar2, .bar3 {
     width: 35px;
-    height: 5px;
+    height: 4px;
     background-color: #ffffff;
     margin: 6px 0;
     transition: 0.4s;

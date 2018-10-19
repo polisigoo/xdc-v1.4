@@ -3117,6 +3117,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -27701,7 +27724,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n#footer{\n     display: flex;\n     flex-direction: column;\n}\n#footer:first-child{\n     margin-bottom: 2rem;\n}\n.other-footer a{\n     color: #bfbfbf;\n}\n.other-footer{\n color: #6f6f6f\n}\n.odd-color{\n     color: #6f6f6f;\n}\n.odd-color-brighter{\n     color: #bfbfbf;\n}\n.other-footer a:hover{\n     color: #dfdfdf;\n}\n.flex-container{\n     display: flex;\n     margin-bottom: 2.5rem;\n     color: #2f2f2f;\n}\n.flex-container a {\n     display: block;\n     color: #8f8f8f;\n}\n.icons{\n font-size: 20px;\n}\n.icons i{\n     display: flex;\n     align-items: center;\n     margin-top: 30%;\n}\n.social-nav{\n     display: flex;\n     height: 100px;\n     align-items: center;\n     margin-bottom: 0px !important\n}\n.social-nav li{\n     margin-left: 1em;\n}\n.social-nav li a{\n     color: #ccc !important;\n     font-size: 1.2em;\n}\n.social-nav li:hover a{\n     border-bottom: none;\n     font-size:1.2em;\n     color: #ffffff !important;\n}\n.flex-item{\n border-bottom: solid 1px  #8f8f8f;\n display: flex;\n height: 70px;\n align-items: center;\n text-align: left;\n justify-content: flex-start;\n}\n.row{\n margin-right: 0px;\n margin-left: 0px;\n width: 100%;\n /*justify-content: center;*/\n}\n", ""]);
+exports.push([module.i, "\n#footer{\n     display: flex;\n     flex-direction: column;\n}\n#footer:first-child{\n     margin-bottom: 2rem;\n}\n.other-footer a{\n     color: #bfbfbf;\n}\n@media screen and (max-width: 600px) {\n.other-footer a {\n     font-size: 0.8rem;\n}\n.social-nav li{\n         margin-left: 0.5em!important;\n         font-size: 1em!important;\n}\n.social-nav li:first-of-type{\n         margin-left: 0px;\n}\n}\n.other-footer{\n color: #6f6f6f\n}\n.odd-color{\n     color: #6f6f6f;\n}\n.odd-color-brighter{\n     color: #bfbfbf;\n}\n.other-footer a:hover{\n     color: #dfdfdf;\n}\n.flex-container{\n     display: flex;\n     margin-bottom: 2.5rem;\n     color: #2f2f2f;\n}\n.flex-container a {\n     display: block;\n     color: #8f8f8f;\n}\n.icons{\n font-size: 20px;\n}\n.icons i{\n     display: flex;\n     align-items: center;\n     margin-top: 30%;\n}\n.social-nav{\n     display: flex;\n     height: 100px;\n     align-items: center;\n     margin-bottom: 0px !important\n}\n.social-nav li{\n     margin-left: 1em;\n     font-size: 1.2em;\n}\n.social-nav li:first-of-type{\n     margin-left: 0px;\n}\n.social-nav li a{\n     color: #ccc !important;\n     font-size: 1.2em;\n}\n.social-nav li:hover a{\n     border-bottom: none;\n     font-size:1.2em;\n     color: #ffffff !important;\n}\n.flex-item{\n border-bottom: solid 1px  #8f8f8f;\n display: flex;\n height: 70px;\n align-items: center;\n text-align: left;\n justify-content: flex-start;\n}\n.row{\n margin-right: 0px;\n margin-left: 0px;\n width: 100%;\n /*justify-content: center;*/\n}\n", ""]);
 
 // exports
 
@@ -27716,7 +27739,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.phone_nav-cont{\n    position: absolute;\n    top: 70;\n    left: 0;\n    width: 130px;\n    background-color:#1495b4; \n    z-index: 100000;\n}\n.phone_nav-cont li{\n    display: block;\n    padding: 5px ;\n    color: #ffffff;\n}\n.phone_nav-icon_container{\n    display: inline-block;\n    cursor: pointer;\n}\n.bar1, .bar2, .bar3 {\nwidth: 35px;\nheight: 5px;\nbackground-color: #ffffff;\nmargin: 6px 0;\ntransition: 0.4s;\nborder-radius: 4px;\n}\n.bar2{\n    width: 28px;\n}\n.change .bar1 {\n    -webkit-transform: rotate(-45deg) translate(-9px, 6px);\n    transform: rotate(-45deg) translate(-9px, 6px);\n}\n.change .bar2 {opacity: 0;\n}\n.change .bar3 {\n    -webkit-transform: rotate(45deg) translate(-8px, -8px);\n    transform: rotate(45deg) translate(-8px, -8px);\n}\n", ""]);
+exports.push([module.i, "\n.phone_nav-cont{\n    position: absolute;\n    top: 70;\n    left: 0;\n    width: 130px;\n    background-color:#1495b4; \n    z-index: 100000;\n}\n.phone_nav-cont li{\n    display: block;\n    padding: 5px ;\n    color: #ffffff;\n}\n.phone_nav-icon_container{\n    display: inline-block;\n    cursor: pointer;\n}\n.bar1, .bar2, .bar3 {\nwidth: 35px;\nheight: 4px;\nbackground-color: #ffffff;\nmargin: 6px 0;\ntransition: 0.4s;\nborder-radius: 4px;\n}\n.bar2{\n    width: 28px;\n}\n.change .bar1 {\n    -webkit-transform: rotate(-45deg) translate(-9px, 6px);\n    transform: rotate(-45deg) translate(-9px, 6px);\n}\n.change .bar2 {opacity: 0;\n}\n.change .bar3 {\n    -webkit-transform: rotate(45deg) translate(-8px, -8px);\n    transform: rotate(45deg) translate(-8px, -8px);\n}\n", ""]);
 
 // exports
 
@@ -50296,7 +50319,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "target": "_blank"
     }
   }, [_c('i', {
-    staticClass: "fa fa-facebook fa-lg"
+    staticClass: "fa fa-facebook fa-md fa-lg"
   }), _vm._v(" "), _c('span', {
     staticClass: "hidden"
   }, [_vm._v(_vm._s(_vm.$t('app_name')) + " on Facebook")])])]), _vm._v(" "), _c('li', {
@@ -50307,7 +50330,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "target": "_blank"
     }
   }, [_c('i', {
-    staticClass: "fa fa-instagram fa-lg"
+    staticClass: "fa fa-instagram fa-md fa-lg"
   }), _vm._v(" "), _c('span', {
     staticClass: "hidden"
   }, [_vm._v(_vm._s(_vm.$t('app_name')) + " on Instagram")])])]), _vm._v(" "), _c('li', {
@@ -50318,7 +50341,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "target": "_blank"
     }
   }, [_c('i', {
-    staticClass: "fa fa-twitter fa-lg"
+    staticClass: "fa fa-twitter fa-md fa-lg"
+  }), _vm._v(" "), _c('span', {
+    staticClass: "hidden"
+  }, [_vm._v(_vm._s(_vm.$t('app_name')) + " on Twitter")])])]), _vm._v(" "), _c('li', {
+    staticClass: "icons"
+  }, [_c('a', {
+    attrs: {
+      "href": _vm.data.social_twitter,
+      "target": "_blank"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-youtube fa-md fa-lg"
   }), _vm._v(" "), _c('span', {
     staticClass: "hidden"
   }, [_vm._v(_vm._s(_vm.$t('app_name')) + " on Twitter")])])])]) : _vm._e()])]), _vm._v(" "), _c('div', {
@@ -50352,7 +50386,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "href": ""
     }
   }, [_vm._v("Govt Regulatory")])], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-12 mt-sm-2 col-lg-6"
+    staticClass: "col-12 mt-3 mt-lg-0 mt-sm-2 col-lg-6"
   }, [_c('h5', {
     staticClass: "mb-3"
   }, [_vm._v("COMPANY")]), _vm._v(" "), _c('router-link', {
@@ -50381,7 +50415,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.$t('app_name')) + " is the registered trademark of R2H Media Tech Pvt Ltd.")])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "col-5 col-md-5 flex-item mb-4 p-0 p-lg-3 p-md-3 "
+    staticClass: "col-5 col-md-5 flex-item mb-4 p-lg-3 p-md-3 "
   }, [_c('a', {
     staticClass: "d-block col-11 col-md-3 p-0 p-lg-3 p-md-3 ",
     attrs: {
@@ -50417,7 +50451,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "href": ""
     }
   }, [_vm._v("Downloads")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-12 mt-4 mt-lg-0 col-lg-6"
+    staticClass: "col-12 mt-3 mt-lg-0 mt-sm-2 col-lg-6"
   }, [_c('h5', {
     staticClass: "mb-3"
   }, [_vm._v("PARTNERS")]), _vm._v(" "), _c('a', {
@@ -55271,13 +55305,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     })])])])]) : _vm._e()], 1)])])])])], 1) : _vm._e()])
   }))], 1) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "col-12 discover-page"
+    staticClass: "col-12 discover-page p-0"
   }, [_c('div', {
-    staticClass: "col-12"
+    staticClass: "col-12 p-0"
   }, [_c('div', {
     staticClass: "row",
     staticStyle: {
-      "margin": "-30px",
       "overflow": "hidden"
     }
   }, [_c('div', {

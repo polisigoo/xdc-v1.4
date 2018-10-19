@@ -269,9 +269,9 @@
 
             <!-- END TOP -->
 
-            <div class="col-12 discover-page">
-                <div class="col-12">
-                    <div class="row" style="margin: -30px; overflow: hidden;">
+            <div class="col-12 discover-page p-0">
+                <div class="col-12 p-0">
+                    <div class="row" style=" overflow: hidden;">
                         <div class="col-12 p-0">
                             <div class="recenlty"
                                  v-if="data.recenlty !== null && $auth.isAuthenticated() === 'active' ">

@@ -1,7 +1,7 @@
 <template>
     <footer id="footer" class="ml-1">
         <div class="d-flex" style="margin-left: 10px; margin-right: 10px;">
-            <div class="col-5 col-md-5 flex-item mb-4 p-0 p-lg-3 p-md-3 ">
+            <div class="col-5 col-md-5 flex-item mb-4 p-lg-3 p-md-3 ">
                 <a style="" class="d-block col-11 col-md-3 p-0 p-lg-3 p-md-3 " href="/">
                     <img src="/images/logo.png" alt="logo" width="100%">
                 </a>
@@ -11,20 +11,26 @@
                 <ul class="social-nav" v-if="data !== null">
                     <li class="icons">
                         <a :href="data.social_facebook" target="_blank">
-                            <i class="fa fa-facebook fa-lg"></i>
+                            <i class="fa fa-facebook fa-md fa-lg"></i>
 
                             <span class="hidden">{{$t('app_name')}} on Facebook</span>
                         </a>
                     </li>
                     <li class="icons">
                         <a :href="data.social_instagram" target="_blank">
-                            <i class="fa fa-instagram fa-lg"></i>
+                            <i class="fa fa-instagram fa-md fa-lg"></i>
                             <span class="hidden">{{$t('app_name')}} on Instagram</span>
                         </a>
                     </li>
                     <li class="icons">
                         <a :href="data.social_twitter" target="_blank">
-                            <i class="fa fa-twitter fa-lg"></i>
+                            <i class="fa fa-twitter fa-md fa-lg"></i>
+                            <span class="hidden">{{$t('app_name')}} on Twitter</span>
+                        </a>
+                    </li>
+                    <li class="icons">
+                        <a :href="data.social_twitter" target="_blank">
+                            <i class="fa fa-youtube fa-md fa-lg"></i>
                             <span class="hidden">{{$t('app_name')}} on Twitter</span>
                         </a>
                     </li>
@@ -39,7 +45,7 @@
                     <a href="#" class="d-block">FAQ</a>
                     <a href="" class="d-block">Downloads</a>
                 </div>
-                <div class="col-12 mt-4 mt-lg-0 col-lg-6">
+                <div class="col-12 mt-3 mt-lg-0 mt-sm-2 col-lg-6">
                     <h5 class="mb-3">PARTNERS</h5>
                     <a href="#" class="d-block">Content Submission</a>
                     <a href="#" class="d-block">Advertisement</a>
@@ -53,7 +59,7 @@
                     <router-link :to="{name: 'privacy'}" class="d-block">Privacy Policy</router-link>
                     <a href="" class="d-block">Govt Regulatory</a>
                 </div>
-                <div class="col-12 mt-sm-2 col-lg-6">
+                <div class="col-12 mt-3 mt-lg-0 mt-sm-2 col-lg-6">
                     <h5 class="mb-3">COMPANY</h5>
                     <router-link :to="{name: 'about-us'}" class="d-block">{{$t('footer.aboutus')}}</router-link>
                     <router-link :to="{name: 'contact-us'}" class="d-block">{{$t('footer.contactus')}}</router-link>
@@ -175,7 +181,20 @@
    }
    .other-footer a{
         color: #bfbfbf;
+        
    }
+   @media screen and (max-width: 600px) {
+      .other-footer a {
+        font-size: 0.8rem;
+      }
+      .social-nav li{
+            margin-left: 0.5em!important;
+            font-size: 1em!important;
+       }
+       .social-nav li:first-of-type{
+            margin-left: 0px;
+       }
+    }
    .other-footer{
     color: #6f6f6f
    }
@@ -213,6 +232,10 @@
    }
    .social-nav li{
         margin-left: 1em;
+        font-size: 1.2em;
+   }
+   .social-nav li:first-of-type{
+        margin-left: 0px;
    }
    .social-nav li a{
         color: #ccc !important;
