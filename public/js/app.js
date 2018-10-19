@@ -1354,6 +1354,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -1611,6 +1612,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_utils_exit_button_vue__ = __webpack_require__("./resources/assets/js/users/views/default/control/utils/exit-button.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_utils_exit_button_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__control_utils_exit_button_vue__);
+//
 //
 //
 //
@@ -48728,7 +48730,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       class: {
         active_plan: _vm.plan === item.plan_id
       }
-    }, [_c('h3', [_vm._v(_vm._s(item.plan_name))]), _vm._v(" "), _c('h1', [_vm._v("₹" + _vm._s(item.plan_amount) + "\n                                            "), _c('small', [_vm._v("/mo")])]), _vm._v(" "), (item.plan_trial !== null) ? _c('i', [_vm._v(_vm._s(item.plan_trial) + " days free")]) : _vm._e()])])
+    }, [_c('h3', [_vm._v(_vm._s(item.plan_name))]), _vm._v(" "), _c('h1', [_vm._v("₹" + _vm._s(item.plan_amount) + "\n                                            "), (item.plan_name == 'Monthly') ? _c('small', [_vm._v("/mo")]) : _vm._e(), _vm._v(" "), (item.plan_name == 'Yearly') ? _c('small', [_vm._v("/yr")]) : _vm._e()]), _vm._v(" "), (item.plan_trial !== null) ? _c('i', [_vm._v(_vm._s(item.plan_trial) + " days free")]) : _vm._e()])])
   }))]), _vm._v(" "), _c('hr')]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: " col-lg-10 offset-lg-1 "
   }, [_c('div', {
@@ -56455,7 +56457,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       class: {
         active_plan: _vm.plan === item.plan_id
       }
-    }, [_c('h3', [_vm._v(_vm._s(item.plan_name))]), _vm._v(" "), _c('h1', [_vm._v("₹" + _vm._s(item.plan_amount) + "\n                                    "), _c('small', [_vm._v("/mo")])]), _vm._v(" "), (item.plan_trial !== null) ? _c('i', [_vm._v(_vm._s(item.plan_trial) + "\n                                    " + _vm._s(_vm.$t('register.day_free')))]) : _vm._e()])])
+    }, [_c('h3', [_vm._v(_vm._s(item.plan_name))]), _vm._v(" "), _c('h1', [_vm._v("₹" + _vm._s(item.plan_amount) + "\n                                    "), (item.plan_name == 'Monthly') ? _c('small', [_vm._v("/mo")]) : _vm._e(), _vm._v(" "), (item.plan_name == 'Yearly') ? _c('small', [_vm._v("/yr")]) : _vm._e()]), _vm._v(" "), (item.plan_trial !== null) ? _c('i', [_vm._v(_vm._s(item.plan_trial) + "\n                                    " + _vm._s(_vm.$t('register.day_free')))]) : _vm._e()])])
   })), _vm._v(" "), _c('div', {
     staticClass: "col-12 col-md-4 offset-md-4 mt-5"
   }, [_c('button', {
