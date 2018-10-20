@@ -36,8 +36,6 @@
         <div class="col-7 col-sm-10 col-lg-10 ">
           <h3> Notice</h3>
           <p>All the content listed on the website are only for its beta testing purpose of the App. No commercials are being involved.
-            <!-- <a v-if="show" @click="SEND_MAIL" style="color:#0275d8;">send again</a>
-            <a style="color:#0275d8;" v-else>Wait..</a> -->
             
           </p>
         </div>

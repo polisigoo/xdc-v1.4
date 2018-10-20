@@ -83,6 +83,13 @@
                          $route.name ==='kids'    ||
                          $route.name ==='movies'    ||
                          $route.name ==='channels' ? true : false"></ads-notifcation>
+        <default-alert v-if="
+                         $route.name ==='discover'    ||
+                         $route.name ==='series'  ||
+                         $route.name ==='collection' ||
+                         $route.name ==='kids'    ||
+                         $route.name ==='movies'    ||
+                         $route.name ==='channels' ? true : false"></default-alert>
 
         <!-- END SIDEBAR IPAD col-sm -->
 
@@ -110,6 +117,7 @@
         mapState
     } from "vuex";
     import message from "./control/notification/message.vue";
+    import default_alert from './control/notification/default.vue'
     import ads_notifcation from "./control/notification/ads.vue";
     import footer from "./control/footer.vue";
     import swal from "sweetalert";
@@ -126,7 +134,8 @@
             message,
             'end-footer': footer,
             'ads-notifcation': ads_notifcation,
-            'search-page': searchPage
+            'search-page': searchPage,
+            'default-alert': default_alert
         },
 
         data() {
