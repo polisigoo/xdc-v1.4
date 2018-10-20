@@ -3,7 +3,7 @@
         <div class="d-flex" style="margin-left: 10px; margin-right: 10px;">
             <div class="col-5 col-md-5 flex-item p-lg-0 p-md-3 ">
                 <a style="" class="d-block col-11 col-md-3 p-0 p-lg-0 p-md-3 " href="/">
-                    <img src="/images/logo.png" alt="logo" width="70%">
+                    <img src="/images/logo.png" id="logo-foot" alt="logo" width="70%">
                 </a>
             </div>
             <div class="col-2 col-md-2"></div>
@@ -193,6 +193,9 @@
        }
        .social-nav li:first-of-type{
             margin-left: 0px;
+       }
+       #logo-foot{
+        width: 90%
        }
     }
    .other-footer{
