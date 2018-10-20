@@ -50310,7 +50310,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(0, false, false), _vm._v(" "), _c('div', {
     staticClass: "col-2 col-md-2"
   }), _vm._v(" "), _c('div', {
-    staticClass: "col-5 col-md-5 flex-item pl-0"
+    staticClass: "col-5 col-md-5 ml-lg-auto flex-item pl-0 justify-content-end"
   }, [(_vm.data !== null) ? _c('ul', {
     staticClass: "social-nav"
   }, [_c('li', {
@@ -50365,7 +50365,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "margin-left": "auto"
     }
   }, [_c('div', {
-    staticClass: "col-12 mt-sm-2 col-lg-6"
+    staticClass: "col-12 mt-4 mt-lg-4 mt-sm-2 col-lg-6"
   }, [_c('h5', {
     staticClass: "mb-3"
   }, [_vm._v("LEGAL")]), _vm._v(" "), _c('router-link', {
@@ -50388,7 +50388,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "href": ""
     }
   }, [_vm._v("Govt Regulatory")])], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-12 mt-3 mt-lg-0 mt-sm-2 col-lg-6"
+    staticClass: "col-12 mt-4 mt-lg-4 mt-lg-0 mt-sm-2 col-lg-6"
   }, [_c('h5', {
     staticClass: "mb-3"
   }, [_vm._v("COMPANY")]), _vm._v(" "), _c('router-link', {
@@ -50417,9 +50417,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.$t('app_name')) + " is the registered trademark of R2H Media Tech Pvt Ltd.")])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "col-5 col-md-5 flex-item mb-4 p-lg-3 p-md-3 "
+    staticClass: "col-5 col-md-5 flex-item p-lg-0 p-md-3 "
   }, [_c('a', {
-    staticClass: "d-block col-11 col-md-3 p-0 p-lg-3 p-md-3 ",
+    staticClass: "d-block col-11 col-md-3 p-0 p-lg-0 p-md-3 ",
     attrs: {
       "href": "/"
     }
@@ -50434,7 +50434,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-12 mt-sm-2 col-lg-6"
+    staticClass: "col-12 mt-4 mt-lg-4 mt-sm-2 col-lg-6"
   }, [_c('h5', {
     staticClass: "mb-3"
   }, [_vm._v("SUPPORT")]), _vm._v(" "), _c('a', {
@@ -50453,7 +50453,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "href": ""
     }
   }, [_vm._v("Downloads")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-12 mt-3 mt-lg-0 mt-sm-2 col-lg-6"
+    staticClass: "col-12 mt-4 mt-lg-4 mt-lg-4 mt-sm-2 col-lg-6"
   }, [_c('h5', {
     staticClass: "mb-3"
   }, [_vm._v("PARTNERS")]), _vm._v(" "), _c('a', {

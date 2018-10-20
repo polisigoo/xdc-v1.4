@@ -1,13 +1,13 @@
 <template>
     <footer id="footer" class="ml-1">
         <div class="d-flex" style="margin-left: 10px; margin-right: 10px;">
-            <div class="col-5 col-md-5 flex-item mb-4 p-lg-3 p-md-3 ">
-                <a style="" class="d-block col-11 col-md-3 p-0 p-lg-3 p-md-3 " href="/">
+            <div class="col-5 col-md-5 flex-item p-lg-0 p-md-3 ">
+                <a style="" class="d-block col-11 col-md-3 p-0 p-lg-0 p-md-3 " href="/">
                     <img src="/images/logo.png" alt="logo" width="100%">
                 </a>
             </div>
             <div class="col-2 col-md-2"></div>
-            <div class="col-5 col-md-5 flex-item pl-0">
+            <div class="col-5 col-md-5 ml-lg-auto flex-item pl-0 justify-content-end">
                 <ul class="social-nav" v-if="data !== null">
                     <li class="icons">
                         <a :href="data.social_facebook" target="_blank">
@@ -39,13 +39,13 @@
         </div>
         <div class="d-flex other-footer" >
             <div class="row">
-                <div class="col-12 mt-sm-2 col-lg-6">
+                <div class="col-12 mt-4 mt-lg-4 mt-sm-2 col-lg-6">
                     <h5 class="mb-3">SUPPORT</h5>
                     <a href="#" class="d-block">Contact Support</a>
                     <a href="#" class="d-block">FAQ</a>
                     <a href="" class="d-block">Downloads</a>
                 </div>
-                <div class="col-12 mt-3 mt-lg-0 mt-sm-2 col-lg-6">
+                <div class="col-12 mt-4 mt-lg-4 mt-lg-4 mt-sm-2 col-lg-6">
                     <h5 class="mb-3">PARTNERS</h5>
                     <a href="#" class="d-block">Content Submission</a>
                     <a href="#" class="d-block">Advertisement</a>
@@ -53,13 +53,13 @@
                 </div>
             </div>
             <div class="row" style="margin-left: auto;">
-               <div class="col-12 mt-sm-2 col-lg-6">
+               <div class="col-12 mt-4 mt-lg-4 mt-sm-2 col-lg-6">
                     <h5 class="mb-3">LEGAL</h5>
                     <router-link :to="{name: 'terms'}" class="d-block">{{$t('footer.terms')}}</router-link>
                     <router-link :to="{name: 'privacy'}" class="d-block">Privacy Policy</router-link>
                     <a href="" class="d-block">Govt Regulatory</a>
                 </div>
-                <div class="col-12 mt-3 mt-lg-0 mt-sm-2 col-lg-6">
+                <div class="col-12 mt-4 mt-lg-4 mt-lg-0 mt-sm-2 col-lg-6">
                     <h5 class="mb-3">COMPANY</h5>
                     <router-link :to="{name: 'about-us'}" class="d-block">{{$t('footer.aboutus')}}</router-link>
                     <router-link :to="{name: 'contact-us'}" class="d-block">{{$t('footer.contactus')}}</router-link>

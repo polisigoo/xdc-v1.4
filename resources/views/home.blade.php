@@ -8,7 +8,7 @@
         <meta name="theme-color" content="#db5945">
         <meta name="description" content="Watch movies & TV shows online or stream right to your smart TV, game console, PC, Mac, mobile, tablet and more. Start your free trial today.">
         <link rel="manifest" href="manifest.json">
-        <link rel="icon" sizes="192x192" href="/images/logo.png">
+        <link rel="icon" sizes="100x100" href="/images/r2h_favicon_100px.png">
         <link rel="stylesheet" href="/css/app.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="/player/skin/skin.css">

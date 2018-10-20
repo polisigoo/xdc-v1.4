@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/css/app.css">
         <link rel="stylesheet" href="/css/admin/main.css">
+        <link rel="icon" sizes="100x100" href="/images/r2h_favicon_100px.png">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   </head>
