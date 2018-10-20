@@ -3,11 +3,11 @@
         <div class="d-flex" style="margin-left: 10px; margin-right: 10px;">
             <div class="col-5 col-md-5 flex-item p-lg-0 p-md-3 ">
                 <a style="" class="d-block col-11 col-md-3 p-0 p-lg-0 p-md-3 " href="/">
-                    <img src="/images/logo.png" alt="logo" width="100%">
+                    <img src="/images/logo.png" alt="logo" width="70%">
                 </a>
             </div>
             <div class="col-2 col-md-2"></div>
-            <div class="col-5 col-md-5 ml-lg-auto flex-item pl-0 justify-content-end">
+            <div class="col-5 col-md-5 ml-lg-auto flex-item pl-0 pr-0 justify-content-end">
                 <ul class="social-nav" v-if="data !== null">
                     <li class="icons">
                         <a :href="data.social_facebook" target="_blank">

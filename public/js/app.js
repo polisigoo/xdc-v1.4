@@ -50532,7 +50532,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(0, false, false), _vm._v(" "), _c('div', {
     staticClass: "col-2 col-md-2"
   }), _vm._v(" "), _c('div', {
-    staticClass: "col-5 col-md-5 ml-lg-auto flex-item pl-0 justify-content-end"
+    staticClass: "col-5 col-md-5 ml-lg-auto flex-item pl-0 pr-0 justify-content-end"
   }, [(_vm.data !== null) ? _c('ul', {
     staticClass: "social-nav"
   }, [_c('li', {
@@ -50649,7 +50649,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "src": "/images/logo.png",
       "alt": "logo",
-      "width": "100%"
+      "width": "70%"
     }
   })])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
