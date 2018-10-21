@@ -55851,7 +55851,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, _vm._l((_vm.data.data[rootindex].list), function(item, index) {
       return _c('slide', {
         key: index,
-        staticClass: "m-4 animation"
+        staticClass: "m-3 animation"
       }, [(_vm.data.data[rootindex].type === 'Movies') ? _c('div', {
         staticClass: "poster",
         on: {

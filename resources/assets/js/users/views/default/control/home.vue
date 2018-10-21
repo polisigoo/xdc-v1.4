@@ -523,7 +523,7 @@
                                           :scrollPerPage="true"
                                           :perPageCustom="[[220,2], [520,3],[768, 4], [1024, 5], [1920, 7]]">
 
-                                    <slide class="m-4 animation" v-for="(item, index) in data.data[rootindex].list"
+                                    <slide class="m-3 animation" v-for="(item, index) in data.data[rootindex].list"
                                            :key="index">
 
                                         <div class="poster"
