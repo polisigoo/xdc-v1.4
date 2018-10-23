@@ -158,6 +158,25 @@
                     series_id: this.$route.params.series_id
                 });
             }
+            var myInt = setInterval(function(){
+            if(document.querySelector('.fp-engine') != null ){
+                    if(!document.querySelector('.fp-engine').paused ){
+                        CLEAR()
+                    }else{
+                        CLEAR()
+                    }  
+                }    
+            }, 10);
+            function CLEAR(){
+                document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                document.querySelector('.fp-player>a').style.height ="50px";
+                document.querySelector('.fp-player>a').style.width ="100px";
+                document.querySelector('.fp-player>a').href ="/";
+                // document.querySelector('.fp-player>a').style.top ="0";
+                document.querySelector('.fp-player>a').style.backgroundPosition ="center";
+                document.querySelector('.fp-player>a').style.backgroundSize ="100px 50px";
+                document.querySelector('.fp-player>a').style.left ="10%";
+            }
         },
 
         watch: {
@@ -182,6 +201,25 @@
                     });
 
                 }
+                var myInt = setInterval(function(){
+                if(document.querySelector('.fp-engine') != null ){
+                        if(!document.querySelector('.fp-engine').paused ){
+                            CLEAR()
+                        }else{
+                            CLEAR()
+                        }  
+                    }    
+                }, 10);
+                function CLEAR(){
+                    document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                    document.querySelector('.fp-player>a').style.height ="50px";
+                    document.querySelector('.fp-player>a').style.width ="100px";
+                    document.querySelector('.fp-player>a').href ="/";
+                    // document.querySelector('.fp-player>a').style.top ="0";
+                    document.querySelector('.fp-player>a').style.backgroundPosition ="center";
+                    document.querySelector('.fp-player>a').style.backgroundSize ="100px 50px";
+                    document.querySelector('.fp-player>a').style.left ="10%";
+                }
             },
 
             // onclick change
@@ -202,6 +240,25 @@
                         series_id: this.next_season.series_id
                     });
                 }
+                var myInt = setInterval(function(){
+                if(document.querySelector('.fp-engine') != null ){
+                        if(!document.querySelector('.fp-engine').paused ){
+                            CLEAR()
+                        }else{
+                            CLEAR()
+                        }  
+                    }    
+                }, 10);
+                function CLEAR(){
+                    document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                    document.querySelector('.fp-player>a').style.height ="50px";
+                    document.querySelector('.fp-player>a').style.width ="100px";
+                    document.querySelector('.fp-player>a').href ="/";
+                    // document.querySelector('.fp-player>a').style.top ="0";
+                    document.querySelector('.fp-player>a').style.backgroundPosition ="center";
+                    document.querySelector('.fp-player>a').style.backgroundSize ="100px 50px";
+                    document.querySelector('.fp-player>a').style.left ="10%";
+                }
             },
 
             // Onclick  Playlist
@@ -220,7 +277,28 @@
                         });
                     }
                 }
+
+                var myInt = setInterval(function(){
+                if(document.querySelector('.fp-engine') != null ){
+                        if(!document.querySelector('.fp-engine').paused ){
+                            CLEAR()
+                        }else{
+                            CLEAR()
+                        }  
+                    }    
+                }, 10);
+                function CLEAR(){
+                    document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                    document.querySelector('.fp-player>a').style.height ="50px";
+                    document.querySelector('.fp-player>a').style.width ="100px";
+                    document.querySelector('.fp-player>a').href ="/";
+                    // document.querySelector('.fp-player>a').style.top ="0";
+                    document.querySelector('.fp-player>a').style.backgroundPosition ="center";
+                    document.querySelector('.fp-player>a').style.backgroundSize ="100px 50px";
+                    document.querySelector('.fp-player>a').style.left ="10%";
+                }
             }
+
         },
         methods: {
             CHANGE_SERIES(episode_id) {
@@ -228,6 +306,25 @@
                     episode_id: episode_id,
                     type: "sp"
                 });
+                var myInt = setInterval(function(){
+                if(document.querySelector('.fp-engine') != null ){
+                        if(!document.querySelector('.fp-engine').paused ){
+                            CLEAR()
+                        }else{
+                            CLEAR()
+                        }  
+                    }    
+                }, 10);
+                function CLEAR(){
+                    document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                    document.querySelector('.fp-player>a').style.height ="50px";
+                    document.querySelector('.fp-player>a').style.width ="100px";
+                    document.querySelector('.fp-player>a').href ="/";
+                    // document.querySelector('.fp-player>a').style.top ="0";
+                    document.querySelector('.fp-player>a').style.backgroundPosition ="center";
+                    document.querySelector('.fp-player>a').style.backgroundSize ="100px 50px";
+                    document.querySelector('.fp-player>a').style.left ="10%";
+                }
             },
 
             SEND_REPORT() {

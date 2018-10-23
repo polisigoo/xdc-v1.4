@@ -175,10 +175,13 @@
             }, 10);
             function CLEAR(){
                 document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
-                document.querySelector('.fp-player>a').style.height ="100px";
-                document.querySelector('.fp-player>a').style.width ="200px";
+                document.querySelector('.fp-player>a').style.height ="50px";
+                document.querySelector('.fp-player>a').style.width ="100px";
                 document.querySelector('.fp-player>a').href ="/";
-                document.querySelector('.fp-player>a').style.left ="5%";
+                // document.querySelector('.fp-player>a').style.top ="0";
+                document.querySelector('.fp-player>a').style.backgroundPosition ="center";
+                document.querySelector('.fp-player>a').style.backgroundSize ="100px 50px";
+                document.querySelector('.fp-player>a').style.left ="10%";
             }
         },
 
@@ -219,10 +222,13 @@
                 }, 10);
                 function CLEAR(){
                     document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
-                    document.querySelector('.fp-player>a').style.height ="100px";
-                    document.querySelector('.fp-player>a').style.width ="200px";
+                    document.querySelector('.fp-player>a').style.height ="50px";
+                    document.querySelector('.fp-player>a').style.width ="100px";
                     document.querySelector('.fp-player>a').href ="/";
-                    document.querySelector('.fp-player>a').style.left ="5%";
+                    // document.querySelector('.fp-player>a').style.top ="0";
+                    document.querySelector('.fp-player>a').style.backgroundPosition ="center";
+                    document.querySelector('.fp-player>a').style.backgroundSize ="100px 50px";
+                    document.querySelector('.fp-player>a').style.left ="10%";
                 }
             },
 
@@ -260,10 +266,13 @@
                 }, 10);
                 function CLEAR(){
                     document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
-                    document.querySelector('.fp-player>a').style.height ="100px";
-                    document.querySelector('.fp-player>a').style.width ="200px";
+                    document.querySelector('.fp-player>a').style.height ="50px";
+                    document.querySelector('.fp-player>a').style.width ="100px";
                     document.querySelector('.fp-player>a').href ="/";
-                    document.querySelector('.fp-player>a').style.left ="5%";
+                    // document.querySelector('.fp-player>a').style.top ="0";
+                    document.querySelector('.fp-player>a').style.backgroundPosition ="center";
+                    document.querySelector('.fp-player>a').style.backgroundSize ="100px 50px";
+                    document.querySelector('.fp-player>a').style.left ="10%";
                 }
             },
 
@@ -295,11 +304,14 @@
                         }, 10);
                         function CLEAR(){
                             document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
-                            document.querySelector('.fp-player>a').style.height ="100px";
-                            document.querySelector('.fp-player>a').style.width ="200px";
+                            document.querySelector('.fp-player>a').style.height ="50px";
+                            document.querySelector('.fp-player>a').style.width ="100px";
                             document.querySelector('.fp-player>a').href ="/";
-                            document.querySelector('.fp-player>a').style.left ="5%";
-                        }
+                            // document.querySelector('.fp-player>a').style.top ="0";
+                            document.querySelector('.fp-player>a').style.backgroundPosition ="center";
+                            document.querySelector('.fp-player>a').style.backgroundSize ="100px 50px";
+                            document.querySelector('.fp-player>a').style.left ="10%";
+            }
                         
                     }
                 }
@@ -325,10 +337,13 @@
                 }, 10);
                 function CLEAR(){
                     document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
-                    document.querySelector('.fp-player>a').style.height ="100px";
-                    document.querySelector('.fp-player>a').style.width ="200px";
+                    document.querySelector('.fp-player>a').style.height ="50px";
+                    document.querySelector('.fp-player>a').style.width ="100px";
                     document.querySelector('.fp-player>a').href ="/";
-                    document.querySelector('.fp-player>a').style.left ="5%";
+                    // document.querySelector('.fp-player>a').style.top ="0";
+                    document.querySelector('.fp-player>a').style.backgroundPosition ="center";
+                    document.querySelector('.fp-player>a').style.backgroundSize ="100px 50px";
+                    document.querySelector('.fp-player>a').style.left ="10%";
                 }
             },
 
