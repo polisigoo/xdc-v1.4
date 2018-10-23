@@ -6727,6 +6727,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -52751,7 +52764,41 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "http://xaansa.com"
     }
-  }, [_vm._v(_vm._s(_vm.$t('home.media')))])])])])])]) : _vm._e(), _vm._v(" "), (_vm.show_sidebar && _vm.$auth.isAuthenticated() === 'active') ? _c('div', {
+  }, [_vm._v(_vm._s(_vm.$t('home.media')))])]), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.$auth.isAuthenticated() !== 'active') ? _c('li', {
+    staticClass: "nav-item"
+  }, [_c('router-link', {
+    staticClass: "login nav-link",
+    attrs: {
+      "to": {
+        name: 'login'
+      }
+    }
+  }, [_vm._v(_vm._s(_vm.$t('register.login')))])], 1) : _vm._e(), _vm._v(" "), (_vm.$auth.isAuthenticated() !== 'active') ? _c('li', {
+    staticClass: "nav-item"
+  }, [(!_vm.$Helper.getIntGatewayStatus('int_gateway')) ? _c('router-link', {
+    staticClass: "singup nav-link",
+    attrs: {
+      "to": {
+        name: 'plan'
+      }
+    }
+  }, [_vm._v(_vm._s(_vm.$t('register.signup')))]) : _vm._e(), _vm._v(" "), (_vm.$Helper.getIntGatewayStatus('int_gateway')) ? _c('router-link', {
+    staticClass: "singup nav-link",
+    attrs: {
+      "to": {
+        name: 'signup-non-payment'
+      }
+    }
+  }, [_vm._v(_vm._s(_vm.$t('register.signup')))]) : _vm._e()], 1) : _vm._e(), _vm._v(" "), (_vm.$auth.isAuthenticated() === 'active') ? _c('li', {
+    staticClass: "nav-item"
+  }, [_c('router-link', {
+    staticClass: "usernam nav-link",
+    attrs: {
+      "to": {
+        name: 'profile'
+      }
+    }
+  }, [_vm._v("\n                            " + _vm._s(_vm._f("truncate")(_vm.$auth.getUserInfo("username"), 5)) + "\n                        ")])], 1) : _vm._e()])])])]) : _vm._e(), _vm._v(" "), (_vm.show_sidebar && _vm.$auth.isAuthenticated() === 'active') ? _c('div', {
     staticClass: "col-3 sidebar-content sidebar-sm"
   }, [_c('div', {
     staticClass: "sidebar"

@@ -262,6 +262,19 @@
                             <li class="nav-item"> 
                                 <a href="http://xaansa.com" class="nav-link ">{{$t('home.media')}}</a>
                             </li>
+                            <hr>
+                            <li class="nav-item" v-if="$auth.isAuthenticated() !== 'active'">
+                                <router-link class="login nav-link" :to="{name: 'login'}">{{$t('register.login')}}</router-link>
+                            </li>
+                            <li class="nav-item" v-if="$auth.isAuthenticated() !== 'active'">
+                                <router-link class="singup nav-link" :to="{name: 'plan'}" v-if="!$Helper.getIntGatewayStatus('int_gateway')">{{$t('register.signup')}}</router-link>
+                                <router-link class="singup nav-link" :to="{name: 'signup-non-payment'}" v-if="$Helper.getIntGatewayStatus('int_gateway')">{{$t('register.signup')}}</router-link>
+                            </li>
+                            <li class="nav-item" v-if="$auth.isAuthenticated() === 'active'">
+                                <router-link class="usernam nav-link" :to="{name: 'profile'}">
+                                {{$auth.getUserInfo("username") | truncate(5)}}
+                            </router-link>
+                            </li>
                         </ul>
                     </div>
                 </div>
