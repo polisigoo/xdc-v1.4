@@ -2247,6 +2247,273 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/admin/views/movies/analysis-movie.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__charts_regions_js__ = __webpack_require__("./resources/assets/js/admin/views/charts/regions.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_loader__ = __webpack_require__("./resources/assets/js/admin/views/components/loader.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_loader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_loader__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        "views-day-chart": __WEBPACK_IMPORTED_MODULE_0__charts_regions_js__["a" /* default */],
+        "views-month-chart": __WEBPACK_IMPORTED_MODULE_0__charts_regions_js__["a" /* default */],
+        "views-year-chart": __WEBPACK_IMPORTED_MODULE_0__charts_regions_js__["a" /* default */],
+        Loader: __WEBPACK_IMPORTED_MODULE_1__components_loader___default.a
+    },
+
+    data: function data() {
+        return {
+            show_alert_services: false,
+            show_chart: true,
+            analysis_date: "Daily",
+            like: {},
+            favor: {},
+            all_views: null,
+            latest_views: [],
+            spinner_loading: true,
+            watchMovieInDay: {
+                perecent: {},
+                all: 0,
+                labels: [],
+                datasets: [{
+                    label: "Views In Year",
+                    yAxisID: "Views",
+                    backgroundColor: "rgba(3, 169, 244, 0.7)",
+                    pointBackgroundColor: "#818181",
+                    borderWidth: 1,
+                    borderColor: "#818181",
+                    pointBorderColor: "#fff",
+                    //Data to be represented on y-axis
+                    data: []
+                }]
+            },
+
+            watchMovieInMonth: {
+                perecent: {},
+                all: 0,
+                labels: [],
+                datasets: [{
+                    label: "Views In Year",
+                    yAxisID: "Views",
+                    backgroundColor: "rgba(3, 169, 244, 0.7)",
+                    pointBackgroundColor: "#818181",
+                    borderWidth: 1,
+                    borderColor: "#818181",
+                    pointBorderColor: "#fff",
+                    //Data to be represented on y-axis
+                    data: []
+                }]
+            },
+
+            watchMovieInYear: {
+                perecent: {},
+                all: 0,
+                labels: [],
+                datasets: [{
+                    label: "Views In Year",
+                    yAxisID: "Views",
+                    backgroundColor: "rgba(3, 169, 244, 0.7)",
+                    pointBackgroundColor: "#818181",
+                    borderWidth: 1,
+                    borderColor: "#818181",
+                    pointBorderColor: "#fff",
+                    //Data to be represented on y-axis
+                    data: []
+                }]
+            },
+
+            //Chart.js options that controls the appearance of the chart
+            options: {
+                scales: {
+                    yAxes: [{
+                        id: "Views",
+                        type: "linear",
+                        position: "left",
+                        ticks: {
+                            beginAtZero: false,
+                            display: false
+                        },
+                        gridLines: {
+                            display: false
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            display: false
+                        }
+                    }],
+                    zAxes: [{
+                        ticks: {
+                            display: false
+                        }
+                    }]
+                },
+                legend: {
+                    display: false
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        axios.get("/api/admin/analysis/movie/" + this.$route.params.id).then(function (response) {
+            if (response.status === 200) {
+                // Active and Inactivity User
+                // Day
+                for (var index = 0; index < response.data.data.views.day.length; index++) {
+                    //Active
+                    _this.watchMovieInDay.labels.push(response.data.data.views.day[index].hour);
+                    _this.watchMovieInDay.datasets[0].data.push(response.data.data.views.day[index].number);
+                }
+
+                //Month
+                for (var _index = 0; _index < response.data.data.views.month.length; _index++) {
+                    _this.watchMovieInMonth.labels.push(response.data.data.views.month[_index].month);
+                    _this.watchMovieInMonth.datasets[0].data.push(response.data.data.views.month[_index].number);
+                }
+
+                //Year
+                for (var _index2 = 0; _index2 < response.data.data.views.year.length; _index2++) {
+                    _this.watchMovieInYear.labels.push(response.data.data.views.year[_index2].year);
+                    _this.watchMovieInYear.datasets[0].data.push(response.data.data.views.year[_index2].number);
+                }
+
+                _this.like = response.data.data.like;
+                _this.favor = response.data.data.favor;
+                _this.latest_views = response.data.data.latest_views;
+                _this.all_views = response.data.data.all_views;
+                _this.spinner_loading = false;
+            }
+        });
+    },
+
+
+    methods: {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/admin/views/movies/movie-edit.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5217,6 +5484,295 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
             });
         }
     }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/admin/views/series/analysis-series.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__charts_regions_js__ = __webpack_require__("./resources/assets/js/admin/views/charts/regions.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_loader__ = __webpack_require__("./resources/assets/js/admin/views/components/loader.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_loader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_loader__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        "views-day-chart": __WEBPACK_IMPORTED_MODULE_0__charts_regions_js__["a" /* default */],
+        "views-month-chart": __WEBPACK_IMPORTED_MODULE_0__charts_regions_js__["a" /* default */],
+        "views-year-chart": __WEBPACK_IMPORTED_MODULE_0__charts_regions_js__["a" /* default */],
+        Loader: __WEBPACK_IMPORTED_MODULE_1__components_loader___default.a
+    },
+
+    data: function data() {
+        return {
+            show_alert_services: false,
+            show_chart: true,
+            analysis_date: "Daily",
+            like: {},
+            favor: {},
+            latest_views: [],
+            top_episode: [],
+            watchMovieInDay: {
+                perecent: {},
+                all: 0,
+                labels: [],
+                datasets: [{
+                    label: "Views In Year",
+                    yAxisID: "Views",
+                    backgroundColor: "rgba(3, 169, 244, 0.7)",
+                    pointBackgroundColor: "#818181",
+                    borderWidth: 1,
+                    borderColor: "#818181",
+                    pointBorderColor: "#fff",
+                    //Data to be represented on y-axis
+                    data: []
+                }]
+            },
+            spinner_loading: true,
+            watchMovieInMonth: {
+                perecent: {},
+                all: 0,
+                labels: [],
+                datasets: [{
+                    label: "Views In Year",
+                    yAxisID: "Views",
+                    backgroundColor: "rgba(3, 169, 244, 0.7)",
+                    pointBackgroundColor: "#818181",
+                    borderWidth: 1,
+                    borderColor: "#818181",
+                    pointBorderColor: "#fff",
+                    //Data to be represented on y-axis
+                    data: []
+                }]
+            },
+
+            watchMovieInYear: {
+                perecent: {},
+                all: 0,
+                labels: [],
+                datasets: [{
+                    label: "Views In Year",
+                    yAxisID: "Views",
+                    backgroundColor: "rgba(3, 169, 244, 0.7)",
+                    pointBackgroundColor: "#818181",
+                    borderWidth: 1,
+                    borderColor: "#818181",
+                    pointBorderColor: "#fff",
+                    //Data to be represented on y-axis
+                    data: []
+                }]
+            },
+
+            //Chart.js options that controls the appearance of the chart
+            options: {
+                scales: {
+                    yAxes: [{
+                        id: "Views",
+                        type: "linear",
+                        position: "left",
+                        ticks: {
+                            beginAtZero: false,
+                            display: false
+                        },
+                        gridLines: {
+                            display: false
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            display: false
+                        }
+                    }],
+                    zAxes: [{
+                        ticks: {
+                            display: false
+                        }
+                    }]
+                },
+                legend: {
+                    display: false
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        axios.get("/api/admin/analysis/series/" + this.$route.params.id).then(function (response) {
+            if (response.status === 200) {
+                // Active and Inactivity User
+                // Day
+                for (var index = 0; index < response.data.data.views.day.length; index++) {
+                    //Active
+                    _this.watchMovieInDay.labels.push(response.data.data.views.day[index].hour);
+                    _this.watchMovieInDay.datasets[0].data.push(response.data.data.views.day[index].number);
+                }
+
+                //Month
+                for (var _index = 0; _index < response.data.data.views.month.length; _index++) {
+                    _this.watchMovieInMonth.labels.push(response.data.data.views.month[_index].month);
+                    _this.watchMovieInMonth.datasets[0].data.push(response.data.data.views.month[_index].number);
+                }
+
+                //Year
+                for (var _index2 = 0; _index2 < response.data.data.views.year.length; _index2++) {
+                    _this.watchMovieInYear.labels.push(response.data.data.views.year[_index2].year);
+                    _this.watchMovieInYear.datasets[0].data.push(response.data.data.views.year[_index2].number);
+                }
+
+                _this.like = response.data.data.like;
+                _this.favor = response.data.data.favor;
+                _this.latest_views = response.data.data.latest_views;
+                _this.all_views = response.data.data.all_views;
+                _this.top_episode = response.data.data.top_episode;
+                _this.spinner_loading = false;
+            }
+        });
+    },
+
+
+    methods: {}
 });
 
 /***/ }),
@@ -55901,6 +56457,185 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0f49ecf2\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/admin/views/movies/analysis-movie.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "analysis"
+  }, [(_vm.spinner_loading) ? _c('div', {
+    staticClass: "spinner-load"
+  }, [_c('Loader')], 1) : _vm._e(), _vm._v(" "), (!_vm.spinner_loading) ? _c('div', {
+    staticClass: "dashboard"
+  }, [_c('div', {
+    staticClass: "change-date"
+  }, [_c('div', {
+    staticClass: "dropdown"
+  }, [_c('button', {
+    staticClass: "dropdown-toggle",
+    staticStyle: {
+      "font-size": "15px",
+      "font-weight": "bold",
+      "color": "#2996f3",
+      "text-transform": "uppercase"
+    },
+    attrs: {
+      "type": "button",
+      "id": "dropdownNavbar",
+      "data-toggle": "dropdown",
+      "aria-haspopup": "true",
+      "aria-expanded": "false"
+    }
+  }, [_vm._v("\n                           " + _vm._s(_vm.analysis_date) + "\n            ")]), _vm._v(" "), _c('div', {
+    staticClass: "dropdown-menu",
+    attrs: {
+      "aria-labelledby": "dropdownNavbar"
+    }
+  }, [_c('div', {
+    staticClass: "dropdown-item",
+    on: {
+      "click": function($event) {
+        _vm.analysis_date = 'Daily'
+      }
+    }
+  }, [_vm._v("Daily")]), _vm._v(" "), _c('div', {
+    staticClass: "dropdown-item",
+    on: {
+      "click": function($event) {
+        _vm.analysis_date = 'Monthly'
+      }
+    }
+  }, [_vm._v("Monthly")]), _vm._v(" "), _c('div', {
+    staticClass: "dropdown-item",
+    on: {
+      "click": function($event) {
+        _vm.analysis_date = 'Yearly'
+      }
+    }
+  }, [_vm._v("Yearly")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-12 row"
+  }, [_c('div', {
+    staticClass: "col-12 col-sm-6 crms text-center p-2"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12 col-lg-6 mt-2"
+  }, [_c('div', {
+    staticClass: "details m-md-2 white"
+  }, [_c('img', {
+    attrs: {
+      "src": "/themes/default/img/admin/heart.svg",
+      "alt": "Likes",
+      "width": "60px"
+    }
+  }), _vm._v(" "), (_vm.analysis_date == 'Daily') ? _c('h4', {
+    staticClass: "likes"
+  }, [_vm._v(_vm._s(_vm.like.day))]) : _vm._e(), _vm._v(" "), (_vm.analysis_date == 'Monthly') ? _c('h4', {
+    staticClass: "likes"
+  }, [_vm._v(_vm._s(_vm.like.month))]) : _vm._e(), _vm._v(" "), (_vm.analysis_date == 'Yearly') ? _c('h4', {
+    staticClass: "likes"
+  }, [_vm._v(_vm._s(_vm.like.year))]) : _vm._e(), _vm._v(" "), _c('span', {
+    staticClass: "header"
+  }, [_vm._v("Likes")])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-12 col-lg-6 mt-2"
+  }, [_c('div', {
+    staticClass: "details m-md-2 white"
+  }, [_c('img', {
+    attrs: {
+      "src": "/themes/default/img/admin/star.svg",
+      "alt": "Favor",
+      "width": "60px"
+    }
+  }), _vm._v(" "), (_vm.analysis_date == 'Daily') ? _c('h4', {
+    staticClass: "favor"
+  }, [_vm._v(_vm._s(_vm.favor.day))]) : _vm._e(), _vm._v(" "), (_vm.analysis_date == 'Monthly') ? _c('h4', {
+    staticClass: "favor"
+  }, [_vm._v(_vm._s(_vm.favor.month))]) : _vm._e(), _vm._v(" "), (_vm.analysis_date == 'Yearly') ? _c('h4', {
+    staticClass: "favor"
+  }, [_vm._v(_vm._s(_vm.favor.year))]) : _vm._e(), _vm._v(" "), _c('span', {
+    staticClass: "header"
+  }, [_vm._v("Favor")])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-12 col-lg-6 mt-2"
+  }, [_c('div', {
+    staticClass: "details m-md-2 white"
+  }, [_c('img', {
+    attrs: {
+      "src": "/themes/default/img/admin/movie.svg",
+      "alt": "views",
+      "width": "60px"
+    }
+  }), _vm._v(" "), _c('h4', {
+    staticClass: "favor"
+  }, [_vm._v(_vm._s(_vm.all_views))]), _vm._v(" "), _c('span', {
+    staticClass: "header"
+  }, [_vm._v("All Views")])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-12 col-sm-6"
+  }, [_c('span', {
+    staticClass: "title p-2"
+  }, [_vm._v("Views")]), _vm._v(" "), _c('div', {
+    staticClass: "details white m-2 p-2"
+  }, [(_vm.analysis_date == 'Daily') ? _c('div', {
+    staticClass: "chart"
+  }, [(_vm.watchMovieInDay.datasets[0].data.length > 0) ? _c('views-day-chart', {
+    attrs: {
+      "data": _vm.watchMovieInDay,
+      "options": _vm.options,
+      "height": 150
+    }
+  }) : _c('div', {
+    staticClass: "no-views m-3 text-center"
+  }, [_c('h3', {
+    staticClass: "title"
+  }, [_vm._v("There is no view in this day")])])], 1) : _vm._e(), _vm._v(" "), (_vm.analysis_date == 'Monthly') ? _c('div', {
+    staticClass: "chart"
+  }, [(_vm.watchMovieInMonth.datasets[0].data.length > 0) ? _c('views-month-chart', {
+    attrs: {
+      "data": _vm.watchMovieInMonth,
+      "options": _vm.options,
+      "height": 150
+    }
+  }) : _c('div', {
+    staticClass: "no-views m-3 text-center"
+  }, [_c('h3', {
+    staticClass: "title"
+  }, [_vm._v("There is no view in last month")])])], 1) : _vm._e(), _vm._v(" "), (_vm.analysis_date == 'Yearly') ? _c('div', {
+    staticClass: "chart"
+  }, [(_vm.watchMovieInYear.datasets[0].data.length > 0) ? _c('views-year-chart', {
+    attrs: {
+      "data": _vm.watchMovieInYear,
+      "options": _vm.options,
+      "height": 150
+    }
+  }) : _c('div', {
+    staticClass: "no-views m-3 text-center"
+  }, [_c('h3', {
+    staticClass: "title"
+  }, [_vm._v("There is no view in last year")])])], 1) : _vm._e()])]), _vm._v(" "), _c('div', {
+    staticClass: "col-12 col-sm-6 mt-3"
+  }, [_c('div', {
+    staticClass: "title p-2"
+  }, [_vm._v("Latest Views")]), _vm._v(" "), (_vm.latest_views.length > 0) ? _c('div', {
+    staticClass: "table-responsive white"
+  }, [_c('div', {
+    staticClass: "table table-hover"
+  }, [_vm._m(0, false, false), _vm._v(" "), _c('tbody', _vm._l((_vm.latest_views), function(item, index) {
+    return _c('tr', {
+      key: index
+    }, [_c('td', [_vm._v(_vm._s(item.user_name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.created_at))])])
+  }))])]) : _vm._e()])])]) : _vm._e()])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('th', [_vm._v("Username")]), _vm._v(" "), _c('th', [_vm._v("View date")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-0f49ecf2", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-15587ad3\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/admin/views/settings/transcoder-video/watermark.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -56995,6 +57730,199 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-1cb33232", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1e55a4d9\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/admin/views/series/analysis-series.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "analysis"
+  }, [(_vm.spinner_loading) ? _c('div', {
+    staticClass: "spinner-load"
+  }, [_c('Loader')], 1) : _vm._e(), _vm._v(" "), (!_vm.spinner_loading) ? _c('div', {
+    staticClass: "dashboard"
+  }, [_c('div', {
+    staticClass: "change-date"
+  }, [_c('div', {
+    staticClass: "dropdown"
+  }, [_c('button', {
+    staticClass: "dropdown-toggle",
+    staticStyle: {
+      "font-size": "15px",
+      "font-weight": "bold",
+      "color": "#2996f3",
+      "text-transform": "uppercase"
+    },
+    attrs: {
+      "type": "button",
+      "id": "dropdownNavbar",
+      "data-toggle": "dropdown",
+      "aria-haspopup": "true",
+      "aria-expanded": "false"
+    }
+  }, [_vm._v("\n                           " + _vm._s(_vm.analysis_date) + "\n            ")]), _vm._v(" "), _c('div', {
+    staticClass: "dropdown-menu",
+    attrs: {
+      "aria-labelledby": "dropdownNavbar"
+    }
+  }, [_c('div', {
+    staticClass: "dropdown-item",
+    on: {
+      "click": function($event) {
+        _vm.analysis_date = 'Daily'
+      }
+    }
+  }, [_vm._v("Daily")]), _vm._v(" "), _c('div', {
+    staticClass: "dropdown-item",
+    on: {
+      "click": function($event) {
+        _vm.analysis_date = 'Monthly'
+      }
+    }
+  }, [_vm._v("Monthly")]), _vm._v(" "), _c('div', {
+    staticClass: "dropdown-item",
+    on: {
+      "click": function($event) {
+        _vm.analysis_date = 'Yearly'
+      }
+    }
+  }, [_vm._v("Yearly")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-12 row"
+  }, [_c('div', {
+    staticClass: "col-12 col-sm-6 crms text-center p-2"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12 col-lg-6 mt-2"
+  }, [_c('div', {
+    staticClass: "details m-md-2 white"
+  }, [_c('img', {
+    attrs: {
+      "src": "/themes/default/img/admin/heart.svg",
+      "alt": "Likes",
+      "width": "60px"
+    }
+  }), _vm._v(" "), (_vm.analysis_date == 'Daily') ? _c('h4', {
+    staticClass: "likes"
+  }, [_vm._v(_vm._s(_vm.like.day))]) : _vm._e(), _vm._v(" "), (_vm.analysis_date == 'Monthly') ? _c('h4', {
+    staticClass: "likes"
+  }, [_vm._v(_vm._s(_vm.like.month))]) : _vm._e(), _vm._v(" "), (_vm.analysis_date == 'Yearly') ? _c('h4', {
+    staticClass: "likes"
+  }, [_vm._v(_vm._s(_vm.like.year))]) : _vm._e(), _vm._v(" "), _c('span', {
+    staticClass: "header"
+  }, [_vm._v("Likes")])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-12 col-lg-6 mt-2"
+  }, [_c('div', {
+    staticClass: "details m-md-2 white"
+  }, [_c('img', {
+    attrs: {
+      "src": "/themes/default/img/admin/star.svg",
+      "alt": "Favor",
+      "width": "60px"
+    }
+  }), _vm._v(" "), (_vm.analysis_date == 'Daily') ? _c('h4', {
+    staticClass: "favor"
+  }, [_vm._v(_vm._s(_vm.favor.day))]) : _vm._e(), _vm._v(" "), (_vm.analysis_date == 'Monthly') ? _c('h4', {
+    staticClass: "favor"
+  }, [_vm._v(_vm._s(_vm.favor.month))]) : _vm._e(), _vm._v(" "), (_vm.analysis_date == 'Yearly') ? _c('h4', {
+    staticClass: "favor"
+  }, [_vm._v(_vm._s(_vm.favor.year))]) : _vm._e(), _vm._v(" "), _c('span', {
+    staticClass: "header"
+  }, [_vm._v("Favor")])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-12 col-lg-6 mt-2"
+  }, [_c('div', {
+    staticClass: "details m-md-2 white"
+  }, [_c('img', {
+    attrs: {
+      "src": "/themes/default/img/admin/movie.svg",
+      "alt": "views",
+      "width": "60px"
+    }
+  }), _vm._v(" "), _c('h4', {
+    staticClass: "favor"
+  }, [_vm._v(_vm._s(_vm.all_views))]), _vm._v(" "), _c('span', {
+    staticClass: "header"
+  }, [_vm._v("All Views")])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-12 col-sm-6"
+  }, [_c('span', {
+    staticClass: "title p-2"
+  }, [_vm._v("Views")]), _vm._v(" "), _c('div', {
+    staticClass: "details white m-2 p-2"
+  }, [(_vm.analysis_date == 'Daily') ? _c('div', {
+    staticClass: "chart"
+  }, [(_vm.watchMovieInDay.datasets[0].data.length > 0) ? _c('views-day-chart', {
+    attrs: {
+      "data": _vm.watchMovieInDay,
+      "options": _vm.options,
+      "height": 150
+    }
+  }) : _c('div', {
+    staticClass: "no-views m-3 text-center"
+  }, [_c('h3', {
+    staticClass: "title"
+  }, [_vm._v("There is no view in this day")])])], 1) : _vm._e(), _vm._v(" "), (_vm.analysis_date == 'Monthly') ? _c('div', {
+    staticClass: "chart"
+  }, [(_vm.watchMovieInMonth.datasets[0].data.length > 0) ? _c('views-month-chart', {
+    attrs: {
+      "data": _vm.watchMovieInMonth,
+      "options": _vm.options,
+      "height": 150
+    }
+  }) : _c('div', {
+    staticClass: "no-views m-3 text-center"
+  }, [_c('h3', {
+    staticClass: "title"
+  }, [_vm._v("There is no view in last month")])])], 1) : _vm._e(), _vm._v(" "), (_vm.analysis_date == 'Yearly') ? _c('div', {
+    staticClass: "chart"
+  }, [(_vm.watchMovieInYear.datasets[0].data.length > 0) ? _c('views-year-chart', {
+    attrs: {
+      "data": _vm.watchMovieInYear,
+      "options": _vm.options,
+      "height": 150
+    }
+  }) : _c('div', {
+    staticClass: "no-views m-3 text-center"
+  }, [_c('h3', {
+    staticClass: "title"
+  }, [_vm._v("There is no view in last year")])])], 1) : _vm._e()])]), _vm._v(" "), (_vm.latest_views.length > 0) ? _c('div', {
+    staticClass: "col-12 col-sm-6 mt-3"
+  }, [_c('div', {
+    staticClass: "title p-2"
+  }, [_vm._v("Latest Epiosde Views")]), _vm._v(" "), _c('div', {
+    staticClass: "table-responsive white"
+  }, [_c('div', {
+    staticClass: "table table-hover"
+  }, [_vm._m(0, false, false), _vm._v(" "), _c('tbody', _vm._l((_vm.latest_views), function(item, index) {
+    return _c('tr', {
+      key: index
+    }, [_c('td', [_vm._v(_vm._s(item.user_name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.season_number) + " / " + _vm._s(item.episode_number))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.created_at))])])
+  }))])])]) : _vm._e(), _vm._v(" "), (_vm.top_episode.length > 0) ? _c('div', {
+    staticClass: "col-12 col-sm-6 mt-3"
+  }, [_c('div', {
+    staticClass: "title p-2"
+  }, [_vm._v("Top Episode Views")]), _vm._v(" "), _c('div', {
+    staticClass: "table-responsive white"
+  }, [_c('div', {
+    staticClass: "table table-hover"
+  }, [_vm._m(1, false, false), _vm._v(" "), _c('tbody', _vm._l((_vm.top_episode), function(item, index) {
+    return _c('tr', {
+      key: index
+    }, [_c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.season_number) + " / " + _vm._s(item.episode_number))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.number))])])
+  }))])])]) : _vm._e()])]) : _vm._e()])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('th', [_vm._v("Username")]), _vm._v(" "), _c('th', [_vm._v("Episode Name")]), _vm._v(" "), _c('th', [_vm._v("SE/EP")]), _vm._v(" "), _c('th', [_vm._v("View date")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('th', [_vm._v("Episode Name")]), _vm._v(" "), _c('th', [_vm._v("SE/EP")]), _vm._v(" "), _c('th', [_vm._v("Views")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1e55a4d9", module.exports)
   }
 }
 
@@ -68814,8 +69742,11 @@ var routes = [{
     path: '/movies/movie-edit/:id',
     name: 'movie_edit',
     component: __webpack_require__("./resources/assets/js/admin/views/movies/movie-edit.vue")
+}, {
+    name: 'analysis-movie',
+    path: '/movies/analysis/:id',
+    component: __webpack_require__("./resources/assets/js/admin/views/movies/analysis-movie.vue")
 },
-
 //Series
 {
     name: 'series-manage',
@@ -68849,6 +69780,10 @@ var routes = [{
     name: 'series_edit',
     path: '/series/series-edit/:id',
     component: __webpack_require__("./resources/assets/js/admin/views/series/series-edit.vue")
+}, {
+    name: 'analysis-series',
+    path: '/series/analysis-series/:id',
+    component: __webpack_require__("./resources/assets/js/admin/views/series/analysis-series.vue")
 }, {
     path: '/top/manage',
     name: 'top-manage',
@@ -71307,6 +72242,47 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/assets/js/admin/views/movies/analysis-movie.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/admin/views/movies/analysis-movie.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0f49ecf2\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/admin/views/movies/analysis-movie.vue"),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\HP\\Downloads\\CinemaRex V1.4\\CinemaRex V1.4\\resources\\assets\\js\\admin\\views\\movies\\analysis-movie.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] analysis-movie.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0f49ecf2", Component.options)
+  } else {
+    hotAPI.reload("data-v-0f49ecf2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/admin/views/movies/movie-edit.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -71624,6 +72600,47 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-19d7e86d", Component.options)
   } else {
     hotAPI.reload("data-v-19d7e86d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/admin/views/series/analysis-series.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/admin/views/series/analysis-series.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1e55a4d9\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/admin/views/series/analysis-series.vue"),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\HP\\Downloads\\CinemaRex V1.4\\CinemaRex V1.4\\resources\\assets\\js\\admin\\views\\series\\analysis-series.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] analysis-series.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1e55a4d9", Component.options)
+  } else {
+    hotAPI.reload("data-v-1e55a4d9", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

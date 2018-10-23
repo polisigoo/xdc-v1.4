@@ -28,7 +28,11 @@ let routes = [
 		name: 'movie_edit',		
 		component: require('./views/movies/movie-edit.vue')
 	},
-
+	{
+		name: 'analysis-movie',
+        path: '/movies/analysis/:id',
+		component: require('./views/movies/analysis-movie.vue')
+	},
 	//Series
 	{	
 		name: 'series-manage',
@@ -73,7 +77,11 @@ let routes = [
         path: '/series/series-edit/:id',
 		component: require('./views/series/series-edit.vue')
 	},
-
+	{
+		name: 'analysis-series',
+        path: '/series/analysis-series/:id',
+		component: require('./views/series/analysis-series.vue')
+	},
     {
         path: '/top/manage',
         name: 'top-manage',
