@@ -776,86 +776,81 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            dropdown_movies: '',
-            dropdown_series: '',
-            dropdown_settings: '',
-            permission: 0,
-            mobile_sidebar: false,
-            show_alert_services: false,
-            data_services_error: []
-        };
-    },
+  data: function data() {
+    return {
+      dropdown_movies: "",
+      dropdown_series: "",
+      dropdown_settings: "",
+      permission: 0,
+      mobile_sidebar: false,
+      show_alert_services: false,
+      data_services_error: [],
+      notif_report: 0,
+      notif_support: 0
+    };
+  },
 
 
-    components: {
-        'upload-modal': __WEBPACK_IMPORTED_MODULE_0__components_upload_modal___default.a
-    },
+  components: {
+    "upload-modal": __WEBPACK_IMPORTED_MODULE_0__components_upload_modal___default.a
+  },
 
-    created: function created() {
-        var _this = this;
+  created: function created() {
+    var _this = this;
 
-        axios.get("/api/admin/check/permission").then(function (response) {
-            if (response.status === 200) {
-                _this.$auth.setDetails(response.data.data.email, response.data.data.name, response.data.data.image, response.data.data.role_id);
+    axios.get("/api/admin/check/permission").then(function (response) {
+      if (response.status === 200) {
+        _this.$auth.setDetails(response.data.data.email, response.data.data.name, response.data.data.image, response.data.data.role_id);
 
-                _this.permission = response.data.data.role_id;
-            }
-        });
+        _this.permission = response.data.data.role_id;
+      }
+    });
 
-        // Check services
-        axios.get('/api/admin/get/checkservices').then(function (response) {
-            console.log(response.data.ffmpeg.status);
-            if (!response.data.ffmpeg.status || !response.data.braintree.status || !response.data.tmdb.status) {
-                _this.show_alert_services = true;
-                _this.data_services_error = response.data;
-            }
-        });
-    },
+    // Check services
+    axios.get("/api/admin/get/checkservices").then(function (response) {
+      if (!response.data.ffmpeg.status || !response.data.braintree.status || !response.data.tmdb.status) {
+        _this.show_alert_services = true;
+        _this.data_services_error = response.data;
+      }
+      _this.notif_report = response.data.notification.reports;
+      _this.notif_support = response.data.notification.supports;
+    });
+  },
 
 
-    methods: {
-        SHOW_DROPDOWN: function SHOW_DROPDOWN(x, t) {
-
-            if (x == 'movies') {
-
-                if (this.dropdown_movies == x) {
-                    this.dropdown_movies = false;
-                } else {
-                    this.dropdown_movies = x;
-                }
-            } else if (x == 'series') {
-                if (this.dropdown_series == x) {
-                    this.dropdown_series = false;
-                } else {
-                    this.dropdown_series = x;
-                }
-            } else {
-                if (this.dropdown_settings == x) {
-                    this.dropdown_settings = false;
-                } else {
-                    this.dropdown_settings = x;
-                }
-            }
-        },
-        LOGOUT: function LOGOUT() {
-            axios.post("admin/logout").then(function (res) {
-                localStorage.removeItem('_a');
-                location.reload();
-            });
+  methods: {
+    SHOW_DROPDOWN: function SHOW_DROPDOWN(x, t) {
+      if (x == "movies") {
+        if (this.dropdown_movies == x) {
+          this.dropdown_movies = false;
+        } else {
+          this.dropdown_movies = x;
         }
+      } else if (x == "series") {
+        if (this.dropdown_series == x) {
+          this.dropdown_series = false;
+        } else {
+          this.dropdown_series = x;
+        }
+      } else {
+        if (this.dropdown_settings == x) {
+          this.dropdown_settings = false;
+        } else {
+          this.dropdown_settings = x;
+        }
+      }
+    },
+    LOGOUT: function LOGOUT() {
+      axios.post("admin/logout").then(function (res) {
+        localStorage.removeItem("_a");
+        location.reload();
+      });
     }
+  }
 });
 
 /***/ }),
@@ -60332,14 +60327,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [(_vm.show_alert_services) ? _c('div', {
     staticClass: "col-12",
     staticStyle: {
-      "z-index": "1",
+      "z-index": "10000",
       "position": "fixed",
-      "left": "0",
-      "bottom": "0",
+      "left": "0px",
+      "bottom": "0px",
       "width": "100%"
     }
   }, _vm._l((_vm.data_services_error), function(item, index) {
     return (!item.status) ? _c('div', {
+      key: index,
       staticClass: "alert alert-warning",
       attrs: {
         "role": "alert"
@@ -60375,7 +60371,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "onError": "this.onerror=null;this.src='/images/avatar.png';",
       "width": "23px"
     }
-  }), _vm._v("\n                        " + _vm._s(_vm.$auth.getUserInfo('name')) + "\n                    ")]), _vm._v(" "), _c('div', {
+  }), _vm._v("\n                            " + _vm._s(_vm.$auth.getUserInfo('name')) + "\n                        ")]), _vm._v(" "), _c('div', {
     staticClass: "dropdown-menu",
     attrs: {
       "aria-labelledby": "dropdownNavbar"
@@ -60902,7 +60898,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "alt": "report",
       "width": "23px"
     }
-  }), _vm._v(" "), _c('strong', [_vm._v("Reports")])])], 1), _vm._v(" "), _c('li', [_c('router-link', {
+  }), _vm._v(" "), _c('strong', [_vm._v("Reports")]), _vm._v(" "), (_vm.notif_report > 0) ? _c('div', {
+    staticClass: "notification"
+  }, [_c('span', [_vm._v(_vm._s(_vm.notif_report))])]) : _vm._e()])], 1), _vm._v(" "), _c('li', [_c('router-link', {
     attrs: {
       "to": {
         name: 'users-manage'
@@ -60926,7 +60924,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "alt": "support",
       "width": "23px"
     }
-  }), _vm._v(" "), _c('strong', [_vm._v("Support")])])], 1), _vm._v(" "), _c('li', [_c('router-link', {
+  }), _vm._v(" "), _c('strong', [_vm._v("Support")]), _vm._v(" "), (_vm.notif_support > 0) ? _c('div', {
+    staticClass: "notification"
+  }, [_c('span', [_vm._v(_vm._s(_vm.notif_support))])]) : _vm._e()])], 1), _vm._v(" "), _c('li', [_c('router-link', {
     attrs: {
       "to": {
         name: 'file-manager',
@@ -61042,7 +61042,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "src": "/images/logo.png",
       "alt": "logo",
-      "width": "100%"
+      "width": "130%"
     }
   }), _vm._v(" "), _c('strong', [_vm._v("R2H-Live")])])
 }]}
