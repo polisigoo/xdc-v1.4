@@ -12855,6 +12855,25 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
     beforeRouteLeave: function beforeRouteLeave(to, from, next) {
         flowplayer(0).engine.unload();
         next();
+        var myInt = setInterval(function () {
+            if (document.querySelector('.fp-engine') != null) {
+                if (!document.querySelector('.fp-engine').paused) {
+                    CLEAR();
+                } else {
+                    CLEAR();
+                }
+            }
+        }, 10);
+        function CLEAR() {
+            document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+            document.querySelector('.fp-player>a').style.height = "50px";
+            document.querySelector('.fp-player>a').style.width = "100px";
+            document.querySelector('.fp-player>a').href = "/";
+            document.querySelector('.fp-player>a').style.display = "block";
+            document.querySelector('.fp-player>a').style.backgroundPosition = "center";
+            document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
+            document.querySelector('.fp-player>a').style.left = "10%";
+        }
     },
     mounted: function mounted() {
         var _this = this;
@@ -12869,6 +12888,25 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
 
         setTimeout(function () {
             _this.$store.dispatch("LOAD_TV", _this.$route.params.id);
+            var myInt = setInterval(function () {
+                if (document.querySelector('.fp-engine') != null) {
+                    if (!document.querySelector('.fp-engine').paused) {
+                        CLEAR();
+                    } else {
+                        CLEAR();
+                    }
+                }
+            }, 10);
+            function CLEAR() {
+                document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                document.querySelector('.fp-player>a').style.height = "50px";
+                document.querySelector('.fp-player>a').style.width = "100px";
+                document.querySelector('.fp-player>a').href = "/";
+                document.querySelector('.fp-player>a').style.display = "block";
+                document.querySelector('.fp-player>a').style.backgroundPosition = "center";
+                document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
+                document.querySelector('.fp-player>a').style.left = "10%";
+            }
         }, 200);
         var myInt = setInterval(function () {
             if (document.querySelector('.fp-engine') != null) {
@@ -12884,7 +12922,7 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
             document.querySelector('.fp-player>a').style.height = "50px";
             document.querySelector('.fp-player>a').style.width = "100px";
             document.querySelector('.fp-player>a').href = "/";
-            // document.querySelector('.fp-player>a').style.top ="0";
+            document.querySelector('.fp-player>a').style.display = "block";
             document.querySelector('.fp-player>a').style.backgroundPosition = "center";
             document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
             document.querySelector('.fp-player>a').style.left = "10%";
@@ -12897,6 +12935,25 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
             if (query.length > 0) {
                 this.searchLoading = true;
                 this.$store.dispatch("LOAD_SEARCH_TV_LIST", query);
+            }
+            var myInt = setInterval(function () {
+                if (document.querySelector('.fp-engine') != null) {
+                    if (!document.querySelector('.fp-engine').paused) {
+                        CLEAR();
+                    } else {
+                        CLEAR();
+                    }
+                }
+            }, 10);
+            function CLEAR() {
+                document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                document.querySelector('.fp-player>a').style.height = "50px";
+                document.querySelector('.fp-player>a').style.width = "100px";
+                document.querySelector('.fp-player>a').href = "/";
+                document.querySelector('.fp-player>a').style.display = "block";
+                document.querySelector('.fp-player>a').style.backgroundPosition = "center";
+                document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
+                document.querySelector('.fp-player>a').style.left = "10%";
             }
         }
     },
@@ -12939,6 +12996,26 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
         CHANGE_CHANNEL: function CHANGE_CHANNEL(id) {
             this.$store.commit('FLOWPLAYER_DESTORY', 'tv');
             this.$store.dispatch("LOAD_TV", id);
+
+            var myInt = setInterval(function () {
+                if (document.querySelector('.fp-engine') != null) {
+                    if (!document.querySelector('.fp-engine').paused) {
+                        CLEAR();
+                    } else {
+                        CLEAR();
+                    }
+                }
+            }, 10);
+            function CLEAR() {
+                document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
+                document.querySelector('.fp-player>a').style.height = "50px";
+                document.querySelector('.fp-player>a').style.width = "100px";
+                document.querySelector('.fp-player>a').href = "/";
+                document.querySelector('.fp-player>a').style.display = "block";
+                document.querySelector('.fp-player>a').style.backgroundPosition = "center";
+                document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
+                document.querySelector('.fp-player>a').style.left = "10%";
+            }
         }
     }
 });
