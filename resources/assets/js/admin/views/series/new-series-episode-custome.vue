@@ -3,21 +3,21 @@
         <div class="k1_manage_table">
 
 
-            <div class="m-2" id="manage-panel">
+            <div class="m-2 p-3" id="manage-panel">
                 <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <router-link class="nav-link"
+                                <li class="nav-item">
+                        <router-link class="btn btn-md btn-warning"  role="button"
                                      :to="{name:'series_manage_id', params:{id:this.$route.params.id}}">Manage
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link"
+                        <router-link class="btn btn-md btn-warning ml-1" role="button"
                                      :to="{name:'new_series_episode', params:{id:this.$route.params.id}}">Episode API
                         </router-link>
                     </li>
 
                     <li class="nav-item">
-                        <router-link class="nav-link"
+                        <router-link class="btn btn-md btn-warning ml-1" role="button"
                                      :to="{name:'new_series_episode_custome', params:{id:this.$route.params.id}}">
                             Episode custom
                         </router-link>
@@ -332,6 +332,7 @@
                 if(payload.progress.progress < 2) {
                     this.$store.commit('UPDATE_PROGRESS_DATA', {
                         key: this.countUploadData,
+                        id: payload.progress.tmdb_id,
                         parameter: 'message',
                         object: 'upload',
                         value: payload.progress.message

@@ -1,26 +1,12 @@
 <template>
   <div>
-    <div class="spinner-load" v-if="spinner_loading">
-      <div class="hidden-md-up phone">
-        <div id="main">
-
-          <span class="spinner"></span>
-
-        </div>
-      </div>
-
-      <div class="hidden-sm-down other">
-        <div id="main">
-
-          <span class="spinner"></span>
-
-        </div>
-      </div>
-    </div>
+        <div class="spinner-load" v-if="spinner_loading">
+            <Loader></Loader>
+       </div>
 
     <!-- END spinner load -->
 
-    <div class="k1_manage_table">
+    <div class="k1_manage_table" v-if="!spinner_loading">
 
       <h5 class="title p-2">Support</h5>
       <div class="col-12 row">
@@ -181,73 +167,75 @@
 
 </template>
 <script>
-  import {
-    mapState
-  } from "vuex";
+const alertify = require("alertify.js");
+import { mapState } from "vuex";
+import Loader from "../components/loader";
 
-  const alertify = require("alertify.js");
-  export default {
-    name: "support-manage",
-    data() {
-      return {
-        query: null
-      };
-    },
+export default {
+  name: "support-manage",
+  data() {
+    return {
+      query: null
+    };
+  },
 
-    computed: mapState({
-      data: state => state.support.data,
-      search_data: state => state.support.search_data,
-      button_loading: state => state.support.button_loading,
-      spinner_loading: state => state.support.spinner_loading
-    }),
+  components: {
+    Loader
+  },
 
-    watch: {
-      query(v) {
-        if (v.length === 0) {
-          this.$store.commit('CLEAR_SUPPORT_SEARCH_DATA');
-        }else {
+  computed: mapState({
+    data: state => state.support.data,
+    search_data: state => state.support.search_data,
+    button_loading: state => state.support.button_loading,
+    spinner_loading: state => state.support.spinner_loading
+  }),
+
+  watch: {
+    query(v) {
+      if (v.length === 0) {
+        this.$store.commit("CLEAR_SUPPORT_SEARCH_DATA");
+      } else {
         this.$store.dispatch("GET_SUPPORT_REQUEST_SEARCH", this.query);
-        }
       }
+    }
+  },
+
+  created() {
+    this.$store.dispatch("GET_ALL_SUPPORT_REQUEST");
+  },
+
+  methods: {
+    PAGINATION(path_url) {
+      this.$store.dispatch("GET_ALL_SUPPORT_REQUEST_BY_PAGINATION", path_url);
     },
 
-    created() {
+    DELETE(id, key) {
+      swal({
+        title: "Are you sure to delete ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(willDelete => {
+        if (willDelete) {
+          this.$store.dispatch("DELETE_SPPORT_REQUEST", {
+            id,
+            key
+          });
+        }
+      });
+    },
+
+    ALL() {
       this.$store.dispatch("GET_ALL_SUPPORT_REQUEST");
     },
 
-    methods: {
-      PAGINATION(path_url) {
-        this.$store.dispatch("GET_ALL_SUPPORT_REQUEST_BY_PAGINATION", path_url);
-      },
+    OPEN() {
+      this.$store.dispatch("GET_OPEN_SUPPORT_REQUEST");
+    },
 
-      DELETE(id, key) {
-        swal({
-          title: "Are you sure to delete ?",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true
-        }).then(willDelete => {
-          if (willDelete) {
-            this.$store.dispatch("DELETE_SPPORT_REQUEST", {
-              id,
-              key
-            });
-          }
-        });
-      },
-
-      ALL() {
-        this.$store.dispatch("GET_ALL_SUPPORT_REQUEST");
-      },
-
-      OPEN() {
-        this.$store.dispatch("GET_OPEN_SUPPORT_REQUEST");
-      },
-
-      CLOSE() {
-        this.$store.dispatch("GET_CLOSED_SUPPORT_REQUEST");
-      },
-
+    CLOSE() {
+      this.$store.dispatch("GET_CLOSED_SUPPORT_REQUEST");
     }
-  };
+  }
+};
 </script>

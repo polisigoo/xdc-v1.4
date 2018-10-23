@@ -1,27 +1,12 @@
-<style scope>
-
-</style>
 <template>
-    <div>
-        <div class="spinner-load" v-if="spinner_loading">
-            <div class="hidden-md-up phone">
-                <div id="main">
-
-                    <span class="spinner"></span>
-
-                </div>
-            </div>
-
-            <div class="hidden-sm-down other">
-                <div id="main">
-
-                    <span class="spinner"></span>
-
-                </div>
-            </div>
+<div class="users">
+    <div class="spinner-load" v-if="spinner_loading">
+        <Loader></Loader>
+    </div>
+    <div class="k1_manage_table"  v-if="!spinner_loading">
+        <div class="title p-2">
+            Administrator Users
         </div>
-        <div class="k1_manage_table">
-
         <div class="col-12 my-3 p-2">
             <div class="group-btn">
                 <router-link role="button" class="btn btn-sm btn-warning" :to="{name: 'admins-user-create'}">Create new account</router-link>
@@ -80,54 +65,60 @@
 
         </div>
 
-
         <div v-else class="text-center my-5">
             <h1>There is no users found</h1>
         </div>
-        </div>
     </div>
+</div>
 </template>
+
 <script>
-import { mapState } from "vuex";
 const alertify = require("alertify.js");
+import {
+    mapState
+} from "vuex";
+import Loader from "../../components/loader";
+
 export default {
-  name: "admins-users-manage",
-  data() {
-    return {
-      items: [],
-      report_item: []
-    };
-  },
+    name: "admins-users-manage",
+    data() {
+        return {
+            items: [],
+            report_item: []
+        };
+    },
+    components: {
+        Loader
+    },
+    computed: mapState({
+        data: state => state.admins.data,
+        invoices: state => state.admins.invoices,
+        data_search: state => state.admins.data_search,
+        button_loading: state => state.admins.button_loading,
+        spinner_loading: state => state.admins.spinner_loading,
+        invoice_spinner_loading: state => state.admins.invoice_spinner_loading
+    }),
 
-  computed: mapState({
-    data: state => state.admins.data,
-    invoices: state => state.admins.invoices,
-    data_search: state => state.admins.data_search,
-    button_loading: state => state.admins.button_loading,
-    spinner_loading: state => state.admins.spinner_loading,
-    invoice_spinner_loading: state => state.admins.invoice_spinner_loading
-  }),
+    created() {
+        this.$store.dispatch("GET_ALL_ADMINS");
+    },
 
-  created() {
-    this.$store.dispatch("GET_ALL_ADMINS");
-  },
-
-  methods: {
-    DELETE(id, key) {
-      swal({
-        title: "Are you sure to delete ?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true
-      }).then(willDelete => {
-        if (willDelete) {
-          this.$store.dispatch("DELETE_ADMIN", {
-            id,
-            key
-          });
+    methods: {
+        DELETE(id, key) {
+            swal({
+                title: "Are you sure to delete ?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then(willDelete => {
+                if (willDelete) {
+                    this.$store.dispatch("DELETE_ADMIN", {
+                        id,
+                        key
+                    });
+                }
+            });
         }
-      });
     }
-  }
 };
 </script>

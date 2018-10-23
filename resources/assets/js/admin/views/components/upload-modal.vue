@@ -6,7 +6,7 @@
         <span class="progress-bar-animated"></span>
 
 
-        <div class="col-12" v-for="(item,index) in uploadData" v-if="uploadData.length > 0">
+        <div class="col-12" v-for="(item,index) in uploadData" v-if="uploadData.length > 0" :key="index">
 
             <div class="desc-upload">
                 <h4>ID: {{item.id}}</h4>

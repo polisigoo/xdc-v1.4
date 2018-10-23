@@ -53,8 +53,8 @@
 
                         <div class="form-group">
                             <div class="col-12">
-                                <button v-if="! button_loading" class="btn btn-warning mt-2" @click="CREATE">Create</button>
-                                <button v-if="button_loading" class="btn btn-warning m-2" disabled>
+                                <button v-if="! button_loading" class="btn btn-md btn-warning mt-2" @click="CREATE">Create</button>
+                                <button v-if="button_loading" class="btn btn-md btn-warning m-2" disabled>
                                     <i id="btn-progress"></i> Loading</button>
                             </div>
                         </div>

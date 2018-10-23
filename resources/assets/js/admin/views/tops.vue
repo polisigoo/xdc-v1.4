@@ -2,24 +2,10 @@
     <div>
     
         <div class="spinner-load" v-if="spinner_loading">
-            <div class="hidden-md-up phone">
-                <div id="main">
+            <Loader></Loader>
+       </div>
 
-                    <span class="spinner"></span>
-
-                </div>
-            </div>
-
-            <div class="hidden-sm-down other">
-                <div id="main">
-
-                    <span class="spinner"></span>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="k1_manage_table">
+     <div class="k1_manage_table" v-if="!spinner_loading">
       <h5 class="title p-2">Top</h5>
 
         <div class="table-responsive mt-2" v-if="data.top !== null" >
@@ -60,7 +46,7 @@
 <script>
 const alertify = require("alertify.js");
 import { mapState } from "vuex";
-
+import Loader from "./components/loader";
 export default {
   data() {
     return {};
@@ -71,6 +57,10 @@ export default {
     button_loading: state => state.tops.button_loading,
     spinner_loading: state => state.tops.spinner_loading
   }),
+
+  components: {
+    Loader
+  },
 
   created() {
     this.$store.dispatch("GET_TOPS");

@@ -1,12 +1,13 @@
 <template>
     <div>
-        <div class="dashboard p-2">
+        <div class="dashboard">
             <div class="alert alert-warning" role="alert" v-if="show_alert_services">
                 You have some problem, Please check it from here
             </div>
-            <h5 class="title">Dashboard</h5>
 
-            <div class="users-chart" v-if="chart_type === 1">
+            <div class="white users-chart" v-if="chart_type === 1">
+                <h5 class="title p-2">Dashboard</h5>
+
                 <div class="row">
                     <div class="col-6">
                         <div class="button-section mt-3 ml-5">
@@ -122,7 +123,7 @@
 
             <!-- END User Chart -->
 
-            <div class="top-chart" v-if="chart_type === 2">
+            <div class="white top-chart" v-if="chart_type === 2">
                 <div class="row">
                     <div class="col-6">
                         <div class="button-section mt-3 ml-5">
@@ -204,7 +205,7 @@
             <!-- END Top Chart -->
 
 
-            <div class="col-12 " v-if="chart_type === 3">
+            <div class="white col-12 " v-if="chart_type === 3">
                 <div class="row">
                     <div class="col-6">
                         <div class="button-section mt-3 ml-5">
@@ -234,78 +235,85 @@
             </div>
 
 
-            <hr>
 
-            <div class="crms  text-center offset-sm-2 p-2" v-if="total != null">
+            <div class="crms text-center offset-1 p-2" v-if="total != null">
                 <div class="col-12 row">
 
-                    <div class="col-12  col-sm-2 col-lg-2 count">
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-2 mt-2 m-md-2 white card">
                         <div class="details">
+                           <img src="/themes/default/img/admin/report.svg" alt="report" width="60px">
                             <h4 class="reports">{{total.reports}}</h4>
                             <span class="header">Reports</span>
                         </div>
                     </div>
 
-                    <div class="col-12  col-sm-2 col-lg-2 count">
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-2 mt-2 m-md-2 white card">
                         <div class="details">
+                          <img src="/themes/default/img/admin/movie.svg" alt="report" width="60px">
                             <h4 class="movies">{{total.movies}}</h4>
                             <span class="header">Movies</span>
                         </div>
                     </div>
 
-                    <div class="col-12  col-sm-2 col-lg-2 count">
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-2 mt-2 m-md-2 white card">
                         <div class="details">
+                           <img src="/themes/default/img/admin/series.svg" alt="series" width="60px">
                             <h4 class="series">{{total.series}}</h4>
                             <span class="header">Series</span>
                         </div>
                     </div>
-                    <div class="col-12  col-sm-2 col-lg-2 count">
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-2 mt-2 m-md-2 white card">
                         <div class="details">
-                            <h4 class="episode">{{total.episodes}}</h4>
-                            <span class="header">Episode</span>
+                            <img src="/themes/default/img/admin/tv.svg" alt="tv" width="60px">
+                            <h4 class="episode">{{total.tvs}}</h4>
+                            <span class="header">Live Streaming</span>
                         </div>
                     </div>
-                    <div class="col-12  col-sm-2 col-lg-2 count">
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-2 mt-2 m-md-2 white card">
                         <div class="details">
+                             <img src="/themes/default/img/admin/users.svg" alt="tv" width="60px">
                             <h4 class="users">{{total.users}}</h4>
                             <span class="header">Users</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr>
-            <div class="col-12">
+
+            <div class="col-12 offset-1 top">
                 <div class="row">
-                    <div class="col-4" v-if="top_all_time.users !== []">
+                    <div class="col-12 col-md-3 white m-2" v-if="top_all_time.users !== []">
                         <b class="title ml-3">Top users</b>
-                        <ul class="list-group">
+                        <ul class="list-group mt-2">
                             <li class="list-group-item d-flex justify-content-between align-items-center"
                                 v-for="(item,index) in top_all_time.users" :key="index"
                                 v-if="item.name !== null">
                                 {{item.name}}
-                                <span class="badge badge-primary badge-pill">{{item.user_count}}</span>
+                                <span class="count">{{item.user_count}}</span>
                             </li>
                         </ul>
                     </div>
-                    <div class="col-4" v-if="top_all_time.movies !== []">
+                    <div class="col-12 col-md-3 white m-2" v-if="top_all_time.movies !== []">
                         <b class="title ml-3">Top movies</b>
-                        <ul class="list-group">
+                        <ul class="list-group mt-2">
                             <li class="list-group-item d-flex justify-content-between align-items-center"
                                 v-for="(item,index) in top_all_time.movies" :key="index"
                                 v-if="item.m_name !== null">
-                                {{item.m_name}}
-                                <span class="badge badge-primary badge-pill">{{item.movie_count}}</span>
+                                 <router-link  :to="{name:'analysis-movie', params: {id:item.m_id}}"> {{item.m_name}} </router-link>
+                                <span class="count">{{item.movie_count}}</span>
                             </li>
                         </ul>
                     </div>
-                    <div class="col-4" v-if="top_all_time.series !== []">
+                    <div class="col-12 col-md-4 white m-2" v-if="top_all_time.series !== []">
                         <b class="title ml-3">Top series</b>
-                        <ul class="list-group">
+                        <ul class="list-group mt-2">
                             <li class="list-group-item d-flex justify-content-between align-items-center"
                                 v-for="(item,index) in top_all_time.series" :key="index"
                                 v-if="item.t_name !== null">
-                                {{item.t_name}}({{item.name}})
-                                <span class="badge badge-primary badge-pill">{{item.series_count}}</span>
+                                
+                                <router-link  :to="{name:'analysis-series', params: {id:item.t_id}}"> {{item.t_name}}                       
+                                ({{item.name}}) </router-link>
+        
+                                <span class="count">{{item.series_count}}</span>
                             </li>
                         </ul>
                     </div>
@@ -316,6 +324,12 @@
     </div>
 
 </template>
+<style>
+    .card{
+        background-color: #fff;
+        padding: 10px;
+    }
+</style>
 <script>
     import usersday from "./charts/users.js";
     import usersmonth from "./charts/users.js";
@@ -576,7 +590,6 @@
         },
 
         mounted() {
-
             axios.get("/api/admin/get/dashboard/analysis").then(response => {
                 if (response.status === 200) {
                     // Active and Inactivity User

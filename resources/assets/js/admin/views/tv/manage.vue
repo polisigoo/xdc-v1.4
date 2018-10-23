@@ -1,34 +1,20 @@
 <template>
     <div>
-        <div class="spinner-load" v-if="spinner_loading">
-            <div class="hidden-md-up phone">
-                <div id="main">
-
-                    <span class="spinner"></span>
-
-                </div>
-            </div>
-
-            <div class="hidden-sm-down other">
-                <div id="main">
-
-                    <span class="spinner"></span>
-
-                </div>
-            </div>
-        </div>
+       <div class="spinner-load" v-if="spinner_loading">
+            <Loader></Loader>
+       </div>
 
         <!-- END spinner load -->
-        <div class="k1_manage_table">
+        <div class="k1_manage_table" v-if="!spinner_loading">
             <h5 class="title p-2">Live Tv</h5>
 
-            <div class="m-2" id="manage-panel">
+            <div class="m-2 p-2" id="manage-panel">
                 <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <router-link class="nav-link" :to="{name: 'tv-manage'}">Manage</router-link>
+                 <li class="nav-item">
+                        <router-link class="btn btn-md btn-warning" role="button" :to="{name: 'tv-manage'}">Manage</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" :to="{name: 'tv-create'}">Create</router-link>
+                        <router-link class="btn btn-md btn-warning" role="button" :to="{name: 'tv-create'}">Create</router-link>
                     </li>
                 </ul>
             </div>
@@ -85,49 +71,49 @@
 </template>
 
 <script>
-    const alertify = require("alertify.js");
-    import {
-        mapState
-    } from "vuex";
+const alertify = require("alertify.js");
+import { mapState } from "vuex";
+import Loader from "../components/loader";
 
-    export default {
-        data() {
-            return {};
-        },
-
-        computed: mapState({
-            data: state => state.channels.data,
-            button_loading: state => state.channels.button_loading,
-            spinner_loading: state => state.channels.spinner_loading
-        }),
-        created() {
-            this.$store.dispatch("GET_ALL_CHANNELS");
-        },
-        methods: {
-            DELETE(id, key) {
-                swal({
-                    title: "Are you sure to delete ?",
-                    icon: "warning",
-                    text: "All videos and subtitles will removed!",
-                    buttons: true,
-                    dangerMode: true
-                }).then(willDelete => {
-                    if (willDelete) {
-                        this.$store.dispatch("DELETE_CHANNEL", {
-                            id,
-                            key
-                        });
-                    }
-                });
-            },
-
-            STREAMING_STATUS(id, key) {
-                        this.$store.dispatch("STREAMING_STATUS", {
-                            id,
-                            key
-                        });
-                    
-            }
+export default {
+  data() {
+    return {};
+  },
+  components: {
+    Loader
+  },
+  computed: mapState({
+    data: state => state.channels.data,
+    button_loading: state => state.channels.button_loading,
+    spinner_loading: state => state.channels.spinner_loading
+  }),
+  created() {
+    this.$store.dispatch("GET_ALL_CHANNELS");
+  },
+  methods: {
+    DELETE(id, key) {
+      swal({
+        title: "Are you sure to delete ?",
+        icon: "warning",
+        text: "All videos and subtitles will removed!",
+        buttons: true,
+        dangerMode: true
+      }).then(willDelete => {
+        if (willDelete) {
+          this.$store.dispatch("DELETE_CHANNEL", {
+            id,
+            key
+          });
         }
-    };
+      });
+    },
+
+    STREAMING_STATUS(id, key) {
+      this.$store.dispatch("STREAMING_STATUS", {
+        id,
+        key
+      });
+    }
+  }
+};
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div>
-    <div class="k1_manage_table">
+    <div class="k1_manage_table p-2">
         <div class="container my-5">
             <div class="row">
 
@@ -63,8 +63,8 @@
 
                         <div class="form-group">
                             <div class="col-12">
-                                <button v-if="! button_loading" class="btn btn-sm btn-warning mt-2" @click="UPDATE">Update</button>
-                                <button v-if="button_loading" class="btn btn-sm btn-warning m-2" disabled>
+                                <button v-if="! button_loading" class="btn btn-md btn-warning mt-2" @click="UPDATE">Update</button>
+                                <button v-if="button_loading" class="btn btn-md btn-warning m-2" disabled>
                                     <i id="btn-progress"></i> Loading</button>
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="k1_manage_table">
-            <div class="title">Series Custom Upload</div>
+            <div class="title p-2">Series Custom Upload</div>
 
 
             <div class="col-12">
@@ -36,7 +36,7 @@
                         <div v-if="cloud_type">
 
                         <div class="form-group">
-                            <div class="col-2">
+                            <div class="col-12">
                                 <label>Name</label>
                             </div>
                             <div class="col-12">
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-2">
+                            <div class="col-12">
                                 <label>Years</label>
                             </div>
                             <div class="col-12">
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-2">
+                            <div class="col-12">
                                 <label>Genres</label>
                             </div>
                             <div class="col-12">
@@ -91,11 +91,11 @@
                             <span v-show="errors.has('genres')" class="is-danger">{{ errors.first('genres') }}</span>
                         </div>
                         <div class="form-group">
-                            <div class="col-2">
+                            <div class="col-12">
                                 <label>Overview</label>
                             </div>
                             <div class="col-12">
-                            <textarea v-validate="'required'" name="overview" class="form-control" v-model="overview"
+                            <textarea v-validate="'required|max:2000'" name="overview" class="form-control" v-model="overview"
                                       type="text" placeholder="Overview"
                             />
                                 <span v-show="errors.has('overview')" class="is-danger">{{ errors.first('overview') }}
@@ -103,8 +103,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-2">
-                                <label>Rate</label>
+                            <div class="col-12">
+                                <label>Rate - Rate From 1-10 </label>
                             </div>
                             <div class="col-12">
                                 <input v-validate="'required|decimal:1|max:3'" name="rate" class="form-control"
@@ -114,7 +114,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-2">
+                            <div class="col-12">
                                 <label>Trailer</label>
                             </div>
                             <div class="col-12">
@@ -129,7 +129,7 @@
                             <div class="col-12 col-sm-4">
                                 <label>Poster</label>
                             </div>
-                            <div class="col-12 col-sm-12">
+                            <div class="col-12 ">
                                 <input type="file" id="poster" name="poster" v-validate="'image|required'"
                                        @change="readImage('poster','posterFileImage')" class="inputfile">
                                 <label id="posterLabel" for="poster">Choose a poster
@@ -144,7 +144,7 @@
                             <div class="col-12 col-sm-4">
                                 <label>Backdrop</label>
                             </div>
-                            <div class="col-12 col-sm-12">
+                            <div class="col-12 ">
                                 <input type="file" id="backdrop" name="backdrop" v-validate="'image|required'"
                                        @change="readImage('backdrop','backdropFileImage')"
                                        class="inputfile">
@@ -157,7 +157,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-12 col-sm-12">
+                            <div class="col-12 ">
                                 <label>Rating system</label>
                                 <select class="form-control" v-validate="'required'" name="age" v-model="age" id="age">
                                     <option>G</option>
@@ -175,13 +175,13 @@
                     </div>
 
 
-                    <div class="col-12 col-md-6" v-if="cloud_type">
+                    <div class="col-12 col-lg-6" v-if="cloud_type">
                         <form class="cover__form" id="form">
                             <div class="form-group">
                                 <div class="col-12 col-sm-4">
                                     <label>Cast (1)</label>
                                 </div>
-                                <div class="col-12 col-sm-12">
+                                <div class="col-12 ">
                                     <input v-validate="'max:50'" name="name1" class="form-control" v-model="cast1"
                                            type="text" placeholder="Name"/>
                                     <br>
@@ -202,7 +202,7 @@
                                 <div class="col-12 col-sm-4">
                                     <label>Cast (2)</label>
                                 </div>
-                                <div class="col-12 col-sm-12">
+                                <div class="col-12 ">
                                     <input v-validate="'max:50'" name="name2" class="form-control" v-model="cast2"
                                            type="text" placeholder="Name"/>
                                     <br>
@@ -224,7 +224,7 @@
                                 <div class="col-12 col-sm-4">
                                     <label>Cast (3)</label>
                                 </div>
-                                <div class="col-12 col-sm-12">
+                                <div class="col-12 ">
                                     <input v-validate="'max:50'" name="name3" class="form-control" v-model="cast3"
                                            type="text" placeholder="Name"/>
                                     <br>
@@ -246,7 +246,7 @@
                                 <div class="col-12 col-sm-4">
                                     <label>Cast (4)</label>
                                 </div>
-                                <div class="col-12 col-sm-12">
+                                <div class="col-12 ">
                                     <input v-validate="'max:50'" name="name4" class="form-control" v-model="cast4"
                                            type="text" placeholder="Name"/>
                                     <br>

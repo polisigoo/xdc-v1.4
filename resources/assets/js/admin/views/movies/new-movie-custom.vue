@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="k1_manage_table">
-            <div class="title">Movie Custom Upload</div>
+            <div class="title p-2">Movie Custom Upload</div>
 
 
             <div class="col-12">
@@ -390,7 +390,7 @@
                                 <button class="btn btn-sm btn-warning" v-if="!disabled_button"
                                         @click="MOVIE_UPLOAD(name)">Upload
                                 </button>
-                                <button class="btn btn-sm btn-warning" v-if="disabled_button" disabled>Loading</button>
+                                <button class="btn btn-md btn-warning" v-if="disabled_button" disabled>Loading</button>
                             </div>
                         </div>
                     </div>
@@ -524,6 +524,7 @@
                 if(payload.progress.progress < 2) {
                     this.$store.commit('UPDATE_PROGRESS_DATA', {
                         key: this.countUploadData,
+                        id: payload.progress.tmdb_id,
                         parameter: 'message',
                         object: 'upload',
                         value: payload.progress.message

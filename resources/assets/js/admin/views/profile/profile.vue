@@ -1,52 +1,36 @@
 <template>
-    <div>
-        <div class="k1_manage_table">
+<div class="profile">
+    <div class="spinner-load" v-if="spinner_loading">
+        <Loader></Loader>
+    </div>
 
-            <div class="spinner-load" v-if="spinner_loading">
-                <div class="hidden-md-up phone">
-                    <div id="main">
-
-                        <span class="spinner"></span>
-
+    <div class="k1_manage_table" v-if="!spinner_loading">
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-12 col-sm-3 col-lg-3">
+                    <div class="list-group">
+                        <router-link class="list-group-item list-group-item-action" :to="{name: 'profile'}">
+                            Profile
+                        </router-link>
+                        <router-link class="list-group-item list-group-item-action" :to="{name: 'security'}" exact>
+                            Security
+                        </router-link>
                     </div>
+                    <hr>
+                    <b class="is-danger" style="cursor:pointer; margin-left:10px;" @click="LOGOUT">Logout</b>
                 </div>
 
-                <div class="hidden-sm-down other">
-                    <div id="main">
+                <!-- END LIST -->
 
-                        <span class="spinner"></span>
+                <div class="col-12 col-sm-6 col-lg-4  mt-5" id="profile-setting">
 
-                    </div>
-                </div>
-            </div>
-
-            <div class="container my-5">
-                <div class="row">
-                    <div class="col-12 col-sm-3 col-lg-3">
-                        <div class="list-group">
-                            <router-link class="list-group-item list-group-item-action" :to="{name: 'profile'}">
-                                Profile
-                            </router-link>
-                            <router-link class="list-group-item list-group-item-action" :to="{name: 'security'}" exact>
-                                Security
-                            </router-link>
-                        </div>
-                        <hr>
-                        <b class="is-danger" style="cursor:pointer; margin-left:10px;" @click="LOGOUT">Logout</b>
-                    </div>
-
-                    <!-- END LIST -->
-
-
-                    <div class="col-12 col-sm-6 col-lg-4  mt-5" id="profile-setting">
-
-                        <div id="avatar-img">
-                            <img :src="$auth.getUserInfo('image')"
+                    <div id="avatar-img">
+                        <img :src="$auth.getUserInfo('image')"
                                  onError="this.onerror=null;this.src='/images/avatar.png';" width="100%">
 
-                            <label for="avatar-img-file">
+                        <label for="avatar-img-file">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>Change image</label>
-                            <input type="file" id="avatar-img-file" name="avatar" class="inputfile"
+                        <input type="file" id="avatar-img-file" name="avatar" class="inputfile"
                                    @change="changeImage" v-validate="'image'">
                         </div>
                         <div class="text-center">
@@ -99,70 +83,75 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                name: "",
-                email: "",
-                avatar_image: "",
-                showModelError: false,
-                success: false,
-                spinner_loading: false,
-            };
-        },
-        created() {
-            // Get all details
-            axios.get("api/admin/profile").then(res => {
-                this.avatar_image = res.data[0].image;
-                this.name = res.data[0].name;
-                this.email = res.data[0].email;
-            });
-        },
-        methods: {
-            changeImage() {
-                this.spinner_loading = true;
-                const formData = new FormData();
-                const image = document.getElementById("avatar-img-file");
-                formData.append("image", image.files[0]);
-                axios.post("api/admin/profile/image", formData).then(
-                    res => {
-                        if (res.data.status === "success") {
-                            this.avatar_image = res.data.image;
-                            localStorage.setItem("image", res.data.image);
-                            this.spinner_loading = false;
-                        }
-                    },
-                    error => {
-                        alertify.logPosition("top right");
-                        alertify.error("There is error in back-end");
+import Loader from "../components/loader";
+
+export default {
+    data() {
+        return {
+            name: "",
+            email: "",
+            avatar_image: "",
+            showModelError: false,
+            success: false,
+            spinner_loading: false,
+        };
+    },
+    components: {
+        Loader
+    },
+    created() {
+        // Get all details
+        axios.get("api/admin/profile").then(res => {
+            this.avatar_image = res.data[0].image;
+            this.name = res.data[0].name;
+            this.email = res.data[0].email;
+        });
+    },
+    methods: {
+        changeImage() {
+            this.spinner_loading = true;
+            const formData = new FormData();
+            const image = document.getElementById("avatar-img-file");
+            formData.append("image", image.files[0]);
+            axios.post("api/admin/profile/image", formData).then(
+                res => {
+                    if (res.data.status === "success") {
+                        this.avatar_image = res.data.image;
+                        localStorage.setItem("image", res.data.image);
                         this.spinner_loading = false;
                     }
-                );
-            },
-            changeDetails() {
-                this.$validator.validateAll().then(result => {
-                    if (result) {
-                        axios
-                            .post("api/admin/profile/details", {
-                                name: this.name,
-                                email: this.email
-                            })
-                            .then(res => {
-                                if (res.data.status === "success") {
-                                    this.success = true;
-                                    localStorage.setItem("name", this.name);
-                                }
-                            });
-                    }
-                });
-            },
+                },
+                error => {
+                    alertify.logPosition("top right");
+                    alertify.error("There is error in back-end");
+                    this.spinner_loading = false;
+                }
+            );
+        },
+        changeDetails() {
+            this.$validator.validateAll().then(result => {
+                if (result) {
+                    axios
+                        .post("api/admin/profile/details", {
+                            name: this.name,
+                            email: this.email
+                        })
+                        .then(res => {
+                            if (res.data.status === "success") {
+                                this.success = true;
+                                localStorage.setItem("name", this.name);
+                            }
+                        });
+                }
+            });
+        },
 
-            LOGOUT() {
-                axios.post("admin/logout").then(res => {
-                    localStorage.removeItem('_a');
-                    location.reload();
-                });
-            }
+        LOGOUT() {
+            axios.post("admin/logout").then(res => {
+                localStorage.removeItem('_a');
+                location.reload();
+            });
         }
-    };
+    }
+};
 </script>

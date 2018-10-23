@@ -9,6 +9,7 @@ const module = {
         data_search: {},
         button_loading: false,
         spinner_loading: false,
+        button_delete_loading: false
     },
     actions: {
 
@@ -169,19 +170,19 @@ const module = {
          * @param {*} id  uuid
          * @param {*} key int
          */
-        DELETE_EPISODE({commit}, {id, key}) {
-            commit('BUTTON_LOAD', id);
-            axios.delete('/api/admin/delete/series/episode/' + id).then(response => {
+        DELETE_EPISODE({commit}, list) {
+            commit('BUTTON_LOAD_DELETE', true);
+            axios.post('/api/admin/delete/series/episode/', {list: list}).then(response => {
               if (response.status === 200) {
                 alertify.logPosition('top right');
                 alertify.success('Successful Delete');  
-                commit('DELETE_SERIES', key);
-                commit('BUTTON_CLEAN');
-              }
+                commit('DELETE_EPISODE', list);
+                commit('BUTTON_LOAD_DELETE', false);
+            }
             },error => {
                 alertify.logPosition('top right');
                 alertify.error(error.response.data.message);
-                commit('BUTTON_CLEAN');
+                commit('BUTTON_LOAD_DELETE', false);
             });
         },
     },
@@ -207,6 +208,11 @@ const module = {
         DELETE_SERIES(state, key) {
             state.data.series.data.splice(key, 1);
         },
+        DELETE_EPISODE(state, list) {
+            for (let i = 0; i < list.length; i++) {
+                state.data.season.data.splice(list[i].key, 1);
+            }
+        },
 
         ADD_SERIES_TO_TOP(state, data) {
             state.data.series.data[data.key].series_id = data.id;
@@ -214,6 +220,10 @@ const module = {
 
         BUTTON_LOAD(state, data) {
             state.button_loading = data;
+        },
+
+        BUTTON_DELETE_LOADING(state, data) {
+            state.button_delete_loading = data;
         },
 
         BUTTON_CLEAN(state) {

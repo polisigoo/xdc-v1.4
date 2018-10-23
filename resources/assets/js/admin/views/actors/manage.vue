@@ -23,23 +23,9 @@
         <hr>
 
 
-        <div class="spinner-load" v-if="spinner_loading">
-          <div class="hidden-md-up phone">
-            <div id="main">
-
-              <span class="spinner"></span>
-
-            </div>
-          </div>
-
-          <div class="hidden-sm-down other">
-            <div id="main">
-
-              <span class="spinner"></span>
-
-            </div>
-          </div>
-        </div>
+       <div class="spinner-load" v-if="spinner_loading">
+            <Loader></Loader>
+       </div>
 
         <!-- END spinner load -->
 
@@ -66,12 +52,12 @@
                       <label id="photoLabel" for="photo">Choose a poster
                         <br>
                       </label>
-                      <img src="" id="photoFileImage" width="200" style="display: none;">
                       <span v-show="errors.has('photo')"
                             class=" is-danger">{{ errors.first('photo')}}</span>
                       </div>
 
                     </div>
+                                          <img src="" id="posterFileImage" width="200" style="display: none;">
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -85,6 +71,7 @@
 
           <!-- Modal -->
 
+        <div v-if="!spinner_loading">
 
         <div class="m-2" v-if="Object.keys(data).length  > 0">
 
@@ -93,7 +80,8 @@
           <div class="row" v-if="data_search === null">
             <div class="col-8 col-sm-3 col-lg-2 mt-2 actor" v-for="(item,index) in data.actors.data" :key="index">
               <div class="actor-image">
-                <img :src="item.image" :alt="item.name" width="100%">
+                  <img :src="item.image" :alt="item.name" width="100%" v-if="item.cloud == 'local'">
+                  <img :src="md_cast + item.image" :alt="item.name" width="100%" v-if="item.cloud == 'aws'">
                 <div class="control">
                   <div class="row">
                     <i class="fa fa-pencil ml-2" aria-hidden="true" @click="SHOW_EDIT(index)"></i>
@@ -112,9 +100,9 @@
                   <button v-if="index === show_key && !button_loading" class="btn btn-sm btn-warning" @click="UPDATE(item.id,index)">Update</button>
                   <button v-if="button_loading === item.id" class="btn btn-sm btn-warning" disabled>
                     <i id="btn-progress"></i> Loading</button>
-                  <p v-if="index !== show_key">{{item.name}}</p>
                 </div>
               </div>
+               <p v-if="index !== show_key" class="mt-2">{{item.name}}</p>
               <span v-show="errors.has(item.name)" class=" is-danger">{{ errors.first(item.name) }}</span>
               <span v-show="errors.has('image_'+item.id)" class=" is-danger">{{ errors.first('image_'+item.id) }}</span>
             </div>
@@ -123,9 +111,10 @@
 
 
           <div class="row" v-else>
-            <div class="col-8 col-sm-3 col-lg-2 mt-2 actor" v-for="(item,index) in data_search.actors" :key="index">
+            <div class="col-6 col-sm-4 col-lg-3 col-xl-2 mt-2 actor" v-for="(item,index) in data_search.actors" :key="index">
               <div class="actor-image">
-                <img :src="item.image" :alt="item.name" width="100%">
+                  <img :src="item.image" :alt="item.name" width="100%" v-if="item.cloud == 'local'">
+                  <img :src="md_cast + item.image" :alt="item.name" width="100%" v-if="item.cloud == 'aws'">
                 <div class="control">
                   <div class="row">
                     <i class="fa fa-pencil ml-2" aria-hidden="true" @click="SHOW_EDIT(index)"></i>
@@ -144,9 +133,9 @@
                   <button v-if="index === show_key && !button_loading" class="btn btn-sm btn-warning" @click="UPDATE(item.id,index)">Update</button>
                   <button v-if="button_loading === item.id" class="btn btn-sm btn-warning" disabled>
                     <i id="btn-progress"></i> Loading</button>
-                  <p v-if="index !== show_key">{{item.name}}</p>
                 </div>
               </div>
+              <p v-if="index !== show_key" class="mt-2">{{item.name}}</p>
               <span v-show="errors.has(item.name)" class=" is-danger">{{ errors.first(item.name) }}</span>
               <span v-show="errors.has('image_'+item.id)" class=" is-danger">{{ errors.first('image_'+item.id) }}</span>
             </div>
@@ -193,162 +182,167 @@
 
         </div>
       </div>
+        </div>
 
     </div>
   </div>
 </template>
 
 <script>
-  const alertify = require("alertify.js");
-  import {
-    mapState
-  } from "vuex";
-  export default {
-    data() {
-      return {
-        new_actor_name: "",
-        show_key: null,
-        button_loading: false,
-        search_query: ''
-      };
+const alertify = require("alertify.js");
+import { mapState } from "vuex";
+import Loader from "../components/loader";
+
+export default {
+  data() {
+    return {
+      new_actor_name: "",
+      show_key: null,
+      button_loading: false,
+      search_query: ""
+    };
+  },
+
+  components: {
+    Loader
+  },
+
+  computed: mapState({
+    data: state => state.actors.data,
+    data_search: state => state.actors.data_search,
+    spinner_loading: state => state.actors.spinner_loading
+  }),
+
+  created() {
+    this.$store.commit("CLEAN_SEARCH_ACTORS");
+    this.$store.dispatch("GET_ALL_ACTORS");
+  },
+
+  methods: {
+    PAGINATION(path_url) {
+      this.$store.dispatch("GET_ACTORS_PAGINATION", path_url);
     },
 
-    computed: mapState({
-      data: state => state.actors.data,
-      data_search: state => state.actors.data_search,
-      spinner_loading: state => state.actors.spinner_loading
-    }),
-
-    created() {
-      this.$store.commit('CLEAN_SEARCH_ACTORS');
-      this.$store.dispatch("GET_ALL_ACTORS");
+    SHOW_EDIT(key) {
+      if (this.show_key === key) {
+        this.show_key = false;
+      } else {
+        this.show_key = key;
+      }
     },
 
-    methods: {
-      PAGINATION(path_url) {
-        this.$store.dispatch("GET_ACTORS_PAGINATION", path_url);
-      },
-
-      SHOW_EDIT(key) {
-        if (this.show_key === key) {
+    UPDATE(id, key) {
+      this.button_loading = id;
+      const formData = new FormData();
+      const image = document.getElementById("image_" + id).files[0];
+      if (image === undefined) {
+        formData.append("id", id);
+        formData.append("name", this.data.actors.data[key].name);
+      } else {
+        formData.append("id", id);
+        formData.append("image", image);
+        formData.append("name", this.data.actors.data[key].name);
+      }
+      axios.post("/api/admin/update/actors/", formData).then(response => {
+        if (response.status === 200) {
+          this.data.actors.data[key].image = response.data.image;
+          this.data.actors.data[key].name = response.data.name;
           this.show_key = false;
-        } else {
-          this.show_key = key;
+          this.button_loading = false;
+          alertify.logPosition("top right");
+          alertify.success(response.data.message);
         }
-      },
+      });
+    },
 
-      UPDATE(id, key) {
-        this.button_loading = id;
-        const formData = new FormData();
-        const image = document.getElementById("image_" + id).files[0];
-        if (image === undefined) {
-          formData.append("id", id);
-          formData.append("name", this.data.actors.data[key].name);
-        } else {
-          formData.append("id", id);
-          formData.append("image", image);
-          formData.append("name", this.data.actors.data[key].name);
-        }
-        axios.post("/api/admin/update/actors/", formData).then(response => {
-          if (response.status === 200) {
-            this.data.actors.data[key].image = response.data.image;
-            this.data.actors.data[key].name = response.data.name;
-            this.show_key = false;
-            this.button_loading = false;
-            alertify.logPosition("top right");
-            alertify.success(response.data.message);
-          }
-        });
-      },
+    READ_IMAGE(id) {
+      var img = document.getElementById("image_" + id);
+      var tgt = img.target || window.event.srcElement,
+        files = tgt.files;
 
-      READ_IMAGE(id) {
-        var img = document.getElementById("image_" + id);
-        var tgt = img.target || window.event.srcElement,
-          files = tgt.files;
+      // FileReader support
+      if (FileReader && files && files.length) {
+        var fr = new FileReader();
+        fr.onload = function() {
+          var srcImage = document.getElementById("preview_" + id);
+          srcImage.style.display = "block";
+          srcImage.src = fr.result;
+        };
+        fr.readAsDataURL(files[0]);
+      } else {
+        // Not supported
+        // fallback -- perhaps submit the input to an iframe and temporarily store
+        // them on the server until the user's session ends.
+      }
+    },
 
-        // FileReader support
-        if (FileReader && files && files.length) {
-          var fr = new FileReader();
-          fr.onload = function () {
-            var srcImage = document.getElementById("preview_" + id);
-            srcImage.style.display = "block";
-            srcImage.src = fr.result;
-          };
-          fr.readAsDataURL(files[0]);
-        } else {
-          // Not supported
-          // fallback -- perhaps submit the input to an iframe and temporarily store
-          // them on the server until the user's session ends.
-        }
-      },
-
-      CREATE_ACTOR() {
-        this.button_loading = true;
-        const formData = new FormData();
-        const photo = document.getElementById("photo").files[0];
-        formData.append("photo", photo);
-        formData.append("name", this.new_actor_name);
-        this.$validator.validateAll().then(result => {
-          axios.post("/api/admin/new/actor", formData).then(
-            response => {
-              if (response.data.status === "success") {
-                alertify.logPosition("top right");
-                alertify.success(response.data.message);
-                this.data.actors.data.push(response.data.actor);
-                this.button_loading = false;
-              }
-            },
-            error => {
+    CREATE_ACTOR() {
+      this.button_loading = true;
+      const formData = new FormData();
+      const photo = document.getElementById("photo").files[0];
+      formData.append("photo", photo);
+      formData.append("name", this.new_actor_name);
+      this.$validator.validateAll().then(result => {
+        axios.post("/api/admin/new/actor", formData).then(
+          response => {
+            if (response.data.status === "success") {
+              alertify.logPosition("top right");
+              alertify.success(response.data.message);
+              this.data.actors.data.push(response.data.actor);
               this.button_loading = false;
             }
-          );
-        });
-      },
-
-      DELETE(id, key) {
-        swal({
-          title: "Are you sure to delete ?",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true
-        }).then(willDelete => {
-          if (willDelete) {
-            this.$store.dispatch("DELETE_ACTOR", {
-              id,
-              key
-            });
+          },
+          error => {
+            this.button_loading = false;
           }
-        });
-      },
+        );
+      });
+    },
 
-      SEARCH() {
-        if (this.search_query !== "") {
-          this.$store.dispatch('GET_ACTORS_SEARCH', this.search_query);
-        } else {
-          this.$store.commit('CLEAR_SEARCH');
+    DELETE(id, key) {
+      swal({
+        title: "Are you sure to delete ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(willDelete => {
+        if (willDelete) {
+          this.$store.dispatch("DELETE_ACTOR", {
+            id,
+            key
+          });
         }
-      },
+      });
+    },
 
-      readImage(id, outImage) {
-        var img = document.getElementById(id);
-        var tgt = img.target || window.event.srcElement,
-          files = tgt.files;
+    SEARCH() {
+      if (this.search_query !== "") {
+        this.$store.dispatch("GET_ACTORS_SEARCH", this.search_query);
+      } else {
+        this.$store.commit("CLEAR_SEARCH");
+      }
+    },
 
-        // FileReader support
-        if (FileReader && files && files.length) {
-          var fr = new FileReader();
-          fr.onload = function () {
-            var srcImage = document.getElementById(outImage);
-            srcImage.style.display = "block";
-            srcImage.src = fr.result;
-          };
-          fr.readAsDataURL(files[0]);
-        } else {
-          // Not supported
-          // fallback -- perhaps submit the input to an iframe and temporarily store
-          // them on the server until the user's session ends.
-        }
+    readImage(id, outImage) {
+      var img = document.getElementById(id);
+      var tgt = img.target || window.event.srcElement,
+        files = tgt.files;
+
+      // FileReader support
+      if (FileReader && files && files.length) {
+        var fr = new FileReader();
+        fr.onload = function() {
+          var srcImage = document.getElementById(outImage);
+          srcImage.style.display = "block";
+          srcImage.src = fr.result;
+        };
+        fr.readAsDataURL(files[0]);
+      } else {
+        // Not supported
+        // fallback -- perhaps submit the input to an iframe and temporarily store
+        // them on the server until the user's session ends.
       }
     }
-  };
+  }
+};
 </script>

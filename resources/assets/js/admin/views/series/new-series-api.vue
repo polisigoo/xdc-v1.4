@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="k1_manage_table">
-            <div class="title">Series API Upload</div>
+            <div class="title p-2">Series API Upload</div>
 
             <div class="col-12">
 

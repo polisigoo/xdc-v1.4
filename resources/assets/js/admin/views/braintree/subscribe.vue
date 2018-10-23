@@ -1,27 +1,11 @@
 <template>
+<div class="subscribe-braintree">
 
-    <div>
-        <div class="spinner-load" v-if="loading">
-            <div class="hidden-md-up phone">
-                <div id="main">
+    <div class="spinner-load" v-if="loading">
+        <Loader></Loader>
+    </div>
 
-                    <span class="spinner"></span>
-
-                </div>
-            </div>
-
-            <div class="hidden-sm-down other">
-                <div id="main">
-
-                    <span class="spinner"></span>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- END Spinner -->
-
-
+    <div v-if="!loading">
         <div class="k1_manage_table" v-if="planList !== null">
             <h5 class="title p-2">Braintree Manage</h5>
             <div class="alert alert-warning" role="alert" v-if="planList.status === 'failed'">
@@ -74,7 +58,6 @@
                                 </li>
                             </ul>
 
-
                             <hr>
 
                             <button class="btn btn-sm btn-danger" v-if="planList.data[index].active && btn_loading !== index"
@@ -92,7 +75,6 @@
                     </div>
 
                 </div>
-
             </div>
 
             <div class="p-3">
@@ -100,98 +82,95 @@
                 <h6 class="text-muted">If you update the plan, click to inactive and active it again</h6>
             </div>
         </div>
-
         <div v-else class="text-center my-5">
             <h1>There is no plan found</h1>
         </div>
-
     </div>
-
+</div>
 </template>
 
 <script>
-    const alertify = require("alertify.js");
+const alertify = require("alertify.js");
 
-    export default {
-        data() {
-            return {
-                planList: [],
-                loading: true,
-                btn_loading: false
-            };
-        },
+export default {
+    data() {
+        return {
+            planList: [],
+            loading: true,
+            btn_loading: false
+        };
+    },
 
-        mounted() {
-            axios.get("/api/admin/get/braintree/plans").then(response => {
-                if (response.status === 200) {
-                    this.planList = response.data;
-                    this.loading = false;
-                }
-            });
-        },
-
-        methods: {
-            ACTIVE(index) {
-                this.btn_loading = true;
-                axios
-                    .post("/api/admin/update/braintree/plans", {
-                        plan_id: this.planList.data[index]['plan']["id"],
-                        plan_name: this.planList.data[index]['plan']["name"],
-                        plan_amount: this.planList.data[index]['plan']["price"],
-                        plan_currency: this.planList.data[index]['plan']["currencyIsoCode"],
-                        plan_trial: this.planList.data[index]['plan']["trialDuration"]
-                    })
-                    .then(
-                        response => {
-                            if (response.status === 200) {
-                                if (response.data.type === "add") {
-                                    alertify.logPosition("top right");
-                                    alertify.success(response.data.message);
-                                    this.planList.data[index]["active"] = true;
-                                    this.btn_loading = false;
-                                } else {
-                                    alertify.logPosition("top right");
-                                    alertify.success(response.data.message);
-                                    this.planList.data[index]["active"] = false;
-                                    this.btn_loading = false;
-                                }
-                            }
-                        },
-                        error => {
-                            alertify.logPosition("top right");
-                            alertify.success("Error in input data");
-                            this.btn_loading = false;
-                        }
-                    );
-            },
-
-
-            INACTIVE_PAYMENT_GATEWAY() {
-                axios.get("/api/admin/update/braintree/payment/status").then(response => {
-                    if (response.status === 200) {
-                        if (response.data.type == 'active') {
-                            this.planList.payment_gateway_status = 1;
-                        } else if (response.data.type == 'inactive') {
-                            this.planList.payment_gateway_status = 0;
-                        }
-                        alertify.logPosition('top right');
-                        alertify.success(response.data.message);
-                    }
-                }, error => {
-                    alertify.logPosition('top right');
-                    alertify.error('Error to remove plan');
-                });
+    mounted() {
+        axios.get("/api/admin/get/braintree/plans").then(response => {
+            if (response.status === 200) {
+                this.planList = response.data;
+                this.loading = false;
             }
+        });
+    },
+
+    methods: {
+        ACTIVE(index) {
+            this.btn_loading = true;
+            axios
+                .post("/api/admin/update/braintree/plans", {
+                    plan_id: this.planList.data[index]['plan']["id"],
+                    plan_name: this.planList.data[index]['plan']["name"],
+                    plan_amount: this.planList.data[index]['plan']["price"],
+                    plan_currency: this.planList.data[index]['plan']["currencyIsoCode"],
+                    plan_trial: this.planList.data[index]['plan']["trialDuration"]
+                })
+                .then(
+                    response => {
+                        if (response.status === 200) {
+                            if (response.data.type === "add") {
+                                alertify.logPosition("top right");
+                                alertify.success(response.data.message);
+                                this.planList.data[index]["active"] = true;
+                                this.btn_loading = false;
+                            } else {
+                                alertify.logPosition("top right");
+                                alertify.success(response.data.message);
+                                this.planList.data[index]["active"] = false;
+                                this.btn_loading = false;
+                            }
+                        }
+                    },
+                    error => {
+                        alertify.logPosition("top right");
+                        alertify.success("Error in input data");
+                        this.btn_loading = false;
+                    }
+                );
+        },
+
+        INACTIVE_PAYMENT_GATEWAY() {
+            axios.get("/api/admin/update/braintree/payment/status").then(response => {
+                if (response.status === 200) {
+                    if (response.data.type == 'active') {
+                        this.planList.payment_gateway_status = 1;
+                    } else if (response.data.type == 'inactive') {
+                        this.planList.payment_gateway_status = 0;
+                    }
+                    alertify.logPosition('top right');
+                    alertify.success(response.data.message);
+                }
+            }, error => {
+                alertify.logPosition('top right');
+                alertify.error('Error to remove plan');
+            });
         }
-    };
+    }
+};
 </script>
 
 <style scoped>
-    .custom-card {
-        background-color: #f9fcfe;
-        padding: 10px;
-        padding-bottom: 20px;
-        border-radius: 5px;
-        font-size: 15px;
-    }
+.custom-card {
+    background-color: #f9fcfe;
+    padding: 10px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    font-size: 15px;
+}
 </style>

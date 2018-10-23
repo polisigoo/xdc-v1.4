@@ -17,23 +17,23 @@ const module = {
          * @param {*} commit object 
          * @param id int id 
          */
-        GET_MOVIES({commit}) {
+        GET_MOVIES({ commit }) {
             commit('SPINER_LOAD');
             axios.get('/api/admin/get/movies').then(response => {
-                if(response.status === 200){                    
+                if (response.status === 200) {
                     commit('SET_MOVIES', response.data.data);
                     commit('SPINER_CLEAN');
-               }
+                }
             });
         },
 
-        GET_MOVIE({commit}, id) {
+        GET_MOVIE({ commit }, id) {
             commit('SPINER_LOAD');
             axios.get('/api/admin/get/movie/' + id).then(response => {
-                if(response.status === 200){                    
+                if (response.status === 200) {
                     commit('SET_MOVIES', response.data.data);
                     commit('SPINER_CLEAN');
-               }
+                }
             }, error => {
                 alertify.logPosition('top right');
                 alertify.error(error.response.data.message);
@@ -47,14 +47,14 @@ const module = {
          * @param id int id 
          */
 
-        GET_MOVIES_PAGINATION({commit}, path_url) {
+        GET_MOVIES_PAGINATION({ commit }, path_url) {
             commit('SPINER_LOAD');
             axios.get(path_url).then(response => {
                 // if status code 200
-                if(response.status === 200){                    
+                if (response.status === 200) {
                     commit('SET_MOVIES', response.data.data);
                     commit('SPINER_CLEAN');
-               }
+                }
             });
         },
 
@@ -64,16 +64,16 @@ const module = {
          * @param {*} id  uuid
          * @param {*} key int
          */
-        DELETE_MOVIE({commit}, {id, key}) {
-            commit('BUTTON_LOAD', id);
-            axios.delete('/api/admin/delete/movie/' + id).then(response => {
-              if (response.status === 200) {
-                alertify.logPosition('top right');
-                alertify.success('Successful Delete');  
-                commit('DELETE_MOVIE', key);
-                commit('BUTTON_CLEAN');
-              }
-            },error => {
+        DELETE_MOVIE({ commit }, list) {
+
+            axios.post('/api/admin/delete/movie/', {list: list}).then(response => {
+                if (response.status === 200) {
+                    alertify.logPosition('top right');
+                    alertify.success('Successful Delete');
+                    commit('DELETE_MOVIE', list);
+                    commit('BUTTON_CLEAN');
+                }
+            }, error => {
                 alertify.logPosition('top right');
                 alertify.error(error.response.data.message);
                 commit('BUTTON_CLEAN');
@@ -86,25 +86,25 @@ const module = {
          * @param {string} string query 
          */
 
-        GET_MOVIE_SEARCH({commit}, query) {
+        GET_MOVIE_SEARCH({ commit }, query) {
             commit('SPINER_LOAD');
-            axios.post('/api/admin/get/movie/search', {query: query} ).then(response => {
+            axios.post('/api/admin/get/movie/search', { query: query }).then(response => {
                 // if status code 200
-                if(response.status === 200){                    
+                if (response.status === 200) {
                     commit('SET_SEARCH_MOVIES', response.data.data);
                     commit('SPINER_CLEAN');
-               }
+                }
             });
         },
 
-        ADD_MOVIE_TO_TOP({commit}, {id,key}) {
-            axios.post('/api/admin/new/movie/top', {id: id}).then(response => {
-              if (response.status === 200) {
-                alertify.logPosition('top right');
-                alertify.success(response.data.message); 
-                commit('ADD_MOVIE_TO_TOP',{id,key});
-              }
-            },error => {
+        ADD_MOVIE_TO_TOP({ commit }, { id, key }) {
+            axios.post('/api/admin/new/movie/top', { id: id }).then(response => {
+                if (response.status === 200) {
+                    alertify.logPosition('top right');
+                    alertify.success(response.data.message);
+                    commit('ADD_MOVIE_TO_TOP', { id, key });
+                }
+            }, error => {
                 alertify.logPosition('top right');
                 alertify.error(error.response.data.message);
             });
@@ -124,8 +124,10 @@ const module = {
             state.data_search = {};
         },
 
-        DELETE_MOVIE(state, key) {
-            state.data.movies.data.splice(key, 1);
+        DELETE_MOVIE(state, list) {
+            for (let i = 0; i < list.length; i++) {
+                state.data.movies.data.splice(list[i].key, 1);
+            }
         },
 
         ADD_MOVIE_TO_TOP(state, data) {
