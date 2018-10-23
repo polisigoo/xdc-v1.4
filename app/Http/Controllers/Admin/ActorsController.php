@@ -138,7 +138,7 @@ class ActorsController extends Controller
             'query' => 'required|string|max:25'
         ]);
 
-        $getActors = Casts::selectRaw('c_id AS id, credit_id, c_name AS name, c_image as image')->where('c_name', 'like', $request->input('query'). '%')->limit(10)->get();
+        $getActors = Casts::selectRaw('c_id AS id, credit_id, c_name AS name, c_image as image,  c_cloud as cloud')->where('c_name', 'like', $request->input('query'). '%')->limit(10)->get();
 
         // Check if there is no result
         if (count($getActors) === 0) {

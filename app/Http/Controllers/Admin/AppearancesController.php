@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Appearance;
+use App\Siteinfo;
 use Auth;
 
 class AppearancesController extends Controller
@@ -28,7 +28,7 @@ class AppearancesController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'data' => Appearance::first()
+            'data' => Siteinfo::first()
         ]);
     }
 
@@ -44,10 +44,10 @@ class AppearancesController extends Controller
             'about' => 'nullable|string',
         ]);
 
-        $check = Appearance::find(1);
+        $check = Siteinfo::find(1);
         if (is_null($check)) {
             // New
-            $create = new Appearance();
+            $create = new Siteinfo();
             if ($request->has('facebook')) {
                 $create->social_facebook = $request->input('facebook');
             }
