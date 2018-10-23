@@ -324,12 +324,7 @@
     </div>
 
 </template>
-<style>
-    .card{
-        background-color: #fff;
-        padding: 10px;
-    }
-</style>
+
 <script>
     import usersday from "./charts/users.js";
     import usersmonth from "./charts/users.js";
