@@ -32,12 +32,15 @@ class ReportsController extends Controller
     public function getAllReports()
     {
         $getReports = DB::table('reports')
-            ->selectRaw('reports.id,reports.report_movie,users.name,users.image,movies.m_name,series.t_name,COUNT(reports.report_movie) AS movies_count, COUNT(reports.report_episode) AS series_count, COUNT(reports.report_userid) AS users_count,series.t_id,series.t_poster,movies.m_poster,movies.m_id')
+            ->selectRaw('reports.id,reports.report_movie,users.name,movies.m_name,series.t_name,COUNT(reports.report_movie) AS movies_count, COUNT(reports.report_episode) AS series_count, COUNT(reports.report_userid) AS users_count,series.t_id,series.t_poster,movies.m_poster,movies.m_id, 
+              count(report_readit)AS report_not_readit
+            ')
             ->leftJoin('users', 'users.id', '=', 'reports.report_userid')
             ->leftJoin('episodes', 'episodes.id', '=', 'reports.report_episode')
             ->leftJoin('series', 'series.t_id', '=', 'reports.report_series')
             ->leftJoin('movies', 'movies.m_id', '=', 'reports.report_movie')
             ->groupBy('reports.report_movie', 'reports.report_series')
+            ->where('report_readit', '=', 0)
             ->paginate(10);
 
         if (empty($getReports->all())) {

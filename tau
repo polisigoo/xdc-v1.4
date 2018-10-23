@@ -1,0 +1,94 @@
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/DashboardController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/FileManagerController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/HomeController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/MovieController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/PluginController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/ProfileController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/ReportsController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/SeriesController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/SubtitlesController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/SupportController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/TmdbController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/TopsController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/TranscoderController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/TvController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/Admin/UsersController.php.
+The file will have its original line endings in your working directory.
+[1mdiff --git a/app/Http/Controllers/Admin/DashboardController.php b/app/Http/Controllers/Admin/DashboardController.php[m
+[1mindex 27b2516..2bf90f8 100644[m
+[1m--- a/app/Http/Controllers/Admin/DashboardController.php[m
+[1m+++ b/app/Http/Controllers/Admin/DashboardController.php[m
+[36m@@ -7,6 +7,7 @@[m [muse App\Http\Controllers\Controller;[m
+ use Auth;[m
+ use DB;[m
+ use App\Tmdb;[m
+[32m+[m[32muse App\Siteinfo;[m
+ [m
+ class DashboardController extends Controller[m
+ {[m
+[36m@@ -46,27 +47,31 @@[m [mclass DashboardController extends Controller[m
+     {[m
+ [m
+         // Users Analysis[m
+[32m+[m[32m        $payemnt_status = '';[m
+[32m+[m[32m        if( ! Siteinfo::find(1)->payment_status) {[m
+[32m+[m[32m            $payemnt_status = "AND users.period_end > NOW()";[m
+[32m+[m[32m        }[m
+ [m
+         $activeUserDay = DB::table('users')[m
+             ->selectRaw('"active" AS type, count(*) AS number, HOUR(users.created_at) AS hour')[m
+[31m-            ->whereRaw('users.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE() AND users.period_end > NOW() ')[m
+[32m+[m[32m            ->whereRaw('users.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE()'. $payemnt_status)[m
+             ->groupBy('hour');[m
+         [m
+         $inactiveUserDay = DB::table('users')[m
+             ->selectRaw('"inactive" AS type ,count(*) AS number, HOUR(users.created_at) AS hour')[m
+[31m-            ->whereRaw('users.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE() AND users.period_end < NOW() ')[m
+[32m+[m[32m            ->whereRaw('users.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE()'. $payemnt_status)[m
+             ->groupBy('hour')[m
+             ->union($activeUserDay)[m
+             ->get();[m
+         [m
+         $activeUserMonth = DB::table('users')[m
+             ->selectRaw('"active" AS type, count(*) AS number, MONTHNAME(users.created_at) AS month')[m
+[31m-            ->whereRaw('users.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 YEAR) AND CURRENT_DATE() AND users.period_end > NOW() ')[m
+[32m+[m[32m            ->whereRaw('users.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 YEAR) AND CURRENT_DATE() AND CURRENT_DATE()' . $payemnt_status)[m
+             ->groupBy('month');[m
+         [m
+         $inactiveUserMonth = DB::table('users')[m
+             ->selectRaw('"inactive" AS type ,count(*) AS number, MONTHNAME(users.created_at) AS month')[m
+[31m-            ->whereRaw('users.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 YEAR) AND CURRENT_DATE() AND users.period_end < NOW() ')[m
+[32m+[m[32m            ->whereRaw('users.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 YEAR) AND CURRENT_DATE() AND CURRENT_DATE()' . $payemnt_status)[m
+             ->groupBy('month')[m
+             ->union($activeUserMonth)[m
+             ->get();[m
+[36m@@ -74,15 +79,16 @@[m [mclass DashboardController extends Controller[m
+ [m
+         $activeUserYear = DB::table('users')[m
+             ->selectRaw('"active" AS type, count(*) AS number, YEAR(users.created_at) AS year')[m
+[31m-            ->whereRaw('users.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 YEAR) AND CURRENT_DATE() AND users.period_end > NOW() ')[m
+[32m+[m[32m            ->whereRaw('users.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 YEAR) AND CURRENT_DATE() AND CURRENT_DATE()' . $payemnt_status)[m
+             ->groupBy('year');[m
+         [m
+         $inactiveUserYear = DB::table('users')[m
+             ->selectRaw('"inactive" AS type ,count(*) AS number, YEAR(users.created_at) AS year')[m
+[31m-            ->whereRaw('users.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 YEAR) AND CURRENT_DATE() AND users.period_end < NOW() ')[m
+[32m+[m[32m            ->whereRaw('users.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 YEAR) AND CURRENT_DATE() AND CURRENT_DATE()' . $payemnt_status)[m
+             ->groupBy('year')[m
+             ->union($activeUserYear)[m
+             ->get();[m
+[32m+[m[41m  

@@ -120,7 +120,7 @@ class SeriesController extends Controller
         //Validate
         $this->validate($request, [
             'name' => 'required|max:50|regex:/^[a-z0-9 .\-]+$/i',
-            'overview' => 'required|max:500',
+            'overview' => 'required|max:2000',
             'year' => 'required|numeric|between:0,2030',
             'rate' => 'required|numeric|between:0,99.99',
             'genres' => 'required|max:100',
@@ -563,25 +563,32 @@ class SeriesController extends Controller
      * @param [type] $id
      * @return void
      */
-    public function deleteEpisode($id)
+    public function deleteEpisode(Request $request)
     {
-        $delete = Episode::join('series', 'series.t_id', '=', 'episodes.series_id')
-            ->where('episodes.id', $id)->first();
 
-        if ($delete->t_cloud == 'aws') {
-            // Remove video
-            Storage::disk('s3')->deleteDirectory('videos/' . $delete->t_name . '/' . $delete->name . '_' . $delete->season_number . '_' . $delete->episode_number . '/');
-            // Remove subtitle
-            Storage::disk('s3')->deleteDirectory('subtitles/' . $delete->t_name . '/' . $delete->name . '_' . $delete->season_number . '_' . $delete->episode_number . '/');
+            foreach($request->list as $value) {
 
-            $delete->delete();
-        } else {
-            // Remove video
-            Storage::disk('public')->deleteDirectory('videos/' . $delete->t_name . '/' . $delete->name . '_' . $delete->season_number . '_' . $delete->episode_number . '/');
-            // Remove subtitle
-            Storage::disk('public')->deleteDirectory('subtitles/' . $delete->t_name . '/' . $delete->name . '_' . $delete->season_number . '_' . $delete->episode_number . '/');
+                $delete = Episode::join('series', 'series.t_id', '=', 'episodes.series_id')->where('episodes.id', $value['id'])->first();
+    
+                if (is_null($delete)) {
+                    return response()->json(['status' => 'faild', 'message' => 'There is no epsiode found'], 404);
+                }
 
-            $delete->delete();
+                if ($delete->t_cloud == 'aws') {
+                    // Remove video
+                    Storage::disk('s3')->deleteDirectory('videos/' . $delete->t_name . '/' . $delete->name . '_' . $delete->season_number . '_' . $delete->episode_number . '/');
+                    // Remove subtitle
+                    Storage::disk('s3')->deleteDirectory('subtitles/' . $delete->t_name . '/' . $delete->name . '_' . $delete->season_number . '_' . $delete->episode_number . '/');
+        
+                    $delete->delete();
+                } else {
+                    // Remove video
+                    Storage::disk('public')->deleteDirectory('videos/' . $delete->t_name . '/' . $delete->name . '_' . $delete->season_number . '_' . $delete->episode_number . '/');
+                    // Remove subtitle
+                    Storage::disk('public')->deleteDirectory('subtitles/' . $delete->t_name . '/' . $delete->name . '_' . $delete->season_number . '_' . $delete->episode_number . '/');
+        
+                    $delete->delete();
+                }
         }
 
         return response()->json(['status' => 'success', 'message' => 'Successful delete'], 200);
@@ -596,30 +603,27 @@ class SeriesController extends Controller
      */
     public function availableEpisode(Request $request)
     {
-        $request->validate([
-            'id' => 'required|uuid',
-        ]);
+       
+        $array = [];
+        foreach($request->list as $value) {
 
-        // Check if there id in episode table
+            $check = Episode::find($value['id']);
 
-        $check = Episode::find($request->id);
-
-        if (is_null($check)) {
-
-            return response(['status' => 'failed', 'message' => 'There is no id for this episode on database'], 422);
-
+            if (is_null($check)) {
+                return response(['status' => 'failed', 'message' => 'There is no id for this movie on database'], 422);
+            }
+    
+            if ($check->show) {
+                $check->show = 0;
+                $check->save();
+                array_push($array, ['key' => $value['key'], 'show' => false]);
+            } else {
+                $check->show = 1;
+                $check->save();
+                array_push($array, ['key' => $value['key'], 'show' => true]);
+            }
         }
-
-        if ($check->show) {
-            $check->show = 0;
-            $check->save();
-            return response(['status' => 'success', 'type' => 'unavailable', 'message' => 'Successful to unavailable ' . $check->episode_name], 200);
-
-        } else {
-            $check->show = 1;
-            $check->save();
-            return response(['status' => 'success', 'type' => 'available', 'message' => 'Successful to available ' . $check->episode_name], 200);
-        }
+        return response(['status' => 'success', 'message' => 'Successful Request', 'list' => $array] , 200);
 
     }
 
@@ -679,7 +683,7 @@ class SeriesController extends Controller
         $request->validate([
             'id' => 'required|uuid',
             'name' => 'nullable|max:40',
-            'overview' => 'nullable|string|max:255',
+            'overview' => 'nullable|string|max:2000',
         ]);
 
         $check = Episode::find($request->input('id'));
@@ -2124,4 +2128,123 @@ class SeriesController extends Controller
             return response()->json(['status' => 'failed', 'message' => 'There is something error with video'], 422);
         }
     }
+
+
+    public function analysisSeries($id)
+    {
+        if (preg_match('/[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}/', $id) !== 1) {
+            return response()->json(['status' => 'faild', 'message' => 'Error in id'], 404);
+        }
+
+        $check = Series::find($id);
+        if (is_null($check)) {
+            return response()->json(['status' => 'faild', 'message' => 'There is no series found'], 404);
+        }
+
+        $viewsInDay = DB::table('recently_watcheds')
+                ->selectRaw('count(recently_watcheds.episode_id) AS number, episodes.name AS name, HOUR(recently_watcheds.created_at) AS hour')
+                ->join('series', 'series.t_id', '=', 'recently_watcheds.series_id')
+                ->join('episodes', 'episodes.id', '=', 'recently_watcheds.episode_id')
+                ->whereRaw('recently_watcheds.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE() AND series.t_id= "'. $id . '"')
+                ->groupBy('recently_watcheds.episode_id')
+                ->limit(10)
+                ->get();
+
+        // Monthly
+        $viewsInMonth = DB::table('recently_watcheds')
+                    ->selectRaw('count(recently_watcheds.episode_id) AS number, episodes.name AS name, MONTH(recently_watcheds.created_at) AS month')
+                    ->join('series', 'series.t_id', '=', 'recently_watcheds.series_id')
+                    ->join('episodes', 'episodes.id', '=', 'recently_watcheds.episode_id')
+                    ->whereRaw('recently_watcheds.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 MONTH) AND CURRENT_DATE() AND series.t_id= "'. $id . '"')
+                    ->groupBy('recently_watcheds.episode_id')
+                    ->limit(10)
+                    ->get();
+
+        // Yearly
+
+        $viewsInYear = DB::table('recently_watcheds')
+                    ->selectRaw('count(recently_watcheds.episode_id) AS number, episodes.name AS name, YEAR(recently_watcheds.created_at) AS year')
+                    ->join('series', 'series.t_id', '=', 'recently_watcheds.series_id')
+                    ->join('episodes', 'episodes.id', '=', 'recently_watcheds.episode_id')
+                    ->whereRaw('recently_watcheds.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 YEAR) AND CURRENT_DATE() AND series.t_id= "'. $id . '"')
+                    ->groupBy('recently_watcheds.episode_id')
+                    ->limit(10)
+                    ->get();
+
+        // Count Like
+        $countLikeInDay = DB::table('likes')
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE() AND series_id = "'. $id . '"')
+                       ->count();
+      
+        $countLikeInMonth = DB::table('likes')
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Month) AND CURRENT_DATE() AND series_id = "'. $id . '"')
+                       ->count();
+
+        $countLikeInYear = DB::table('likes')
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Year) AND CURRENT_DATE() AND series_id = "'. $id . '"')
+                       ->count();
+     
+
+        // Count Favor
+        $countFavorInDay = DB::table('collection_lists')
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE() AND series_id = "'. $id . '"')
+                       ->count();
+      
+        $countFavorInMonth = DB::table('collection_lists')
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Month) AND CURRENT_DATE() AND series_id = "'. $id . '"')
+                       ->count();
+
+        $countFavorInYear = DB::table('collection_lists')
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Year) AND CURRENT_DATE() AND series_id = "'. $id . '"')
+                       ->count();
+
+
+
+        $latestViews =  DB::table('recently_watcheds')
+                        ->selectRaw('users.name AS user_name, users.id AS user_id, episodes.name AS name, episodes.season_number, episodes.episode_number, recently_watcheds.created_at')
+                        ->join('series', 'series.t_id', '=', 'recently_watcheds.series_id')
+                        ->join('episodes', 'episodes.id', '=', 'recently_watcheds.episode_id')
+                        ->join('users', 'users.id', '=', 'recently_watcheds.uid')
+                        ->whereRaw('series.t_id = "'. $id . '"')
+                        ->orderBy('recently_watcheds.created_at', 'DESC')
+                        ->limit(20)
+                        ->get();
+
+
+        $topViews =  DB::table('recently_watcheds')
+                        ->selectRaw('count(recently_watcheds.episode_id) AS number, episodes.name AS name, episodes.season_number, episodes.episode_number, recently_watcheds.created_at')
+                        ->join('series', 'series.t_id', '=', 'recently_watcheds.series_id')
+                        ->join('episodes', 'episodes.id', '=', 'recently_watcheds.episode_id')
+                        ->whereRaw('series.t_id = "'. $id . '"')
+                        ->orderBy('recently_watcheds.episode_id', 'DESC')
+                        ->limit(20)
+                        ->get();
+
+
+        return response()->json([
+                    'status' => 'success',
+                    'data' => [
+                        'views' => [
+                            'day' =>  $viewsInDay,
+                            'month' => $viewsInMonth,
+                            'year' =>  $viewsInYear
+                        ],
+                        'like' => [
+                            'day' =>  $countLikeInDay,
+                            'month' => $countLikeInMonth,
+                            'year' =>  $countLikeInYear
+                        ],
+                        'favor' => [
+                            'day' =>  $countFavorInDay,
+                            'month' => $countFavorInMonth,
+                            'year' =>  $countFavorInYear
+                        ],
+                        'latest_views' => $latestViews,
+                        'top_episode' => $topViews,
+                        'all_views' => DB::table('recently_watcheds')->where('series_id', $id)->count()
+                    ]
+                ]);
+    }
+
+
 }

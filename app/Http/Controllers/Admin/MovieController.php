@@ -47,7 +47,6 @@ class MovieController extends Controller
      */
     public function getAllMovies()
     {
-
         $getMovies = Movie::selectRaw('
                         movies.m_id AS id,
                         movies.m_name AS name,
@@ -87,20 +86,12 @@ class MovieController extends Controller
 
         // Upload To Local Or AWS Cloud
         if ($request->cloud_type == 'local') {
-
             return $this->uploadMovieTmdbInfoToLocal($request);
-
-        } else if ($request->cloud_type == 'aws') {
-
+        } elseif ($request->cloud_type == 'aws') {
             return $this->uploadMovieTmdbInfoToAWS($request);
-
         } else {
-
             return response()->json(['data' => 'Error cloud not found'], 422);
-
         }
-
-
     }
 
     /**
@@ -113,19 +104,12 @@ class MovieController extends Controller
 
         // Upload To Local Or AWS Cloud
         if ($request->cloud_type == 'local') {
-
             return $this->uploadMovieVideoToLocal($request);
-
-        } else if ($request->cloud_type == 'aws') {
-
+        } elseif ($request->cloud_type == 'aws') {
             return $this->uploadMovieVideoToAWS($request);
-
         } else {
-
             return response()->json(['data' => 'Error cloud not found'], 422);
-
         }
-
     }
 
     /**
@@ -148,12 +132,8 @@ class MovieController extends Controller
 
 
         if (!empty($request->file('subtitleUpload'))) {
-
-
-            if($update->m_cloud === 'local') {
-
+            if ($update->m_cloud === 'local') {
                 foreach ($request->file('subtitleUpload') as $key => $value) {
-
                     $file = file_get_contents($value);
                     $subtitles = Subtitles::load($file, 'srt');
                     $name = uniqid('subtitle_') . '.vtt';
@@ -168,11 +148,8 @@ class MovieController extends Controller
                 }
 
                 return response()->json(['status' => 'success', 'message' => 'Successful upload subtitles', 'data' => $sub]);
-
-            }elseif ($update->m_cloud === 'aws'){
-
+            } elseif ($update->m_cloud === 'aws') {
                 foreach ($request->file('subtitleUpload') as $key => $value) {
-
                     $file = file_get_contents($value);
                     $subtitles = Subtitles::load($file, 'srt');
                     $name = uniqid('subtitle_') . '.vtt';
@@ -187,9 +164,7 @@ class MovieController extends Controller
                 }
 
                 return response()->json(['status' => 'success', 'message' => 'Successful upload subtitles', 'data' => $sub]);
-
             }
-
         }
     }
 
@@ -218,20 +193,12 @@ class MovieController extends Controller
 
         // Upload To Local Or AWS Cloud
         if ($request->cloud_type == 'local') {
-
             return $this->uploadMovieCustomInfoToLocal($request);
-
-        } else if ($request->cloud_type == 'aws') {
-
+        } elseif ($request->cloud_type == 'aws') {
             return $this->uploadMovieCustomInfoToAWS($request);
-
         } else {
-
             return response()->json(['data' => 'Error cloud not found'], 422);
-
         }
-
-
     }
 
     /**
@@ -278,6 +245,7 @@ class MovieController extends Controller
      */
     public function update(Request $request)
     {
+        
         //Validate
         $request->validate([
             'id' => 'required|uuid',
@@ -295,7 +263,7 @@ class MovieController extends Controller
 
         // Update AWS Movie
 
-        if($update->m_cloud == 'aws') {
+        if ($update->m_cloud == 'aws') {
             $update->m_name = $request->name;
             $update->m_year = $request->year;
             $update->m_desc = $request->overview;
@@ -376,8 +344,7 @@ class MovieController extends Controller
                 }
                 $video->save();
             }
-
-        }else {
+        } else {
 
             // Local Upload
 
@@ -440,8 +407,6 @@ class MovieController extends Controller
                 }
                 $video->save();
             }
-
-
         }
 
         return response()->json(['status' => 'success', 'message' => 'Successful update ' . $request->name]);
@@ -453,33 +418,33 @@ class MovieController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function deleteMovie($id)
+    public function deleteMovie(Request $request)
     {
-        $delete = Movie::find($id);
+        foreach ($request->list as $value) {
+            $delete = Movie::find($value['id']);
 
-        if (is_null($delete)) {
-            return response()->json(['status' => 'faild', 'message' => 'There is no movie found'], 404);
+            if (is_null($delete)) {
+                return response()->json(['status' => 'faild', 'message' => 'There is no movie found'], 404);
+            }
+
+            if ($delete->m_cloud == 'aws') {
+                // Remove video
+                Storage::disk('s3')->deleteDirectory('videos/' . $delete->m_name . '/');
+                // Remove subtitle
+                Storage::disk('s3')->deleteDirectory('subtitles/' . $delete->m_name  . '/');
+                $delete->delete();
+            } else {
+                // Remove video
+                Storage::disk('public')->deleteDirectory('videos/' . $delete->m_name . '/');
+                // Remove subtitle
+                Storage::disk('public')->deleteDirectory('subtitles/' . $delete->m_name. '/');
+                $delete->delete();
+            }
         }
 
-        if($delete->m_cloud == 'aws') {
-            // Remove video
-            Storage::disk('s3')->deleteDirectory('videos/' . $delete->m_name . '/');
-            // Remove subtitle
-            Storage::disk('s3')->deleteDirectory('subtitles/' . $delete->m_name  . '/');
-
-            $delete->delete();
-        }else {
-            // Remove video
-            Storage::disk('public')->deleteDirectory('videos/' . $id . '/');
-            // Remove subtitle
-            Storage::disk('public')->deleteDirectory('subtitles/' . $id . '/');
-
-            $delete->delete();
-        }
 
 
-
-        return response()->json(['status' => 'success', 'message' => 'successful delete ' . $delete->m_name]);
+        return response()->json(['status' => 'success', 'message' => 'successful delete movies']);
     }
 
     /**
@@ -499,6 +464,7 @@ class MovieController extends Controller
                 movies.m_name AS name,
                 movies.m_poster AS poster,
                 movies.m_year AS year,
+                movies.m_cloud,
                 movies.show,
                 movies.created_at,
                 movies.updated_at,
@@ -527,27 +493,28 @@ class MovieController extends Controller
      */
     public function availableMovie(Request $request)
     {
-        $request->validate([
-            'id' => 'required|uuid',
-        ]);
-
         // Check if there id in episode table
+        
+        $array = [];
+        foreach ($request->list as $value) {
+            $check = Movie::find($value['id']);
 
-        $check = Movie::find($request->id);
-
-        if (is_null($check)) {
-            return response(['status' => 'failed', 'message' => 'There is no id for this movie on database'], 422);
+            if (is_null($check)) {
+                return response(['status' => 'failed', 'message' => 'There is no id for this movie on database'], 422);
+            }
+    
+            if ($check->show) {
+                $check->show = 0;
+                $check->save();
+                array_push($array, ['key' => $value['key'], 'show' => false]);
+            } else {
+                $check->show = 1;
+                $check->save();
+                array_push($array, ['key' => $value['key'], 'show' => true]);
+            }
         }
 
-        if ($check->show) {
-            $check->show = 0;
-            $check->save();
-            return response(['status' => 'success', 'type' => 'unavailable', 'message' => 'Successful to unavailable ' . $check->m_name], 200);
-        } else {
-            $check->show = 1;
-            $check->save();
-            return response(['status' => 'success', 'type' => 'available', 'message' => 'Successful to available ' . $check->m_name], 200);
-        }
+        return response(['status' => 'success', 'message' => 'Successful Request', 'list' => $array], 200);
     }
 
 
@@ -696,7 +663,8 @@ class MovieController extends Controller
     }
 
 
-    public function uploadMovieTmdbInfoToAWS($request) {
+    public function uploadMovieTmdbInfoToAWS($request)
+    {
 
         // Check if there is api of moviedb in config file
         $getApi = Tmdb::find(1);
@@ -812,7 +780,8 @@ class MovieController extends Controller
     }
 
 
-    public function uploadMovieCustomInfoToLocal($request) {
+    public function uploadMovieCustomInfoToLocal($request)
+    {
 
 
         // Upload images to local
@@ -908,7 +877,8 @@ class MovieController extends Controller
     }
 
 
-    public function uploadMovieCustomInfoToAWS($request) {
+    public function uploadMovieCustomInfoToAWS($request)
+    {
         // Upload images to s3
         $name_poster = md5($request->file('poster')->getClientOriginalName() . microtime()) . '.jpg';
         $name_backdrop = md5($request->file('backdrop')->getClientOriginalName() . microtime()) . '.jpg';
@@ -1024,7 +994,6 @@ class MovieController extends Controller
             }
 
             return response()->json(['status' => 'success', 'message' => 'Successful upload and transcode video to local', 'id' => $request->id], 200);
-
         } elseif ($request->has('video')) {
             $addtype = Movie::find($request->id);
             $addtype->m_type = 'local';
@@ -1048,18 +1017,15 @@ class MovieController extends Controller
 
                 // Store video data
                 if ($transcoding) {
-
                     $video = new Video();
                     $video->movie_id = $request->id;
                     $video->resolution = '720';
                     $video->video_url = '/storage/videos/' . $addtype->m_name . '/' . $newNameM3U8;
                     $video->save();
-
                 } else {
                     // Error
                     return $transcoding;
                 }
-
             } elseif ($resolution[0]['Container'] === 'mp4') {
 
 
@@ -1068,12 +1034,11 @@ class MovieController extends Controller
                 $path = Storage::disk('public')->put('temp', $file);
 
                 // Transcode Video To Mp4
-                $transcode = $this->transcodeVideoToMp4($resolution, $addtype->m_name, $path, $request->tmdb_id, 'local', $addtype->m_name);
+                $transcode = $this->transcodeVideoToMp4($resolution, $request->id, $path, $request->tmdb_id, 'local', $addtype->m_name);
 
                 if (!$transcode) {
                     return response()->json(['status' => 'failed', 'message' => 'Failed to transcode video'], 422);
                 }
-
             }
 
             Storage::deleteDirectory('public/temp');
@@ -1099,7 +1064,8 @@ class MovieController extends Controller
     }
 
 
-    public function uploadMovieVideoToAWS($request){
+    public function uploadMovieVideoToAWS($request)
+    {
         if ($request->has('video_link')) {
 
             // Add type
@@ -1139,7 +1105,6 @@ class MovieController extends Controller
             }
 
             return response()->json(['status' => 'success', 'message' => 'Successful upload and transcode video to local', 'id' => $request->id], 200);
-
         } elseif ($request->has('video')) {
             $addtype = Movie::find($request->id);
             $addtype->m_type = 'local';
@@ -1163,7 +1128,6 @@ class MovieController extends Controller
 
                 // Store video data
                 if ($transcoding) {
-
                     $video = new Video();
                     $video->movie_id = $request->id;
                     $video->resolution = '720';
@@ -1174,13 +1138,10 @@ class MovieController extends Controller
                     $s3 = App::make('aws')->createClient('s3');
 
                     $s3->uploadDirectory(storage_path('/app/public/videos/' . $addtype->m_name . '/'), config('aws.private_bucket'), '/videos/'. $addtype->m_name . '/', []);
-
-
                 } else {
                     // Error
                     return $transcoding;
                 }
-
             } elseif ($resolution[0]['Container'] === 'mp4') {
 
 
@@ -1189,12 +1150,11 @@ class MovieController extends Controller
                 $path = Storage::disk('public')->put('temp', $file);
 
                 // Transcode Video To Mp4
-                $transcode = $this->transcodeVideoToMp4($resolution, $addtype->m_name, $path, $request->tmdb_id, 'aws', $addtype->m_name);
+                $transcode = $this->transcodeVideoToMp4($resolution, $request->id, $path, $request->tmdb_id, 'aws', $addtype->m_name);
 
                 if (!$transcode) {
                     return response()->json(['status' => 'failed', 'message' => 'Failed to transcode video'], 422);
                 }
-
             }
 
             Storage::deleteDirectory('public/temp');
@@ -1220,4 +1180,107 @@ class MovieController extends Controller
         }
     }
 
+
+    public function analysisMovie($id)
+    {
+        if (preg_match('/[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}/', $id) !== 1) {
+            return response()->json(['status' => 'faild', 'message' => 'Error in id'], 404);
+        }
+
+        $check = Movie::find($id);
+
+        if (is_null($check)) {
+            return response()->json(['status' => 'faild', 'message' => 'There is no movie found'], 404);
+        }
+
+
+        $viewsInDay = DB::table('recently_watcheds')
+                ->selectRaw('"movie" AS type, count(recently_watcheds.movie_id) AS number, movies.m_name AS name, HOUR(recently_watcheds.created_at) AS hour')
+                ->join('movies', 'movies.m_id', '=', 'recently_watcheds.movie_id')
+                ->whereRaw('recently_watcheds.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE() AND movies.m_id= "'. $id . '"')
+                ->groupBy('recently_watcheds.movie_id')
+                ->limit(10)
+                ->get();
+
+        // Monthly
+        $viewsInMonth = DB::table('recently_watcheds')
+                ->selectRaw('"movie" AS type, count(recently_watcheds.movie_id) AS number, movies.m_name AS name, MONTHNAME(recently_watcheds.created_at) AS month')
+                ->join('movies', 'movies.m_id', '=', 'recently_watcheds.movie_id')
+                ->groupBy('recently_watcheds.movie_id')
+                ->whereRaw('recently_watcheds.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 MONTH) AND CURRENT_DATE() AND movies.m_id = "'. $id . '"')
+                ->limit(10)
+                ->get();
+
+        // Yearly
+
+        $viewsInYear = DB::table('recently_watcheds')
+                ->selectRaw('"movie" AS type, count(recently_watcheds.movie_id) AS number, movies.m_name AS name, YEAR(recently_watcheds.created_at) AS year')
+                ->join('movies', 'movies.m_id', '=', 'recently_watcheds.movie_id')
+                ->whereRaw('recently_watcheds.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 YEAR) AND CURRENT_DATE() AND movies.m_id = "'. $id . '"')
+                ->groupBy('recently_watcheds.movie_id')
+                ->limit(10)
+                ->get();
+
+        // Count Like
+        $countLikeInDay = DB::table('likes')
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE() AND movie_id = "'. $id . '"')
+                       ->count();
+      
+        $countLikeInMonth = DB::table('likes')
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Month) AND CURRENT_DATE() AND movie_id = "'. $id . '"')
+                       ->count();
+
+        $countLikeInYear = DB::table('likes')
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Year) AND CURRENT_DATE() AND movie_id = "'. $id . '"')
+                       ->count();
+     
+
+        // Count Favor
+        $countFavorInDay = DB::table('collection_lists')
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE() AND movie_id = "'. $id . '"')
+                       ->count();
+      
+        $countFavorInMonth = DB::table('collection_lists')
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Month) AND CURRENT_DATE() AND movie_id = "'. $id . '"')
+                       ->count();
+
+        $countFavorInYear = DB::table('collection_lists')
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Year) AND CURRENT_DATE() AND movie_id = "'. $id . '"')
+                       ->count();
+
+
+
+        $latestViews =  DB::table('recently_watcheds')
+                        ->selectRaw('users.name AS user_name, users.id AS user_id, recently_watcheds.created_at')
+                        ->join('movies', 'movies.m_id', '=', 'recently_watcheds.movie_id')
+                        ->join('users', 'users.id', '=', 'recently_watcheds.uid')
+                        ->whereRaw('movies.m_id = "'. $id . '"')
+                        ->orderBy('recently_watcheds.created_at', 'DESC')
+                        ->limit(20)
+                        ->get();
+
+
+        return response()->json([
+                    'status' => 'success',
+                    'data' => [
+                        'views' => [
+                            'day' =>  $viewsInDay,
+                            'month' => $viewsInMonth,
+                            'year' =>  $viewsInYear
+                        ],
+                        'like' => [
+                            'day' =>  $countLikeInDay,
+                            'month' => $countLikeInMonth,
+                            'year' =>  $countLikeInYear
+                        ],
+                        'favor' => [
+                            'day' =>  $countFavorInDay,
+                            'month' => $countFavorInMonth,
+                            'year' =>  $countFavorInYear
+                        ],
+                        'latest_views' => $latestViews,
+                        'all_views' => DB::table('recently_watcheds')->where('movie_id', $id)->count()
+                    ]
+                ]);
+    }
 }

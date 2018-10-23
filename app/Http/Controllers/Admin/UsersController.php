@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\Siteinfo;
 
 class UsersController extends Controller
 {
@@ -86,11 +87,23 @@ class UsersController extends Controller
 
     public function getActivityUsers()
     {
+
+      // Users Analysis
+        $payemnt_status = '';
+        if( ! Siteinfo::find(1)->payment_status) {
+        
         $getActitivyUsers = DB::table('users')
             ->selectRaw('id,name,email,created_at,confirmed,period_end,created_at,updated_at')
             ->whereRaw('period_end >'. date("Y/m/d"))
             ->orderBy('created_at', 'DESC')
             ->paginate(15);
+
+        }else{
+            $getActitivyUsers = DB::table('users')
+            ->selectRaw('id,name,email,created_at,confirmed,period_end,created_at,updated_at')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(15);
+        }
 
         // Check if empty result
         if (empty($getActitivyUsers->all())) {
