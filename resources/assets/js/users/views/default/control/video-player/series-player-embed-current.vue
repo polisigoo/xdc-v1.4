@@ -57,6 +57,23 @@
                 document.querySelector('.fp-player>a').style.backgroundPosition ="center";
                 document.querySelector('.fp-player>a').style.backgroundSize ="100px 50px";
                 document.querySelector('.fp-player>a').style.left ="10%";
+                document.querySelector('.fp-player>a').style.bottom ="30%";
+
+                var x = window.matchMedia("(max-width: 1400px)")
+                mediaQuery(x, "20%") 
+                x.addListener(mediaQuery)
+                var y = window.matchMedia("(max-width: 500px)")
+                mediaQuery(y, "37%") 
+                y.addListener(mediaQuery)
+
+
+                function mediaQuery(x, val) {
+                    if (x.matches) { // If media query matches
+                        document.querySelector('.fp-player>a').style.bottom =val;
+                    } else {
+                        document.querySelector('.fp-player>a').style.bottom ="30%";
+                    }
+                }
             }
         },
 

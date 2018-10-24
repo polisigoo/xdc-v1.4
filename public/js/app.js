@@ -11474,6 +11474,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             document.querySelector('.fp-player>a').style.backgroundPosition = "center";
             document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
             document.querySelector('.fp-player>a').style.left = "10%";
+            document.querySelector('.fp-player>a').style.bottom = "30%";
+
+            var x = window.matchMedia("(max-width: 1400px)");
+            mediaQuery(x, "20%");
+            x.addListener(mediaQuery);
+            var y = window.matchMedia("(max-width: 500px)");
+            mediaQuery(y, "37%");
+            y.addListener(mediaQuery);
+
+            function mediaQuery(x, val) {
+                if (x.matches) {
+                    // If media query matches
+                    document.querySelector('.fp-player>a').style.bottom = val;
+                } else {
+                    document.querySelector('.fp-player>a').style.bottom = "30%";
+                }
+            }
         }
     }
 });
@@ -11631,6 +11648,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
             document.querySelector('.fp-player>a').style.backgroundPosition = "center";
             document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
             document.querySelector('.fp-player>a').style.left = "10%";
+            document.querySelector('.fp-player>a').style.bottom = "30%";
+
+            var x = window.matchMedia("(max-width: 1400px)");
+            mediaQuery(x, "20%");
+            x.addListener(mediaQuery);
+            var y = window.matchMedia("(max-width: 500px)");
+            mediaQuery(y, "37%");
+            y.addListener(mediaQuery);
+
+            function mediaQuery(x, val) {
+                if (x.matches) {
+                    // If media query matches
+                    document.querySelector('.fp-player>a').style.bottom = val;
+                } else {
+                    document.querySelector('.fp-player>a').style.bottom = "30%";
+                }
+            }
         }
     },
     beforeRouteLeave: function beforeRouteLeave(to, from, next) {
@@ -11644,12 +11678,29 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
             if (val === 'movie') {
                 var _CLEAR = function _CLEAR() {
                     document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
-                    document.querySelector('.fp-player>a').style.height = "100px";
-                    document.querySelector('.fp-player>a').style.width = "200px";
+                    document.querySelector('.fp-player>a').style.height = "50px";
+                    document.querySelector('.fp-player>a').style.width = "100px";
                     document.querySelector('.fp-player>a').href = "/";
                     document.querySelector('.fp-player>a').style.backgroundPosition = "center";
                     document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
                     document.querySelector('.fp-player>a').style.left = "10%";
+                    document.querySelector('.fp-player>a').style.bottom = "30%";
+
+                    var x = window.matchMedia("(max-width: 1400px)");
+                    mediaQuery(x, "20%");
+                    x.addListener(mediaQuery);
+                    var y = window.matchMedia("(max-width: 500px)");
+                    mediaQuery(y, "37%");
+                    y.addListener(mediaQuery);
+
+                    function mediaQuery(x, val) {
+                        if (x.matches) {
+                            // If media query matches
+                            document.querySelector('.fp-player>a').style.bottom = val;
+                        } else {
+                            document.querySelector('.fp-player>a').style.bottom = "30%";
+                        }
+                    }
                 };
 
                 this.$store.commit('FLOWPLAYER_DESTORY', 'movie');
@@ -11687,12 +11738,29 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
             }, 10);
             function CLEAR() {
                 document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
-                document.querySelector('.fp-player>a').style.height = "100px";
-                document.querySelector('.fp-player>a').style.width = "200px";
+                document.querySelector('.fp-player>a').style.height = "50px";
+                document.querySelector('.fp-player>a').style.width = "100px";
                 document.querySelector('.fp-player>a').href = "/";
                 document.querySelector('.fp-player>a').style.backgroundPosition = "center";
                 document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
                 document.querySelector('.fp-player>a').style.left = "10%";
+                document.querySelector('.fp-player>a').style.bottom = "30%";
+
+                var x = window.matchMedia("(max-width: 1400px)");
+                mediaQuery(x, "20%");
+                x.addListener(mediaQuery);
+                var y = window.matchMedia("(max-width: 500px)");
+                mediaQuery(y, "37%");
+                y.addListener(mediaQuery);
+
+                function mediaQuery(x, val) {
+                    if (x.matches) {
+                        // If media query matches
+                        document.querySelector('.fp-player>a').style.bottom = val;
+                    } else {
+                        document.querySelector('.fp-player>a').style.bottom = "30%";
+                    }
+                }
             }
         },
         SEND_REPORT: function SEND_REPORT() {
@@ -11937,6 +12005,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
             document.querySelector('.fp-player>a').style.backgroundPosition = "center";
             document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
             document.querySelector('.fp-player>a').style.left = "10%";
+            document.querySelector('.fp-player>a').style.bottom = "30%";
+
+            var x = window.matchMedia("(max-width: 1400px)");
+            mediaQuery(x, "20%");
+            x.addListener(mediaQuery);
+            var y = window.matchMedia("(max-width: 500px)");
+            mediaQuery(y, "37%");
+            y.addListener(mediaQuery);
+
+            function mediaQuery(x, val) {
+                if (x.matches) {
+                    // If media query matches
+                    document.querySelector('.fp-player>a').style.bottom = val;
+                } else {
+                    document.querySelector('.fp-player>a').style.bottom = "30%";
+                }
+            }
         }
     },
 
@@ -11983,6 +12068,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                 document.querySelector('.fp-player>a').style.backgroundPosition = "center";
                 document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
                 document.querySelector('.fp-player>a').style.left = "10%";
+                document.querySelector('.fp-player>a').style.bottom = "30%";
+
+                var x = window.matchMedia("(max-width: 1400px)");
+                mediaQuery(x, "20%");
+                x.addListener(mediaQuery);
+                var y = window.matchMedia("(max-width: 500px)");
+                mediaQuery(y, "37%");
+                y.addListener(mediaQuery);
+
+                function mediaQuery(x, val) {
+                    if (x.matches) {
+                        // If media query matches
+                        document.querySelector('.fp-player>a').style.bottom = val;
+                    } else {
+                        document.querySelector('.fp-player>a').style.bottom = "30%";
+                    }
+                }
             }
         },
 
@@ -12028,6 +12130,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                 document.querySelector('.fp-player>a').style.backgroundPosition = "center";
                 document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
                 document.querySelector('.fp-player>a').style.left = "10%";
+                document.querySelector('.fp-player>a').style.bottom = "30%";
+
+                var x = window.matchMedia("(max-width: 1400px)");
+                mediaQuery(x, "20%");
+                x.addListener(mediaQuery);
+                var y = window.matchMedia("(max-width: 500px)");
+                mediaQuery(y, "37%");
+                y.addListener(mediaQuery);
+
+                function mediaQuery(x, val) {
+                    if (x.matches) {
+                        // If media query matches
+                        document.querySelector('.fp-player>a').style.bottom = val;
+                    } else {
+                        document.querySelector('.fp-player>a').style.bottom = "30%";
+                    }
+                }
             }
         },
 
@@ -12050,6 +12169,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                             document.querySelector('.fp-player>a').style.backgroundPosition = "center";
                             document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
                             document.querySelector('.fp-player>a').style.left = "10%";
+                            document.querySelector('.fp-player>a').style.bottom = "30%";
+
+                            var x = window.matchMedia("(max-width: 1400px)");
+                            mediaQuery(x, "20%");
+                            x.addListener(mediaQuery);
+                            var y = window.matchMedia("(max-width: 500px)");
+                            mediaQuery(y, "37%");
+                            y.addListener(mediaQuery);
+
+                            function mediaQuery(x, val) {
+                                if (x.matches) {
+                                    // If media query matches
+                                    document.querySelector('.fp-player>a').style.bottom = val;
+                                } else {
+                                    document.querySelector('.fp-player>a').style.bottom = "30%";
+                                }
+                            }
                         };
 
                         _this.$store.commit('FLOWPLAYER_DESTORY', 'series');
@@ -12102,6 +12238,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                 document.querySelector('.fp-player>a').style.backgroundPosition = "center";
                 document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
                 document.querySelector('.fp-player>a').style.left = "10%";
+                document.querySelector('.fp-player>a').style.bottom = "30%";
+
+                var x = window.matchMedia("(max-width: 1400px)");
+                mediaQuery(x, "20%");
+                x.addListener(mediaQuery);
+                var y = window.matchMedia("(max-width: 500px)");
+                mediaQuery(y, "37%");
+                y.addListener(mediaQuery);
+
+                function mediaQuery(x, val) {
+                    if (x.matches) {
+                        // If media query matches
+                        document.querySelector('.fp-player>a').style.bottom = val;
+                    } else {
+                        document.querySelector('.fp-player>a').style.bottom = "30%";
+                    }
+                }
             }
         },
         SEND_REPORT: function SEND_REPORT() {
@@ -12204,6 +12357,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             document.querySelector('.fp-player>a').style.backgroundPosition = "center";
             document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
             document.querySelector('.fp-player>a').style.left = "10%";
+            document.querySelector('.fp-player>a').style.bottom = "30%";
+
+            var x = window.matchMedia("(max-width: 1400px)");
+            mediaQuery(x, "20%");
+            x.addListener(mediaQuery);
+            var y = window.matchMedia("(max-width: 500px)");
+            mediaQuery(y, "37%");
+            y.addListener(mediaQuery);
+
+            function mediaQuery(x, val) {
+                if (x.matches) {
+                    // If media query matches
+                    document.querySelector('.fp-player>a').style.bottom = val;
+                } else {
+                    document.querySelector('.fp-player>a').style.bottom = "30%";
+                }
+            }
         }
     }
 });
@@ -12278,6 +12448,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             document.querySelector('.fp-player>a').style.backgroundPosition = "center";
             document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
             document.querySelector('.fp-player>a').style.left = "10%";
+            document.querySelector('.fp-player>a').style.bottom = "30%";
+
+            var x = window.matchMedia("(max-width: 1400px)");
+            mediaQuery(x, "20%");
+            x.addListener(mediaQuery);
+            var y = window.matchMedia("(max-width: 500px)");
+            mediaQuery(y, "37%");
+            y.addListener(mediaQuery);
+
+            function mediaQuery(x, val) {
+                if (x.matches) {
+                    // If media query matches
+                    document.querySelector('.fp-player>a').style.bottom = val;
+                } else {
+                    document.querySelector('.fp-player>a').style.bottom = "30%";
+                }
+            }
         }
     }
 });
@@ -12485,6 +12672,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
             document.querySelector('.fp-player>a').style.backgroundPosition = "center";
             document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
             document.querySelector('.fp-player>a').style.left = "10%";
+            document.querySelector('.fp-player>a').style.bottom = "30%";
+
+            var x = window.matchMedia("(max-width: 1400px)");
+            mediaQuery(x, "20%");
+            x.addListener(mediaQuery);
+            var y = window.matchMedia("(max-width: 500px)");
+            mediaQuery(y, "37%");
+            y.addListener(mediaQuery);
+
+            function mediaQuery(x, val) {
+                if (x.matches) {
+                    // If media query matches
+                    document.querySelector('.fp-player>a').style.bottom = val;
+                } else {
+                    document.querySelector('.fp-player>a').style.bottom = "30%";
+                }
+            }
         }
     },
 
@@ -12526,6 +12730,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                 document.querySelector('.fp-player>a').style.backgroundPosition = "center";
                 document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
                 document.querySelector('.fp-player>a').style.left = "10%";
+                document.querySelector('.fp-player>a').style.bottom = "30%";
+
+                var x = window.matchMedia("(max-width: 1400px)");
+                mediaQuery(x, "20%");
+                x.addListener(mediaQuery);
+                var y = window.matchMedia("(max-width: 500px)");
+                mediaQuery(y, "37%");
+                y.addListener(mediaQuery);
+
+                function mediaQuery(x, val) {
+                    if (x.matches) {
+                        // If media query matches
+                        document.querySelector('.fp-player>a').style.bottom = val;
+                    } else {
+                        document.querySelector('.fp-player>a').style.bottom = "30%";
+                    }
+                }
             }
         },
 
@@ -12566,6 +12787,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                 document.querySelector('.fp-player>a').style.backgroundPosition = "center";
                 document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
                 document.querySelector('.fp-player>a').style.left = "10%";
+                document.querySelector('.fp-player>a').style.bottom = "30%";
+
+                var x = window.matchMedia("(max-width: 1400px)");
+                mediaQuery(x, "20%");
+                x.addListener(mediaQuery);
+                var y = window.matchMedia("(max-width: 500px)");
+                mediaQuery(y, "37%");
+                y.addListener(mediaQuery);
+
+                function mediaQuery(x, val) {
+                    if (x.matches) {
+                        // If media query matches
+                        document.querySelector('.fp-player>a').style.bottom = val;
+                    } else {
+                        document.querySelector('.fp-player>a').style.bottom = "30%";
+                    }
+                }
             }
         },
 
@@ -12601,6 +12839,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                 document.querySelector('.fp-player>a').style.backgroundPosition = "center";
                 document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
                 document.querySelector('.fp-player>a').style.left = "10%";
+                document.querySelector('.fp-player>a').style.bottom = "30%";
+
+                var x = window.matchMedia("(max-width: 1400px)");
+                mediaQuery(x, "20%");
+                x.addListener(mediaQuery);
+                var y = window.matchMedia("(max-width: 500px)");
+                mediaQuery(y, "37%");
+                y.addListener(mediaQuery);
+
+                function mediaQuery(x, val) {
+                    if (x.matches) {
+                        // If media query matches
+                        document.querySelector('.fp-player>a').style.bottom = val;
+                    } else {
+                        document.querySelector('.fp-player>a').style.bottom = "30%";
+                    }
+                }
             }
         }
     },
@@ -12628,6 +12883,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                 document.querySelector('.fp-player>a').style.backgroundPosition = "center";
                 document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
                 document.querySelector('.fp-player>a').style.left = "10%";
+                document.querySelector('.fp-player>a').style.bottom = "30%";
+
+                var x = window.matchMedia("(max-width: 1400px)");
+                mediaQuery(x, "20%");
+                x.addListener(mediaQuery);
+                var y = window.matchMedia("(max-width: 500px)");
+                mediaQuery(y, "37%");
+                y.addListener(mediaQuery);
+
+                function mediaQuery(x, val) {
+                    if (x.matches) {
+                        // If media query matches
+                        document.querySelector('.fp-player>a').style.bottom = val;
+                    } else {
+                        document.querySelector('.fp-player>a').style.bottom = "30%";
+                    }
+                }
             }
         },
         SEND_REPORT: function SEND_REPORT() {
@@ -12878,6 +13150,7 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
             }
         }, 10);
         function CLEAR() {
+
             document.querySelector('.fp-player>a').style.backgroundImage = "url('/images/logo_watermark.png')";
             document.querySelector('.fp-player>a').style.height = "50px";
             document.querySelector('.fp-player>a').style.width = "100px";
@@ -12886,6 +13159,23 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
             document.querySelector('.fp-player>a').style.backgroundPosition = "center";
             document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
             document.querySelector('.fp-player>a').style.left = "10%";
+            document.querySelector('.fp-player>a').style.bottom = "30%";
+
+            var x = window.matchMedia("(max-width: 1400px)");
+            mediaQuery(x, "20%");
+            x.addListener(mediaQuery);
+            var y = window.matchMedia("(max-width: 500px)");
+            mediaQuery(y, "37%");
+            y.addListener(mediaQuery);
+
+            function mediaQuery(x, val) {
+                if (x.matches) {
+                    // If media query matches
+                    document.querySelector('.fp-player>a').style.bottom = val;
+                } else {
+                    document.querySelector('.fp-player>a').style.bottom = "30%";
+                }
+            }
         }
     },
     mounted: function mounted() {
@@ -12919,6 +13209,22 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                 document.querySelector('.fp-player>a').style.backgroundPosition = "center";
                 document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
                 document.querySelector('.fp-player>a').style.left = "10%";
+                document.querySelector('.fp-player>a').style.bottom = "30%";
+                var x = window.matchMedia("(max-width: 1400px)");
+                mediaQuery(x, "20%");
+                x.addListener(mediaQuery);
+                var y = window.matchMedia("(max-width: 500px)");
+                mediaQuery(y, "37%");
+                y.addListener(mediaQuery);
+
+                function mediaQuery(x, val) {
+                    if (x.matches) {
+                        // If media query matches
+                        document.querySelector('.fp-player>a').style.bottom = val;
+                    } else {
+                        document.querySelector('.fp-player>a').style.bottom = "30%";
+                    }
+                }
             }
         }, 200);
         var myInt = setInterval(function () {
@@ -12939,6 +13245,22 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
             document.querySelector('.fp-player>a').style.backgroundPosition = "center";
             document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
             document.querySelector('.fp-player>a').style.left = "10%";
+            document.querySelector('.fp-player>a').style.bottom = "30%";
+            var x = window.matchMedia("(max-width: 1400px)");
+            mediaQuery(x, "20%");
+            x.addListener(mediaQuery);
+            var y = window.matchMedia("(max-width: 500px)");
+            mediaQuery(y, "37%");
+            y.addListener(mediaQuery);
+
+            function mediaQuery(x, val) {
+                if (x.matches) {
+                    // If media query matches
+                    document.querySelector('.fp-player>a').style.bottom = val;
+                } else {
+                    document.querySelector('.fp-player>a').style.bottom = "30%";
+                }
+            }
         }
     },
 
@@ -12967,6 +13289,22 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                 document.querySelector('.fp-player>a').style.backgroundPosition = "center";
                 document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
                 document.querySelector('.fp-player>a').style.left = "10%";
+                document.querySelector('.fp-player>a').style.bottom = "30%";
+                var x = window.matchMedia("(max-width: 1400px)");
+                mediaQuery(x, "20%");
+                x.addListener(mediaQuery);
+                var y = window.matchMedia("(max-width: 500px)");
+                mediaQuery(y, "37%");
+                y.addListener(mediaQuery);
+
+                function mediaQuery(x, val) {
+                    if (x.matches) {
+                        // If media query matches
+                        document.querySelector('.fp-player>a').style.bottom = val;
+                    } else {
+                        document.querySelector('.fp-player>a').style.bottom = "30%";
+                    }
+                }
             }
         }
     },
@@ -13028,6 +13366,22 @@ var alertify = __webpack_require__("./node_modules/alertify.js/dist/js/alertify.
                 document.querySelector('.fp-player>a').style.backgroundPosition = "center";
                 document.querySelector('.fp-player>a').style.backgroundSize = "100px 50px";
                 document.querySelector('.fp-player>a').style.left = "10%";
+                document.querySelector('.fp-player>a').style.bottom = "30%";
+                var x = window.matchMedia("(max-width: 1400px)");
+                mediaQuery(x, "20%");
+                x.addListener(mediaQuery);
+                var y = window.matchMedia("(max-width: 500px)");
+                mediaQuery(y, "37%");
+                y.addListener(mediaQuery);
+
+                function mediaQuery(x, val) {
+                    if (x.matches) {
+                        // If media query matches
+                        document.querySelector('.fp-player>a').style.bottom = val;
+                    } else {
+                        document.querySelector('.fp-player>a').style.bottom = "30%";
+                    }
+                }
             }
         }
     }
