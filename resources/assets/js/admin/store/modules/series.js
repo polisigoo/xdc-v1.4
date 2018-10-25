@@ -172,7 +172,7 @@ const module = {
          */
         DELETE_EPISODE({commit}, list) {
             commit('BUTTON_LOAD_DELETE', true);
-            axios.post('/api/admin/delete/series/episode/', {list: list}).then(response => {
+            axios.post('/api/admin/delete/series/episode', {list: list}).then(response => {
               if (response.status === 200) {
                 alertify.logPosition('top right');
                 alertify.success('Successful Delete');  

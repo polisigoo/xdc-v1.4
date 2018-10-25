@@ -66,7 +66,7 @@ const module = {
          */
         DELETE_MOVIE({ commit }, list) {
 
-            axios.post('/api/admin/delete/movie/', {list: list}).then(response => {
+            axios.post('/api/admin/delete/movie', {list: list}).then(response => {
                 if (response.status === 200) {
                     alertify.logPosition('top right');
                     alertify.success('Successful Delete');

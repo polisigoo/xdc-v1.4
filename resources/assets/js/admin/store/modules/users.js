@@ -22,7 +22,7 @@ const module = {
          */
         GET_ALL_USERS({commit}) {
             commit('SPINER_LOAD');
-            axios.get('/api/admin/get/users/').then(response => {
+            axios.get('/api/admin/get/users').then(response => {
                 if(response.status === 200){                    
                     commit('SET_USERS', response.data.data);
                     commit('SPINER_CLEAN');
