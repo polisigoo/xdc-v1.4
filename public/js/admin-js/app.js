@@ -70455,7 +70455,7 @@ var module = {
             var commit = _ref4.commit;
 
 
-            axios.post('/api/admin/delete/movie/', { list: list }).then(function (response) {
+            axios.post('/api/admin/delete/movie', { list: list }).then(function (response) {
                 if (response.status === 200) {
                     alertify.logPosition('top right');
                     alertify.success('Successful Delete');
@@ -70942,7 +70942,7 @@ var module = {
             var commit = _ref12.commit;
 
             commit('BUTTON_LOAD_DELETE', true);
-            axios.post('/api/admin/delete/series/episode/', { list: list }).then(function (response) {
+            axios.post('/api/admin/delete/series/episode', { list: list }).then(function (response) {
                 if (response.status === 200) {
                     alertify.logPosition('top right');
                     alertify.success('Successful Delete');
@@ -71499,7 +71499,7 @@ var module = {
             var commit = _ref.commit;
 
             commit('SPINER_LOAD');
-            axios.get('/api/admin/get/users/').then(function (response) {
+            axios.get('/api/admin/get/users').then(function (response) {
                 if (response.status === 200) {
                     commit('SET_USERS', response.data.data);
                     commit('SPINER_CLEAN');
