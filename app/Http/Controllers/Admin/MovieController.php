@@ -422,7 +422,7 @@ class MovieController extends Controller
     {
         foreach ($request->list as $value) {
             $delete = Movie::find($value['id']);
-
+            return response()->json($delete);
             if (is_null($delete)) {
                 return response()->json(['status' => 'faild', 'message' => 'There is no movie found'], 404);
             }
@@ -438,6 +438,7 @@ class MovieController extends Controller
                 Storage::disk('public')->deleteDirectory('videos/' . $delete->m_name . '/');
                 // Remove subtitle
                 Storage::disk('public')->deleteDirectory('subtitles/' . $delete->m_name. '/');
+                return response()->json($delete);
                 $delete->delete();
             }
         }

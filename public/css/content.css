@@ -1,0 +1,118 @@
+.cursor-pointer{
+	cursor: pointer;
+}
+.myheader{
+	position: sticky;
+	top: 0;
+	background-color: #F8F8F8 !important;
+	height: 12%;
+	z-index: 1;
+}
+.myprimary{
+	color: #127CBC;
+}
+.mygrey{
+	color: #989898;
+}
+.box{
+	box-shadow: 0px 2px 3px #ccc;
+}
+.mylogo{
+	width:100px;
+	height: 55px;
+}
+.myavatar{
+	width: 50px;
+	height: 50px;
+}
+.mygrey-light{
+	color: #A7A7A7;
+}
+.mynav{
+	/*width: 200px;*/
+	background-color: #e6e6e6;
+	height: 88%;
+	position: sticky;
+	top: 12%
+}
+.mynav a{
+	font-weight: 400;
+}
+.mynav a:hover{
+	background-color: #fafafa;
+	color: #989898;
+
+}
+.myactive{
+	background-color: #fdfdfd;
+}
+ .main-content{
+ 	/*position: absolute;*/
+ }
+
+.border-dashed{
+	border-style: dashed !important;
+	border-color: #989898 !important;
+}
+.link-border{
+	border: solid 2px #989898 !important;
+}
+.address-border{
+	border: solid 2px #ccc;
+}
+.address-container{
+	border: solid 2px #ccc;
+}
+
+.primary{
+		background-color: #44c5ed !important;
+	}
+.text-black{
+	color: #000;
+}
+.myform-control{
+	padding: 6px 12px;
+	display: block;
+	width: 100%;
+	font-size: 1rem;
+}
+.font-bold{
+	font-weight: 500;
+}	
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+	h2{
+		font-size: 1.2rem !important;
+	}
+
+	h4{
+		font-size: 1rem !important;
+	}
+
+	*{
+		font-size: 0.8rem;
+	}
+	.mylogo{
+		width:50px;
+		height: 25px;
+	}
+	.myavatar{
+		width: 25px;
+		height: 25px;
+	}
+	.myheader{
+		height: 7%;
+	}
+	.mynav{
+		height: 93%;
+		top: 7%;
+	}
+	#sm-100{
+		width: 96% !important;
+	}
+	#w-sm-50{
+		width: 50% !important;
+	}
+}

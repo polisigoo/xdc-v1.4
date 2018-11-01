@@ -132,6 +132,11 @@ let routes = [
         component: require('./views/users/create.vue')
     },
     {
+        path: '/cp/requests',
+        name: 'cp-request',
+        component: require('./views/cp/all.vue')
+    },
+    {
         path: '/tv/manage',
         name: 'tv-manage',
         component: require('./views/tv/manage.vue')

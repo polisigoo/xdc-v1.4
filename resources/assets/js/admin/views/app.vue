@@ -136,6 +136,13 @@
                             </li>
 
                             <li>
+                                <router-link :to="{name: 'cp-request'}" >
+                                    <img src="/themes/default/img/admin/users.svg" alt="users" width="23px">
+                                    <strong>CpRequests</strong>
+                                </router-link>
+                            </li>
+
+                            <li>
                                 <router-link :to="{name:'users-manage'}">
                                     <img src="/themes/default/img/admin/users.svg" alt="users" width="23px">
                                     <strong>Customers</strong>
@@ -300,6 +307,13 @@
                                 <router-link :to="{name:'actors-manage'}">
                                     <img src="/themes/default/img/admin/actors.svg" alt="actors" width="23px">
                                     <strong>Actors</strong>
+                                </router-link>
+                            </li>
+
+                            <li>
+                                <router-link :to="{name: 'cp-request'}" >
+                                    <img src="/themes/default/img/admin/users.svg" alt="users" width="23px">
+                                    <strong>CpRequests</strong>
                                 </router-link>
                             </li>
 

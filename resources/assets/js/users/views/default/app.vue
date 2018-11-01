@@ -104,6 +104,7 @@
 
 
         <router-view :key="getShowPagePath" v-if="getShowPagePath != null"></router-view>
+        <request></request>
 
 
     </div>
@@ -121,7 +122,8 @@
     import ads_notifcation from "./control/notification/ads.vue";
     import footer from "./control/footer.vue";
     import swal from "sweetalert";
-    import searchPage from './control/search/search.vue'
+    import searchPage from './control/search/search.vue';
+    import request from "./control/content-request.vue";
 
     const moment = require("moment");
 
@@ -131,6 +133,7 @@
         components: {
             sidebar,
             navbar,
+            request,
             message,
             'end-footer': footer,
             'ads-notifcation': ads_notifcation,

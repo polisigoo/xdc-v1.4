@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-12 mt-4 mt-lg-4 mt-lg-4 mt-sm-2 col-lg-6">
                     <h5 class="mb-3">PARTNERS</h5>
-                    <a href="#" class="d-block">Content Submission</a>
+                    <a  data-toggle="modal" data-target="#content-request-modal" class="d-block content-link" style="">Content Submission</a>
                     <a href="#" class="d-block">Advertisement</a>
                     <a href="" class="d-block">Partnerships</a>
                 </div>
@@ -70,9 +70,18 @@
         <p class="pl-lg-3 text-center text-lg-left mt-4 odd-color-brighter mb-2">© 2018 R2H Live Mediatech Pvt. Ltd.</p>
         <p class="pl-lg-3 d-none d-lg-block odd-color">{{$t('app_name')}} is the registered trademark of R2H Media Tech Pvt Ltd.</p>
     </footer>
+    <!-- Modal -->
     
 </template>
 <style>
+  .content-link{
+    color: #bfbfbf !important;
+
+  }
+  .content-link:hover{
+    color: #dfdfdf !important;
+    
+  }
    #footer{
         display: flex;
         flex-direction: column;
@@ -170,9 +179,13 @@
     import {
         mapState
     } from "vuex";
+    import request from "./content-request.vue";
 
     export default {
 
+        components: {
+          request,
+        },
         computed: mapState({
             data: state => state.home.footer,
         }),

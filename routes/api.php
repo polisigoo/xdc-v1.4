@@ -197,4 +197,9 @@ Route::middleware('throttle:60,1')->group(function () {
     });
 
 });
+Route::group(['prefix' => 'cp'], function() {
+    Route::get('/request/getunresolved', 'Cp\RequestController@getAllUnresolved');
+    Route::get('/request/accept/{req}', 'Cp\RequestController@accept');
+    Route::get('/request/reject/{req}', 'Cp\RequestController@reject');
+});
 

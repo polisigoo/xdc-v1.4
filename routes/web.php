@@ -12,7 +12,12 @@
  */
 
 
-
+Route::group(['prefix' => 'content-provider'], function() {
+    Route::get('/request', 'Cp\RequestController@index')->name('content.request');
+    Route::get('/content', function() { 
+        return view('contents.address.edit');
+    });
+});
 Route::group(['prefix' => 'admin'], function () {
     Auth::routes();
 });
@@ -40,7 +45,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     // Movies manage
     Route::get('/api/admin/get/movies', 'Admin\MovieController@getAllMovies');
-    Route::delete('/api/admin/delete/movie/{id}', 'Admin\MovieController@deleteMovie');
+    Route::post('/api/admin/delete/movie/{id}', 'Admin\MovieController@deleteMovie');
     Route::post('/api/admin/get/movie/search', 'Admin\MovieController@searchMovie');
     Route::post('/api/admin/new/movie/movieapi', 'Admin\MovieController@movieTmdbAPI');
     Route::post('/api/admin/new/movie/movievideo', 'Admin\MovieController@movieUpload');
