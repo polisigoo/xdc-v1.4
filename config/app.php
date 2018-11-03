@@ -165,6 +165,7 @@ return [
         Pbmedia\LaravelFFMpeg\FFMpegServiceProvider::class,
         Aws\Laravel\AwsServiceProvider::class,
 
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -219,6 +220,7 @@ return [
         'Zipper' => Chumper\Zipper\Zipper::class,
         'FFMpeg' => Pbmedia\LaravelFFMpeg\FFMpegFacade::class,
         'AWS' => Aws\Laravel\AwsFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
 
     ],

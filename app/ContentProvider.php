@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class ContentProvider extends Authenticatable
 {
-    use Notifiable,Uuids;
+    use Notifiable;
 
     /**
      * Indicates if the IDs are auto-incrementing.

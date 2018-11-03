@@ -802,7 +802,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       show_alert_services: false,
       data_services_error: [],
       notif_report: 0,
-      notif_support: 0
+      notif_support: 0,
+      reqs: []
     };
   },
 
@@ -820,6 +821,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         _this.permission = response.data.data.role_id;
       }
+    });
+
+    axios.get("api/cp/request/getunresolved").then(function (res) {
+      _this.reqs = res.data;
     });
 
     // Check services
@@ -1172,8 +1177,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_loader__ = __webpack_require__("./resources/assets/js/admin/views/components/loader.vue");
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_loader__ = __webpack_require__("./resources/assets/js/admin/views/components/loader.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_loader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_loader__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1242,8 +1266,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            rejId: "",
+            rejecting: false,
+            accepting: false,
+            rejMsg: "",
             reqs: [],
             spinner_loading: false
+
         };
     },
 
@@ -1264,26 +1293,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         accept: function accept(id) {
             var _this2 = this;
 
+            this.accepting = true;
             axios.get("api/cp/request/accept/" + id).then(function (res) {
                 axios.get("api/cp/request/getunresolved").then(function (res) {
-                    _this2.spinner_loading = false;
+                    _this2.accepting = false;
                     _this2.reqs = res.data;
                 });
             });
         },
-        reject: function reject(id) {
+        reject: function reject() {
             var _this3 = this;
 
-            axios.get("api/cp/request/reject/" + id).then(function (res) {
+            if (this.rejMsg.trim() == "") {
+                return;
+            }
+            this.rejecting = true;
+            axios.get("api/cp/request/reject/" + this.rejId + "/" + this.rejMsg).then(function (res) {
                 axios.get("api/cp/request/getunresolved").then(function (res) {
                     _this3.spinner_loading = false;
                     _this3.reqs = res.data;
+                    _this3.rejecting = false;
+                    $('#reject-modal').modal('hide');
                 });
             });
+        },
+        attach: function attach(id) {
+            this.rejId = id;
+            $('#reject-modal').modal('show');
         }
     }
 
 });
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
@@ -61009,7 +61050,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "alt": "users",
       "width": "23px"
     }
-  }), _vm._v(" "), _c('strong', [_vm._v("CpRequests")])])], 1), _vm._v(" "), _c('li', [_c('router-link', {
+  }), _vm._v(" "), _c('strong', [_vm._v("CpRequests")]), (_vm.reqs.length > 0) ? _c('span', {
+    staticClass: "badge ml-4",
+    staticStyle: {
+      "background-color": "red"
+    }
+  }, [_vm._v(_vm._s(_vm.reqs.length))]) : _vm._e()])], 1), _vm._v(" "), _c('li', [_c('router-link', {
     attrs: {
       "to": {
         name: 'users-manage'
@@ -61327,7 +61373,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "alt": "users",
       "width": "23px"
     }
-  }), _vm._v(" "), _c('strong', [_vm._v("CpRequests")])])], 1), _vm._v(" "), _c('li', [_c('router-link', {
+  }), _vm._v(" "), _c('strong', [_vm._v("CpRequests")]), _vm._v(" "), (_vm.reqs.length > 0) ? _c('span', {
+    staticClass: "badge ml-2",
+    staticStyle: {
+      "background-color": "red"
+    }
+  }, [_vm._v(_vm._s(_vm.reqs.length))]) : _vm._e()])], 1), _vm._v(" "), _c('li', [_c('router-link', {
     attrs: {
       "to": {
         name: 'report-manage'
@@ -65067,9 +65118,91 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "container"
   }, [(_vm.spinner_loading) ? _c('div', {
     staticClass: "spinner-load"
-  }, [_c('Loader')], 1) : _vm._e(), _vm._v(" "), (!_vm.spinner_loading) ? _c('div', {
+  }, [_c('Loader')], 1) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "modal fade",
+    attrs: {
+      "id": "reject-modal",
+      "tabindex": "-1",
+      "role": "dialog",
+      "aria-labelledby": "exampleModalLabel",
+      "aria-hidden": "true"
+    }
+  }, [_c('div', {
+    staticClass: "modal-dialog",
+    staticStyle: {
+      "margin-top": "8%"
+    },
+    attrs: {
+      "role": "document"
+    }
+  }, [_c('div', {
+    staticClass: "modal-content w-75"
+  }, [_c('div', {
+    staticClass: " box py-3 px-4"
+  }, [_c('label', [_vm._v("Enter a rejection message")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.rejMsg),
+      expression: "rejMsg"
+    }],
+    staticClass: "form-control",
+    staticStyle: {
+      "resize": "none",
+      "height": "100px",
+      "padding": "10px"
+    },
+    attrs: {
+      "id": "reject"
+    },
+    domProps: {
+      "value": (_vm.rejMsg)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.rejMsg = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.rejId),
+      expression: "rejId"
+    }],
+    attrs: {
+      "type": "hidden",
+      "name": "id"
+    },
+    domProps: {
+      "value": (_vm.rejId)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.rejId = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "d-flex mt-3 justify-content-end"
+  }, [(!_vm.rejecting) ? _c('button', {
+    staticClass: "btn btn-sm btn-danger",
+    on: {
+      "click": function($event) {
+        _vm.reject()
+      }
+    }
+  }, [_vm._v("Reject")]) : _vm._e(), _vm._v(" "), (_vm.rejecting) ? _c('button', {
+    staticClass: "btn btn-sm btn-danger",
+    on: {
+      "click": function($event) {
+        _vm.reject()
+      }
+    }
+  }, [_vm._v("Loading...")]) : _vm._e()])])])])]), _vm._v(" "), (!_vm.spinner_loading) ? _c('div', {
     staticClass: "row pl-md-5 pl-0"
-  }, _vm._l((_vm.reqs), function(req) {
+  }, [_vm._l((_vm.reqs), function(req) {
     return _c('div', {
       staticClass: "col-lg-9 col-md-11 col-12 box mt-3 py-3"
     }, [_c('div', {
@@ -65094,22 +65227,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "ml-3 text-capitalize"
     }, [_vm._v(_vm._s(req.content_types))])]), _vm._v(" "), _c('div', {
       staticClass: "d-flex justify-content-end"
-    }, [_c('button', {
+    }, [(!_vm.accepting) ? _c('button', {
       staticClass: "btn btn-primary btn-sm",
       on: {
         "click": function($event) {
           _vm.accept(req.id)
         }
       }
-    }, [_vm._v("Accept")]), _vm._v(" "), _c('button', {
+    }, [_vm._v("Accept")]) : _vm._e(), _vm._v(" "), (_vm.accepting) ? _c('button', {
+      staticClass: "btn btn-secondary btn-sm"
+    }, [_vm._v("Loading..")]) : _vm._e(), _vm._v(" "), _c('button', {
       staticClass: "btn btn-danger btn-sm ml-3",
+      attrs: {
+        "data-toggle": "modal",
+        "data-target": "reject-modal"
+      },
       on: {
         "click": function($event) {
-          _vm.reject(req.id)
+          _vm.attach(req.id)
         }
       }
     }, [_vm._v("Reject")])])])
-  })) : _vm._e()])
+  }), _vm._v(" "), (_vm.reqs.length == 0) ? _c('div', {
+    staticClass: "col-lg-9 col-md-11 col-12 box mt-3 py-3"
+  }, [_c('h4', [_vm._v("No Content Provider Request")])]) : _vm._e()], 2) : _vm._e()])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', {
     staticClass: "col-4"

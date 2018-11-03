@@ -1,5 +1,6 @@
 <?php
  use App\Events\EventTrigger;
+ // use \PDF;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,9 +12,13 @@
 |
  */
 
-
+Route::get('test-blad','Cp\RequestController@test');
+Route::get('test-blade',function(){
+    $data['cp'] = \App\ContentProvider::where('email', 'jude@gmail.com')->first();
+    return view('docs.cpagg', $data);
+});
 Route::group(['prefix' => 'content-provider'], function() {
-    Route::get('/request', 'Cp\RequestController@index')->name('content.request');
+    Route::post('/request', 'Cp\RequestController@index')->name('content.request');
     Route::get('/content', function() { 
         return view('contents.address.edit');
     });

@@ -2893,7 +2893,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function($) {//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3025,31 +3062,81 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "request",
   data: function data() {
-    return {};
+    return {
+      countries: [],
+      states: [],
+      country: 1,
+      image: "",
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get("api/countries/all").then(function (res) {
+      // this.spinner_loading = false;
+      _this.countries = res.data;
+      console.log(_this.countries);
+      axios.get("/api/country/" + _this.countries[0].id + "/states").then(function (resp) {
+        _this.states = resp.data;
+        console.log(_this.states);
+      });
+    });
   },
 
+  watch: {
+    // whenever question changes, this function will run
+    country: function country() {
+      var _this2 = this;
+
+      axios.get("/api/country/" + this.country + "/states").then(function (resp) {
+        _this2.states = resp.data;
+        console.log(_this2.states);
+      });
+    }
+  },
   methods: {
     sendReq: function sendReq(e) {
       e.preventDefault();
       var myform = document.querySelector('#reqForm');
       var data = new FormData(myform);
-      if (data.getAll('content_type[]') == "") {
-        alert('You need to select at least one content type');
+      if (data.getAll('content_type[]') == "" || !document.querySelector('#passport').files[0]) {
+        alert('Some fields are empty');
         return;
       }
-      $.ajax({
-        url: "/content-provider/request",
-        data: $('#reqForm').serialize(),
-        success: function success(data) {
-          alert(data.message);
-        },
-        dataType: "json"
+      axios.post('/content-provider/request', data).then(function (res) {
+        console.log(res.data);
       });
+      //  		$.ajax({
+      //  			type: "POST",
+      // 	url: "/content-provider/request",
+      // 	data: $('#reqForm').serialize(),
+      // 	success: function(data){alert(data.message)},
+      // 	dataType: "json"
+      // })
+    },
+    selectInp: function selectInp() {
+      document.querySelector('#passport').click();
+      // alert('clicked');
+    },
+    imageHandler: function imageHandler() {
+      var img = document.querySelector('#passimg');
+      var file = document.querySelector('#passport').files[0];
+      if (file.type.startsWith('image/')) {
+        img.file = file;
+        img.classList = "d-block mb-3 p-1 ml-3";
+        var reader = new FileReader();
+        reader.onload = function (a) {
+          return function (e) {
+            a.src = e.target.result;
+          };
+        }(img);
+        reader.readAsDataURL(file);
+      }
     }
   }
 
 });
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
@@ -53240,12 +53327,111 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('form', {
     staticClass: "content-request",
     attrs: {
+      "enctype": "multipart/form-data",
       "id": "reqForm"
     },
     on: {
       "submit": _vm.sendReq
     }
-  }, [_vm._m(1, false, false), _vm._v(" "), _vm._m(2, false, false), _vm._v(" "), _vm._m(3, false, false), _vm._v(" "), _vm._m(4, false, false), _vm._v(" "), _vm._m(5, false, false), _vm._v(" "), _vm._m(6, false, false), _vm._v(" "), _vm._m(7, false, false)])]), _vm._v(" "), _vm._m(8, false, false)])])])
+  }, [_c('input', {
+    attrs: {
+      "type": "hidden",
+      "name": "_token"
+    },
+    domProps: {
+      "value": _vm.csrf
+    }
+  }), _vm._v(" "), _vm._m(1, false, false), _vm._v(" "), _vm._m(2, false, false), _vm._v(" "), _vm._m(3, false, false), _vm._v(" "), _vm._m(4, false, false), _vm._v(" "), _vm._m(5, false, false), _vm._v(" "), _c('div', {
+    staticClass: "d-flex"
+  }, [_c('div', {
+    staticClass: "form-group col-6"
+  }, [_c('label', {
+    staticClass: "text-black"
+  }, [_vm._v("Country")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.country),
+      expression: "country"
+    }],
+    staticClass: "myform-control",
+    attrs: {
+      "name": "country"
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.country = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, _vm._l((_vm.countries), function(country) {
+    return _c('option', {
+      domProps: {
+        "value": country.id
+      }
+    }, [_vm._v(_vm._s(country.name))])
+  }))]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-6"
+  }, [_c('label', {
+    staticClass: "text-black"
+  }, [_vm._v("State")]), _vm._v(" "), _c('select', {
+    staticClass: "myform-control",
+    attrs: {
+      "name": "state"
+    }
+  }, _vm._l((_vm.states), function(state) {
+    return _c('option', {
+      domProps: {
+        "value": state.name
+      }
+    }, [_vm._v(_vm._s(state.name))])
+  }))])]), _vm._v(" "), _vm._m(6, false, false), _vm._v(" "), _vm._m(7, false, false), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-12"
+  }, [_c('label', {
+    staticClass: "text-black d-block"
+  }, [_vm._v("Passport Photo")]), _vm._v(" "), _c('img', {
+    staticClass: "d-none mb-3 p-1",
+    staticStyle: {
+      "border": "2px solid #a3a3a3"
+    },
+    attrs: {
+      "src": "",
+      "id": "passimg",
+      "width": "150px",
+      "height": "150px"
+    }
+  }), _vm._v(" "), _c('button', {
+    staticClass: "w-50 py-2",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.selectInp
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-plus"
+  })]), _vm._v(" "), _c('input', {
+    staticClass: "myform-control d-none",
+    staticStyle: {
+      "border": "1px solid #ccc"
+    },
+    attrs: {
+      "type": "file",
+      "accept": "image/*",
+      "id": "passport",
+      "name": "passport"
+    },
+    on: {
+      "change": function($event) {
+        _vm.imageHandler()
+      }
+    }
+  })]), _vm._v(" "), _vm._m(8, false, false), _vm._v(" "), _vm._m(9, false, false)])]), _vm._v(" "), _vm._m(10, false, false)])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header req-header primary"
@@ -53320,6 +53506,52 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "required": ""
     }
   })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group col-12"
+  }, [_c('label', {
+    staticClass: "text-black text-capitalize"
+  }, [_vm._v("Address")]), _vm._v(" "), _c('input', {
+    staticClass: "myform-control mb-3",
+    attrs: {
+      "type": "text",
+      "name": "address1",
+      "placeholder": "Address Line1: Apartment/Complex",
+      "required": ""
+    }
+  }), _vm._v(" "), _c('input', {
+    staticClass: "myform-control",
+    attrs: {
+      "type": "text",
+      "name": "address2",
+      "placeholder": "Address Line2: Street Name",
+      "required": ""
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "d-flex"
+  }, [_c('div', {
+    staticClass: "form-group col-6"
+  }, [_c('label', {
+    staticClass: "text-black"
+  }, [_vm._v("City")]), _vm._v(" "), _c('input', {
+    staticClass: "myform-control",
+    attrs: {
+      "type": "text",
+      "name": "city"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-6"
+  }, [_c('label', {
+    staticClass: "text-black"
+  }, [_vm._v("Zip Code")]), _vm._v(" "), _c('input', {
+    staticClass: "myform-control",
+    attrs: {
+      "type": "text",
+      "name": "zip"
+    }
+  })])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-group pt-2"
@@ -53454,7 +53686,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Talk Shows\n\t\t\t        \t\t\t\t\t\n\t\t\t        \t\t\t\t")])])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "d-flex justify-content-start col-12"
+    staticClass: "d-flex justify-content-start"
   }, [_c('div', {
     staticClass: "col-md-4 col-5"
   }, [_c('button', {
@@ -53471,7 +53703,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "d-flex col-12 pt-4"
   }, [_c('p', {
     staticClass: "text-black col-12 mt-3"
-  }, [_vm._v("All of the above field types are mandatory")])])
+  }, [_c('span', {
+    staticClass: "text-danger"
+  }, [_vm._v("*")]), _vm._v("All of the above field types are mandatory")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-footer"

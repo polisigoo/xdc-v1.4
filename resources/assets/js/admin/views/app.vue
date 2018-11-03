@@ -138,7 +138,7 @@
                             <li>
                                 <router-link :to="{name: 'cp-request'}" >
                                     <img src="/themes/default/img/admin/users.svg" alt="users" width="23px">
-                                    <strong>CpRequests</strong>
+                                    <strong>CpRequests</strong><span class="badge ml-4" style="background-color: red;" v-if="reqs.length > 0">{{reqs.length}}</span>
                                 </router-link>
                             </li>
 
@@ -313,7 +313,7 @@
                             <li>
                                 <router-link :to="{name: 'cp-request'}" >
                                     <img src="/themes/default/img/admin/users.svg" alt="users" width="23px">
-                                    <strong>CpRequests</strong>
+                                    <strong>CpRequests</strong> <span class="badge ml-2" style="background-color: red;" v-if="reqs.length > 0">{{reqs.length}}</span>
                                 </router-link>
                             </li>
 
@@ -422,7 +422,8 @@ export default {
       show_alert_services: false,
       data_services_error: [],
       notif_report: 0,
-      notif_support: 0
+      notif_support: 0,
+      reqs: []
     };
   },
 
@@ -442,6 +443,10 @@ export default {
 
         this.permission = response.data.data.role_id;
       }
+    });
+
+    axios.get("api/cp/request/getunresolved").then(res => {
+        this.reqs = res.data;
     });
 
     // Check services

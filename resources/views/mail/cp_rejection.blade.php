@@ -38,19 +38,12 @@
     <!-- END Header -->
 
     <div class="body">
-        <p>Hello from {{ config('app.name') }}!</p>
-        <p>{{$req->email}} is requesting to become a content provider</p>
+        <p>Hello {{ ucwords($req->first_name)  }}!</p>
+        <p>Your request to become a content provider has been received but has been rejected.</p>
+        <p>Reasons for the rejection are listed below</p>
         <hr>
-        <p>Name: {{$req->first_name}} {{$req->last_name}}</p>
-        <p>Company Name: {{$req->company_name}}</p>
-        <p>Mobile Number: {{$req->mobile_number}}</p>
-        <p>Content Types: {{ucwords($req->content_types) }}</p>
-        <p>Date: {{$req->created_at}}</p>
+        <p>{{$msg}}</p>
 
-        <div style="margin-top: 2rem; display: flex; ">
-        	<a href="{{config('app.url')}}/administrator#/cp/requests" style="padding: 8px 25px; color: white; background-color: green; text-decoration: none; border: solid 1px #00af00;">Accept</a>
-        	<a href="{{config('app.url')}}/administrator#/cp/requests" style=" margin-left: 15px; color:white; padding: 8px 25px; text-decoration: none; background-color: red; border: solid 1px #af0000;"> Reject</a>
-        </div>
     </div>
     <!-- END BODY -->
 

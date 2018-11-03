@@ -3,6 +3,21 @@
 		<div class="spinner-load" v-if="spinner_loading">
 	        <Loader></Loader>
 	    </div>
+	    <div class="modal fade" id="reject-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  			<div class="modal-dialog" role="document" style="margin-top: 8%">
+	    		<div class="modal-content w-75">
+			    	<div class=" box py-3 px-4">
+			    		<label>Enter a rejection message</label>
+				    	<textarea id="reject" v-model="rejMsg" class="form-control" style="resize: none; height: 100px; padding: 10px;"></textarea> 
+				    	<input type="hidden" name="id" v-model="rejId">
+				    	<div class="d-flex mt-3 justify-content-end">
+				    		<button class="btn btn-sm btn-danger" v-if="!rejecting" @click="reject()">Reject</button>
+				    		<button class="btn btn-sm btn-danger" v-if="rejecting" @click="reject()">Loading...</button>
+				    	</div>
+			    	</div>
+			    </div>
+			</div>
+		</div>
 		<div v-if="!spinner_loading" class="row pl-md-5 pl-0">
 			<div v-for="req in reqs" class="col-lg-9 col-md-11 col-12 box mt-3 py-3">
 				<div class="d-flex f-2">
@@ -26,9 +41,13 @@
 					<p class="ml-3 text-capitalize">{{req.content_types}}</p>
 				</div>
 				<div class="d-flex justify-content-end">
-					<button class="btn btn-primary btn-sm" @click="accept(req.id)">Accept</button>
-					<button class="btn btn-danger btn-sm ml-3" @click="reject(req.id)">Reject</button>
+					<button class="btn btn-primary btn-sm" v-if ="!accepting" @click="accept(req.id)">Accept</button>
+					<button class="btn btn-secondary btn-sm" v-if ="accepting" >Loading..</button>
+					<button class="btn btn-danger btn-sm ml-3" data-toggle="modal" data-target="reject-modal" @click="attach(req.id)">Reject</button>
 				</div>
+			</div>
+			<div v-if="reqs.length == 0" class="col-lg-9 col-md-11 col-12 box mt-3 py-3">
+				<h4>No Content Provider Request</h4>
 			</div>
 		</div>
 	</div>
@@ -66,8 +85,13 @@
 	export default{
 		data() {
 	        return {
+	        	rejId: "",
+	        	rejecting : false,
+	        	accepting : false,
+	            rejMsg: "",
 	            reqs: [],
 	            spinner_loading: false,
+
 	        };
 	    },
 	    components: {
@@ -82,20 +106,29 @@
 	    },
 	    methods: {
 	    	accept(id){
+	    		this.accepting = true;
 		    	axios.get("api/cp/request/accept/"+ id).then(res => {
 		    		axios.get("api/cp/request/getunresolved").then(res => {
-			    		this.spinner_loading = false;
+			    		this.accepting = false;
 			    		this.reqs = res.data;
 			        });
 		        });
 	    	},
-	    	reject(id){
-	    		axios.get("api/cp/request/reject/"+ id).then(res => {
+	    	reject(){
+	    		if ( this.rejMsg.trim()  == "") {return}
+	    		this.rejecting = true;
+	    		axios.get("api/cp/request/reject/"+ this.rejId+ "/" + this.rejMsg).then(res => {
 		    		axios.get("api/cp/request/getunresolved").then(res => {
 			    		this.spinner_loading = false;
 			    		this.reqs = res.data;
+			    		this.rejecting = false;
+			    		$('#reject-modal').modal('hide');
 			        });
 		        });
+	    	},
+	    	attach(id){
+	    		this.rejId = id;
+	    		$('#reject-modal').modal('show');
 	    	}
 	    }
 	    

@@ -200,6 +200,9 @@ Route::middleware('throttle:60,1')->group(function () {
 Route::group(['prefix' => 'cp'], function() {
     Route::get('/request/getunresolved', 'Cp\RequestController@getAllUnresolved');
     Route::get('/request/accept/{req}', 'Cp\RequestController@accept');
-    Route::get('/request/reject/{req}', 'Cp\RequestController@reject');
+    Route::get('/request/reject/{req}/{msg}', 'Cp\RequestController@reject');
 });
+
+Route::get('/countries/all', 'CountriesController@getAll');
+Route::get('/country/{id}/states', 'CountriesController@getStates')->where('id', '^[\w-]*$');;
 
