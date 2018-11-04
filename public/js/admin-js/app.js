@@ -1179,6 +1179,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_loader__ = __webpack_require__("./resources/assets/js/admin/views/components/loader.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_loader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_loader__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert__ = __webpack_require__("./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_sweetalert__);
 //
 //
 //
@@ -1261,6 +1263,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1290,11 +1293,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        accept: function accept(id) {
+        accept: function accept(id, name) {
             var _this2 = this;
 
             this.accepting = true;
             axios.get("api/cp/request/accept/" + id).then(function (res) {
+                __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Successful", name + " is now a content provider", "success");
                 axios.get("api/cp/request/getunresolved").then(function (res) {
                     _this2.accepting = false;
                     _this2.reqs = res.data;
@@ -1309,6 +1313,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             this.rejecting = true;
             axios.get("api/cp/request/reject/" + this.rejId + "/" + this.rejMsg).then(function (res) {
+                __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Successful!", "Rejected successfully", "success");
                 axios.get("api/cp/request/getunresolved").then(function (res) {
                     _this3.spinner_loading = false;
                     _this3.reqs = res.data;
@@ -65231,7 +65236,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "btn btn-primary btn-sm",
       on: {
         "click": function($event) {
-          _vm.accept(req.id)
+          _vm.accept(req.id, req.first_name + ' ' + req.last_name)
         }
       }
     }, [_vm._v("Accept")]) : _vm._e(), _vm._v(" "), (_vm.accepting) ? _c('button', {

@@ -127,7 +127,8 @@
 					</div>
 					<div class="d-flex justify-content-start">
 						<div class="col-md-4 col-5">
-							<button class="primary btn rounded-0 btn-sm w-100 text-white" style="cursor: pointer;" type="submit">Submit</button>
+							<button class="primary btn rounded-0 btn-sm w-100 text-white" v-if="!loading" style="cursor: pointer;" type="submit">Submit</button>
+							<button class="primary btn rounded-0 btn-sm w-100 text-white" v-if="loading" type="button">Loading...</button>
 						</div>
 						
 					</div> 
@@ -138,7 +139,7 @@
 		        </form>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" id="mod-close" class="btn btn-secondary" data-dismiss="modal">Close</button>
 		      </div>
 		    </div>
 	  	</div>
@@ -164,79 +165,83 @@
 	}
 </style>
 <script>
-  export default {
-    name: "request",
-    data() {
-    	return {
-    		countries: [],
-    		states:[],
-    		country: 1,
-    		image: "",
-    		csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-    	};
-    },
-    created() {
-    	axios.get("api/countries/all").then(res => {
-    		// this.spinner_loading = false;
-    		this.countries = res.data;
-    		console.log(this.countries);
-    		axios.get("/api/country/"+this.countries[0].id+"/states").then(resp => {
-    			this.states = resp.data;
-    			console.log(this.states);
-    		});
-        });
-    },
-	watch: {
-		// whenever question changes, this function will run
-		country(){
-			axios.get("/api/country/"+this.country+"/states").then(resp => {
-    			this.states = resp.data;
-    			console.log(this.states);
-    		});
-		}
-	},
-    methods: {
-    	sendReq(e){
-    		e.preventDefault();
-    		var myform = document.querySelector('#reqForm');
-    		var data = new FormData(myform);
-    		if (data.getAll('content_type[]') == "" || !document.querySelector('#passport').files[0] ) {
-    			alert('Some fields are empty');
-    			return;
-    		}
-    		axios.post('/content-provider/request', data).then(res =>{
-    			console.log(res.data);
-    		});
-   //  		$.ajax({
-   //  			type: "POST",
-			// 	url: "/content-provider/request",
-			// 	data: $('#reqForm').serialize(),
-			// 	success: function(data){alert(data.message)},
-			// 	dataType: "json"
-			// })
-    		
-    	},
-    	selectInp(){
-    		document.querySelector('#passport').click();
-    		// alert('clicked');
-    	},
-    	imageHandler(){
-    		let img = document.querySelector('#passimg');
-    		let file = document.querySelector('#passport').files[0];
-		    if (file.type.startsWith('image/')) {
-				img.file = file;
-				img.classList = "d-block mb-3 p-1 ml-3"
-				var reader = new FileReader();
-				reader.onload = (function(a){
-					return function(e){
-						a.src = e.target.result
-					}
-				})(img)
-				reader.readAsDataURL(file);
-		    }
+	import swal from 'sweetalert';
+	export default {
+		name: "request",
+		data() {
+			return {
+				countries: [],
+				states:[],
+				country: 1,
+				image: "",
+				loading: false,
+				csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+			};
+		},
+		created() {
+			axios.get("api/countries/all").then(res => {
+				// this.spinner_loading = false;
+				this.countries = res.data;
+				console.log(this.countries);
+				axios.get("/api/country/"+this.countries[0].id+"/states").then(resp => {
+					this.states = resp.data;
+					console.log(this.states);
+				});
+		    });
+		},
+		watch: {
+			// whenever question changes, this function will run
+			country(){
+				axios.get("/api/country/"+this.country+"/states").then(resp => {
+					this.states = resp.data;
+					console.log(this.states);
+				});
+			}
+		},
+		methods: {
+			sendReq(e){
+				e.preventDefault();
+				var myform = document.querySelector('#reqForm');
+				var data = new FormData(myform);
+				this.loading = true;
+				if (data.getAll('content_type[]') == "") {
+					swal("Oops!", "You must select at least one content type", "error");
+					this.loading = false;
+					return;
+					
+				}
+				if (!document.querySelector('#passport').files[0]) {
+					swal("Oops!", "You must upload a passport photograph", "error");
+					this.loading = false
+					return;
+				}
+				axios.post('/content-provider/request', data).then(res =>{
+					swal("Successful", res.data.message, "success");
+					this.loading = false;
+					document.querySelector('#mod-close').click();
+				});
+			},
+			selectInp(){
+				document.querySelector('#passport').click();
+				// alert('clicked');
+			},
+			imageHandler(){
+				let img = document.querySelector('#passimg');
+				let file = document.querySelector('#passport').files[0];
+			    if (file.type.startsWith('image/')) {
+					img.file = file;
+					img.classList = "d-block mb-3 p-1 ml-3"
+					var reader = new FileReader();
+					reader.onload = (function(a){
+						return function(e){
+							a.src = e.target.result
+						}
+					})(img)
+					reader.readAsDataURL(file);
+			    }
 
+			}
 		}
-    }
-    
-  }
+
+	}
 </script>

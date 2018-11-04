@@ -52,7 +52,7 @@ class RequestController extends Controller
     	//Notify Admin
     	$admin = Admin::first();
     	$admin->notify(new ReqNot($req));
-    	Mail::to('james@xaansa.com')->send(new ReqMail($cp_req));
+    	Mail::to('anupam@xaansa.com')->queue(new ReqMail($cp_req));
     	return response()->json(['message' => 'Your request has been sent successfully.']);
     	
     }
@@ -91,7 +91,7 @@ class RequestController extends Controller
         $agg = $this->genAgreementPdf($cp);
 
         //Notify Requester
-        Mail::to($cp_req->email)->send(new CpWelcome($cp_req, $pass,$pdf, $agg));
+        Mail::to($cp_req->email)->queue(new CpWelcome($cp_req, $pass,$pdf, $agg));
 
     	return response()->json(['message' => 'successful']);
     }
@@ -102,7 +102,7 @@ class RequestController extends Controller
     	$cp_req->save();
 
     	//Notify Requester
-    	Mail::to($cp_req->email)->send(new CpRejection($cp_req, $msg));
+    	Mail::to($cp_req->email)->queue(new CpRejection($cp_req, $msg));
     	return response()->json(['message' => 'successful']);
     }
 
@@ -117,7 +117,7 @@ class RequestController extends Controller
     public function genAgreementPdf($req){
         $data['cp'] = $req;
         $path = "storage/".$data['cp']->id."-agreement.pdf";
-        \PDF::loadView('docs.cpagreement', $data)->setWarnings(false)->save($path);
+        \PDF::loadView('docs.cpagg', $data)->setWarnings(false)->save($path);
         return $path;
     }
 

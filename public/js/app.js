@@ -2893,6 +2893,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert__ = __webpack_require__("./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert__);
 //
 //
 //
@@ -3058,83 +3060,90 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "request",
-  data: function data() {
-    return {
-      countries: [],
-      states: [],
-      country: 1,
-      image: "",
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    };
-  },
-  created: function created() {
-    var _this = this;
+	name: "request",
+	data: function data() {
+		return {
+			countries: [],
+			states: [],
+			country: 1,
+			image: "",
+			loading: false,
+			csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+		};
+	},
+	created: function created() {
+		var _this = this;
 
-    axios.get("api/countries/all").then(function (res) {
-      // this.spinner_loading = false;
-      _this.countries = res.data;
-      console.log(_this.countries);
-      axios.get("/api/country/" + _this.countries[0].id + "/states").then(function (resp) {
-        _this.states = resp.data;
-        console.log(_this.states);
-      });
-    });
-  },
+		axios.get("api/countries/all").then(function (res) {
+			// this.spinner_loading = false;
+			_this.countries = res.data;
+			console.log(_this.countries);
+			axios.get("/api/country/" + _this.countries[0].id + "/states").then(function (resp) {
+				_this.states = resp.data;
+				console.log(_this.states);
+			});
+		});
+	},
 
-  watch: {
-    // whenever question changes, this function will run
-    country: function country() {
-      var _this2 = this;
+	watch: {
+		// whenever question changes, this function will run
+		country: function country() {
+			var _this2 = this;
 
-      axios.get("/api/country/" + this.country + "/states").then(function (resp) {
-        _this2.states = resp.data;
-        console.log(_this2.states);
-      });
-    }
-  },
-  methods: {
-    sendReq: function sendReq(e) {
-      e.preventDefault();
-      var myform = document.querySelector('#reqForm');
-      var data = new FormData(myform);
-      if (data.getAll('content_type[]') == "" || !document.querySelector('#passport').files[0]) {
-        alert('Some fields are empty');
-        return;
-      }
-      axios.post('/content-provider/request', data).then(function (res) {
-        console.log(res.data);
-      });
-      //  		$.ajax({
-      //  			type: "POST",
-      // 	url: "/content-provider/request",
-      // 	data: $('#reqForm').serialize(),
-      // 	success: function(data){alert(data.message)},
-      // 	dataType: "json"
-      // })
-    },
-    selectInp: function selectInp() {
-      document.querySelector('#passport').click();
-      // alert('clicked');
-    },
-    imageHandler: function imageHandler() {
-      var img = document.querySelector('#passimg');
-      var file = document.querySelector('#passport').files[0];
-      if (file.type.startsWith('image/')) {
-        img.file = file;
-        img.classList = "d-block mb-3 p-1 ml-3";
-        var reader = new FileReader();
-        reader.onload = function (a) {
-          return function (e) {
-            a.src = e.target.result;
-          };
-        }(img);
-        reader.readAsDataURL(file);
-      }
-    }
-  }
+			axios.get("/api/country/" + this.country + "/states").then(function (resp) {
+				_this2.states = resp.data;
+				console.log(_this2.states);
+			});
+		}
+	},
+	methods: {
+		sendReq: function sendReq(e) {
+			var _this3 = this;
+
+			e.preventDefault();
+			var myform = document.querySelector('#reqForm');
+			var data = new FormData(myform);
+			this.loading = true;
+			if (data.getAll('content_type[]') == "") {
+				__WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Oops!", "You must select at least one content type", "error");
+				this.loading = false;
+				return;
+			}
+			if (!document.querySelector('#passport').files[0]) {
+				__WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Oops!", "You must upload a passport photograph", "error");
+				this.loading = false;
+				return;
+			}
+			axios.post('/content-provider/request', data).then(function (res) {
+				__WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Successful", res.data.message, "success");
+				_this3.loading = false;
+				document.querySelector('#mod-close').click();
+			});
+		},
+		selectInp: function selectInp() {
+			document.querySelector('#passport').click();
+			// alert('clicked');
+		},
+		imageHandler: function imageHandler() {
+			var img = document.querySelector('#passimg');
+			var file = document.querySelector('#passport').files[0];
+			if (file.type.startsWith('image/')) {
+				img.file = file;
+				img.classList = "d-block mb-3 p-1 ml-3";
+				var reader = new FileReader();
+				reader.onload = function (a) {
+					return function (e) {
+						a.src = e.target.result;
+					};
+				}(img);
+				reader.readAsDataURL(file);
+			}
+		}
+	}
 
 });
 
@@ -53431,7 +53440,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.imageHandler()
       }
     }
-  })]), _vm._v(" "), _vm._m(8, false, false), _vm._v(" "), _vm._m(9, false, false)])]), _vm._v(" "), _vm._m(10, false, false)])])])
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "d-flex justify-content-start"
+  }, [_c('div', {
+    staticClass: "col-md-4 col-5"
+  }, [(!_vm.loading) ? _c('button', {
+    staticClass: "primary btn rounded-0 btn-sm w-100 text-white",
+    staticStyle: {
+      "cursor": "pointer"
+    },
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v("Submit")]) : _vm._e(), _vm._v(" "), (_vm.loading) ? _c('button', {
+    staticClass: "primary btn rounded-0 btn-sm w-100 text-white",
+    attrs: {
+      "type": "button"
+    }
+  }, [_vm._v("Loading...")]) : _vm._e()])]), _vm._v(" "), _vm._m(8, false, false)])]), _vm._v(" "), _vm._m(9, false, false)])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header req-header primary"
@@ -53686,20 +53712,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Talk Shows\n\t\t\t        \t\t\t\t\t\n\t\t\t        \t\t\t\t")])])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "d-flex justify-content-start"
-  }, [_c('div', {
-    staticClass: "col-md-4 col-5"
-  }, [_c('button', {
-    staticClass: "primary btn rounded-0 btn-sm w-100 text-white",
-    staticStyle: {
-      "cursor": "pointer"
-    },
-    attrs: {
-      "type": "submit"
-    }
-  }, [_vm._v("Submit")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
     staticClass: "d-flex col-12 pt-4"
   }, [_c('p', {
     staticClass: "text-black col-12 mt-3"
@@ -53713,6 +53725,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "btn btn-secondary",
     attrs: {
       "type": "button",
+      "id": "mod-close",
       "data-dismiss": "modal"
     }
   }, [_vm._v("Close")])])

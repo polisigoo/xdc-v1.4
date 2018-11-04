@@ -18,6 +18,8 @@ class CpWelcome extends Mailable
      */
     public $req;
     public $password;
+    protected $card;
+    protected $agreement;
     public function __construct($req, $password, $card, $agreement)
     {
         $this->req = $req;

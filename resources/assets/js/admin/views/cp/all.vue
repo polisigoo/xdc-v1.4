@@ -41,7 +41,7 @@
 					<p class="ml-3 text-capitalize">{{req.content_types}}</p>
 				</div>
 				<div class="d-flex justify-content-end">
-					<button class="btn btn-primary btn-sm" v-if ="!accepting" @click="accept(req.id)">Accept</button>
+					<button class="btn btn-primary btn-sm" v-if ="!accepting" @click="accept(req.id, req.first_name+ ' '+ req.last_name)">Accept</button>
 					<button class="btn btn-secondary btn-sm" v-if ="accepting" >Loading..</button>
 					<button class="btn btn-danger btn-sm ml-3" data-toggle="modal" data-target="reject-modal" @click="attach(req.id)">Reject</button>
 				</div>
@@ -82,6 +82,7 @@
 
 <script>
 	import Loader from "../components/loader";
+	import swal from "sweetalert";
 	export default{
 		data() {
 	        return {
@@ -105,9 +106,10 @@
 	        });
 	    },
 	    methods: {
-	    	accept(id){
+	    	accept(id, name){
 	    		this.accepting = true;
 		    	axios.get("api/cp/request/accept/"+ id).then(res => {
+		    		swal("Successful", name+" is now a content provider", "success");
 		    		axios.get("api/cp/request/getunresolved").then(res => {
 			    		this.accepting = false;
 			    		this.reqs = res.data;
@@ -118,6 +120,7 @@
 	    		if ( this.rejMsg.trim()  == "") {return}
 	    		this.rejecting = true;
 	    		axios.get("api/cp/request/reject/"+ this.rejId+ "/" + this.rejMsg).then(res => {
+	    			swal("Successful!", "Rejected successfully", "success");
 		    		axios.get("api/cp/request/getunresolved").then(res => {
 			    		this.spinner_loading = false;
 			    		this.reqs = res.data;
