@@ -53403,7 +53403,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-group col-12"
   }, [_c('label', {
     staticClass: "text-black d-block"
-  }, [_vm._v("Passport Photo")]), _vm._v(" "), _c('img', {
+  }, [_vm._v("Upload a Passport size photo")]), _vm._v(" "), _c('img', {
     staticClass: "d-none mb-3 p-1",
     staticStyle: {
       "border": "2px solid #a3a3a3"

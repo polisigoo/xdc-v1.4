@@ -118,7 +118,7 @@
 		        	</div>
 		        		
 					<div class="form-group col-12">
-						<label class="text-black d-block">Passport Photo</label>
+						<label class="text-black d-block">Upload a Passport size photo</label>
 
 						<img src="" id="passimg" class="d-none mb-3 p-1" style="border:2px solid #a3a3a3;" width="150px" height="150px">
 

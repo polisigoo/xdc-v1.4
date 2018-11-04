@@ -38,23 +38,30 @@
     <!-- END Header -->
 
     <div class="body">
-        <p>Hello {{ $req->first_name }}!</p>
-        <p>Your request to become a content provider has been approved</p>
-        <hr>
-        <p>You can log in to your dashboard using your email address and this auto generated password which can be changed later by you if you wish
-            <em><strong>{{$password}}</strong></em>
+        <p>Dear Mr {{ $req->first_name }} {{$req->last_name}} </p>
+        <p>R2H Membership Number: {{$req->id}}</p>
+        
+        <p>Welcome to the R2H CINE FAMILY</p>
+
+        <p>Thank you for registering as a Content Provider. We trust that this relationship will be mutually beneficial.</p>
+        <p>Please use the following temporary password <em><strong>{{$password}}</strong></em> and your membership number  to login into your R2H CINE FAMILY account, once you have logged in, you will be prompted to change your password to a custom one of your choice.</p>
+        <p>Your new R2H Membership Card is attached hereto.</p>
+        <p>
+            Please do not hesitate to contact our Call Centre at 1800-XXXXXX (toll free within India) or Mobile Number +91-9819 724 722 should you have any queries. You can also visit our website www.r2h.in for the program terms and conditions as well as frequently asked questions.
         </p>
 
-        <div style="margin-top: 2rem;">
-        	<a href="#" style="padding: 8px 25px; color: white; background-color: green; text-decoration: none; border: solid 1px #00af00;">Go to Dashboard</a>
-        </div>
+        <p>
+            Kind Regards. <br>
+            R2H CINE FAMILY Program <br>
+            info.r2hlive@gmail.com <br>
+            D-98, Pocket D, Okhla Phase I,  <br>
+            Okhla Industrial Area, New Delhi, Delhi 110020
+
+        </p>
     </div>
     <!-- END BODY -->
 
-    <div class="footer" style="margin-top: 100px;background: #e8e8e8;padding: 20px;">
-        <p>Please do not reply to this email. Emails sent to this address will not be answered.
-        </p>
-        <p>Copyright © {{ date('Y') }} {{ config('app.name') }}  </p>
+    
     </div>
 </div>
 </body>
