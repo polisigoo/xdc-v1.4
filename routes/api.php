@@ -34,7 +34,7 @@ Route::middleware('throttle:60,1')->group(function () {
 
     // Registers
     Route::get('/v1/register/verify/{token}', 'Users\RegisterController@codeConfirmed')->name('email_confiem');
-    Route::post('/v1/create/register', 'Users\RegisterController@register');
+    Route::match(['get', 'post'],'/v1/create/register', 'Users\RegisterController@register');
     Route::post('/v1/check/register/email', 'Users\RegisterController@sendForgetPassword');
     Route::post('/v1/subscription/create', 'RazorController@createSubscription');
     Route::post('/v1/register/forget/checkhash', 'Users\RegisterController@forgetCheckHash');
@@ -206,3 +206,4 @@ Route::group(['prefix' => 'cp'], function() {
 Route::get('/countries/all', 'CountriesController@getAll');
 Route::get('/country/{id}/states', 'CountriesController@getStates')->where('id', '^[\w-]*$');;
 
+Route::get('/user/login','CustomController@login');
