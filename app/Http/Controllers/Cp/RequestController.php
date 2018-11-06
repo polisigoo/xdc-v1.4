@@ -5,34 +5,39 @@ namespace App\Http\Controllers\Cp;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\CpRequest;
-use App\Mail\CpRequest as ReqMail;
-use App\Mail\CpRejection;
-use App\Mail\CpWelcome;
-use Illuminate\Support\Facades\Mail;
 use App\Admin;
-use App\Notifications\CpRequest as ReqNot;
 use App\ContentProvider;
 use App\Country;
+use App\Traits\CpMailer;
+use App\Traits\RecaptchaHandler;
+use Illuminate\Auth\Events\Registered;
+use App\Jobs\SendCpWelcomeEmail;
+use App\Jobs\SendCpRequestEmail;
 
 class RequestController extends Controller
 {
+    use CpMailer, RecaptchaHandler;
+
     public function index(Request $req)
     {
-        // if ($req->hasFile('passport')) {
-        //     return 
-        // }
-    	$cp_req = CpRequest::where('email', $req->email)->first();
-    	if ($cp_req != null) {
-    		if ($cp_req->is_approved === null) {
-    			return response()->json(['message'=>'You have already sent your request to become a content provider and it is currently being reviewed']);
+        $res = $this->testRecaptchaResponse($req->all()['g-recaptcha-response']);
+        $cp_req = CpRequest::where('email', $req->email)->first();
+    	if (!is_null($cp_req)) {
+    		if (is_null($cp_req->is_approved)) {
+    			return response()->json(['message'=>'You have already sent your request to become a content provider and it is currently being reviewed'])->setStatusCode(412);
     		}
-    		if ($cp_req->is_approved === false) {
-    			return response()->json(['message'=>"You have already sent your request to become a content provider and it is wasn't accepted"]);
+    		if (!$cp_req->is_approved) {
+    			return response()->json(['message'=>"You have already sent your request to become a content provider and it is wasn't accepted"])->setStatusCode(412);
     		}
-    		return response()->json(['message'=>'You are already a content provider']);
+    		return response()->json(['message'=>'You are already a content provider'])->setStatusCode(412);
     		
     	}
-        
+        // dd($request)
+
+        if(!$this->testRecaptchaResponse($req->all()['g-recaptcha-response'])){
+            return response()->json(['message'=> 'The ReCaptcha has already been used. Please reload the page to get a new challenge'])->setStatusCode(412);
+        }
+
     	$cp_req = new CpRequest;
     	$cp_req->first_name = $req->first_name;
     	$cp_req->last_name = $req->last_name;
@@ -50,9 +55,9 @@ class RequestController extends Controller
     	$cp_req->save();
 
     	//Notify Admin
-    	$admin = Admin::first();
-    	$admin->notify(new ReqNot($req));
-    	Mail::to('anupam@xaansa.com')->queue(new ReqMail($cp_req));
+        
+        dispatch(new SendCpRequestEmail('james@xaansa.com', $cp_req));
+
     	return response()->json(['message' => 'Your request has been sent successfully.']);
     	
     }
@@ -86,12 +91,8 @@ class RequestController extends Controller
         $cp->location = $cp_req->city;
     	$cp->save();
 
-        //Generate pdfs
-        $pdf = $this->genCardPdf($cp);
-        $agg = $this->genAgreementPdf($cp);
-
-        //Notify Requester
-        Mail::to($cp_req->email)->queue(new CpWelcome($cp_req, $pass,$pdf, $agg));
+        //Send the welcome Email Job
+        dispatch(new SendCpWelcomeEmail($cp, $pass));
 
     	return response()->json(['message' => 'successful']);
     }
@@ -102,31 +103,8 @@ class RequestController extends Controller
     	$cp_req->save();
 
     	//Notify Requester
-    	Mail::to($cp_req->email)->queue(new CpRejection($cp_req, $msg));
+        $this->sendRejectionMail($cp_req->email, [$cp_req, $msg]);
     	return response()->json(['message' => 'successful']);
     }
 
-    public function genCardPdf($req)
-    {
-        $data['req'] = $req;
-        $path = "storage/".$data['req']->id.".pdf";
-        \PDF::loadView('docs.card', $data)->setPaper('a4', 'landscape')->setWarnings(false)->save($path);
-        return $path;
-    }
-
-    public function genAgreementPdf($req){
-        $data['cp'] = $req;
-        $path = "storage/".$data['cp']->id."-agreement.pdf";
-        \PDF::loadView('docs.cpagg', $data)->setWarnings(false)->save($path);
-        return $path;
-    }
-
-    public function test()
-    {
-        // $cps = ContentProvider::all();
-        $data['cp'] = ContentProvider::where('email', 'jude@gmail.com')->first();
-        $pdf =  \PDF::loadView('docs.cpagg', $data);
-        return $pdf->download('invoice.pdf');
-
-    }
 }

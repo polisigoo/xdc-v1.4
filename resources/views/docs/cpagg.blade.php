@@ -32,8 +32,8 @@
     <body style="font-size: 15px;">
     	<div class="px-3">
     		<div class="d-block py-2">
-    		<img src="images/image1.png" width="700px" height="900px">
-    	</div>
+        		<img src="images/image1.png" width="700px" height="900px">
+        	</div>
 	    	<div class="container-fluid">
 	    		<div class="">
 		    		<h4 class="text-capitalize text-center"> <u>R2H LIVE Content Provider (CP) Agreement</u></h4>

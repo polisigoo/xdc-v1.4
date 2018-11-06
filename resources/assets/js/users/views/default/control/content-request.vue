@@ -11,20 +11,24 @@
 		        	<div class="d-flex">
 		        		<div class="form-group col-6 pt-2">
 		        			<label class="text-black text-capitalize">First Name</label>
-		        			<input  type="text" name="first_name" class="myform-control" required>
+		        			<input v-validate="'required'"  type="text" name="first_name" class="myform-control mb-1" required>
+		        			<small class="text-danger">{{ errors.first('first_name') }}</small>
 		        		</div>
 		        		<div class="form-group col-6 pt-2">
 		        			<label class="text-black text-capitalize">Last Name</label>
-		        			<input  type="text" name="last_name" class="myform-control" required>
+		        			<input  type="text" v-validate="'required'" name="last_name" class="myform-control" required>
+		        			<small class="text-danger">{{ errors.first('last_name') }}</small>
 		        		</div>
 		        	</div>
 		        	<div class="form-group col-12 pt-2">
 		        		<label class="text-black text-capitalize">E-mail ID</label>
-		        		<input type="email"  name="email" class="myform-control" required>
+		        		<input v-validate="'required|email'" type="email"  name="email" class="myform-control" required>
+		        		<small class="text-danger">{{ errors.first('email') }}</small>
 		        	</div>
 		        	<div class="form-group col-12 pt-2">
 		        		<label class="text-black text-capitalize">Mobile / Contact Number</label>
-		        		<input type="text"  name="phone" class="myform-control" required>
+		        		<input v-validate="'regex:^([+]*[0-9]+)$'" type="text" v-model="phone"  name="phone" class="myform-control mb-1" required>
+		        		<small class="text-danger">{{ errors.first('phone') }}</small>
 		        	</div>
 		        	<div class="form-group col-12 pt-2">
 		        		<label class="text-black text-capitalize">company / Production Name</label>
@@ -56,7 +60,8 @@
 		    			</div>
 		    			<div class="form-group col-6">
 		    				<label class="text-black">Zip Code</label>
-		    				<input type="text" name="zip" class="myform-control">
+		    				<input v-validate="'required|numeric'" type="text" v-model="zip" name="zip" class="myform-control mb-1">
+		    				<small class="text-danger">{{ errors.first('zip') }}</small>
 		    			</div>
 					</div>
 		        	<div class="form-group pt-2">
@@ -123,9 +128,21 @@
 						<img src="" id="passimg" class="d-none mb-3 p-1" style="border:2px solid #a3a3a3;" width="150px" height="150px">
 
 						<button class="w-50 py-2" type="button" @click="selectInp"><i class="fa fa-plus"></i></button>
-						<input type="file" class="myform-control d-none" accept="image/*" id="passport" v-on:change="imageHandler()"  style="border:1px solid #ccc;" name="passport">
+						<input type="file" class="myform-control d-none" accept="image/*" id="passport" v-on:change="imageHandler()" length="1000000"  style="border:1px solid #ccc;" name="passport">
 					</div>
-					<div class="d-flex justify-content-start">
+					<div class="col">
+						<vue-recaptcha 
+					  		ref = "recaptcha"
+					  		@verify="onCaptchaVerified"
+	                  		@expired="onCaptchaExpired"
+	                  		sitekey="6Lfq8HgUAAAAALWjBjFiF-Noe-JKyAM3ZoP1fXam" >
+	                  			
+	                  	</vue-recaptcha>
+					</div>
+				  	
+						
+					<!-- <div class="g-recaptcha" data-sitekey="6Lfq8HgUAAAAALWjBjFiF-Noe-JKyAM3ZoP1fXam" v-bind:data-callback="recaptcha"></div> -->
+					<div class="d-flex justify-content-start mt-3">
 						<div class="col-md-4 col-5">
 							<button class="primary btn rounded-0 btn-sm w-100 text-white" v-if="!loading" style="cursor: pointer;" type="submit">Submit</button>
 							<button class="primary btn rounded-0 btn-sm w-100 text-white" v-if="loading" type="button">Loading...</button>
@@ -166,43 +183,54 @@
 </style>
 <script>
 	import swal from 'sweetalert';
+	import VueRecaptcha from 'vue-recaptcha';
 	export default {
 		name: "request",
+		components: { VueRecaptcha },
 		data() {
 			return {
 				countries: [],
 				states:[],
-				country: 1,
+				country: 100,
 				image: "",
+				phone: "",
+				zip: "",
 				loading: false,
 				csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			};
 		},
 		created() {
 			axios.get("api/countries/all").then(res => {
-				// this.spinner_loading = false;
 				this.countries = res.data;
-				console.log(this.countries);
 				axios.get("/api/country/"+this.countries[0].id+"/states").then(resp => {
 					this.states = resp.data;
-					console.log(this.states);
+
+				}).then(() =>{
+					this.country = 94;
 				});
 		    });
 		},
 		watch: {
-			// whenever question changes, this function will run
+			// whenever country changes, this function will run
 			country(){
 				axios.get("/api/country/"+this.country+"/states").then(resp => {
 					this.states = resp.data;
-					console.log(this.states);
 				});
-			}
+			},
+			
 		},
 		methods: {
+			onCaptchaVerified(token){
+				// console.log(token);
+			},
+			onCaptchaExpired(){
+				this.$refs.recaptcha.reset();
+			},
 			sendReq(e){
 				e.preventDefault();
 				var myform = document.querySelector('#reqForm');
 				var data = new FormData(myform);
+				console.log()
 				this.loading = true;
 				if (data.getAll('content_type[]') == "") {
 					swal("Oops!", "You must select at least one content type", "error");
@@ -210,15 +238,36 @@
 					return;
 					
 				}
-				if (!document.querySelector('#passport').files[0]) {
+				if (!document.querySelector('#passport').files[0] || document.querySelector('#passport').files[0].size > 1000*1024) {
 					swal("Oops!", "You must upload a passport photograph", "error");
 					this.loading = false
 					return;
 				}
+				if(!this.phone.match('^([+]*[0-9]+)$')){
+					swal("Oops!", "Your phone number is not in the correct format", "error");
+					this.loading = false
+					return;
+				}
+				if (!this.zip.match('^([0-9]+)$')) {
+					swal("Oops!", "Your zip code is not in the correct format", "error");
+					this.loading = false
+					return;
+				}
+				if (!data.getAll('g-recaptcha-response')) {
+					swal("Oops!", "You must pass the recaptcha challenge", "error");
+					this.loading = false
+					return;
+				}
+
 				axios.post('/content-provider/request', data).then(res =>{
+					console.log(res.data);
 					swal("Successful", res.data.message, "success");
 					this.loading = false;
 					document.querySelector('#mod-close').click();
+					document.querySelector('#reqForm').reset();
+				}).catch(err => {
+					swal("Oops", err.response.data.message, "error");
+					this.loading = false;
 				});
 			},
 			selectInp(){
@@ -228,6 +277,10 @@
 			imageHandler(){
 				let img = document.querySelector('#passimg');
 				let file = document.querySelector('#passport').files[0];
+				if (file.size > 1000*1024) {
+					swal('Oops', "Passport should not be larger than 1mb", 'error');
+					return;
+				}
 			    if (file.type.startsWith('image/')) {
 					img.file = file;
 					img.classList = "d-block mb-3 p-1 ml-3"
@@ -240,7 +293,7 @@
 					reader.readAsDataURL(file);
 			    }
 
-			}
+			},
 		}
 
 	}
