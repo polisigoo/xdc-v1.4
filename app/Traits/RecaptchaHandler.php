@@ -14,6 +14,9 @@ trait RecaptchaHandler
 				'response' => $response,
 			]
 		]);
-		return json_decode($res->getBody()->getContents())->success;
+		if ($res->getBody()->getContents()) {
+			return true;
+		}
+		return false;
 	}
 }
