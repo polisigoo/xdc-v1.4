@@ -81,7 +81,7 @@ class RequestController extends Controller
     	$cp->email = $cp_req->email;
     	$cp->mobile_number = $cp_req->mobile_number;
     	$cp->company_name = $cp_req->company_name;
-    	$cp->password = $pass;
+    	$cp->password = bcrypt($pass);
         $cp->passport = $cp_req->passport;
         $cp->address1 = $cp_req->address1;
         $cp->address2 = $cp_req->address2;
