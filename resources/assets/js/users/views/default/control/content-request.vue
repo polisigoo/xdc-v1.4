@@ -27,7 +27,7 @@
 		        	</div>
 		        	<div class="form-group col-12 pt-2">
 		        		<label class="text-black text-capitalize">Mobile / Contact Number</label>
-		        		<input v-validate="'regex:^([+]*[0-9]+)$'" type="text" v-model="phone"  name="phone" class="myform-control mb-1" required>
+		        		<input v-validate="'regex:^([+]*[0-9]+)$|max:10'" type="text" v-model="phone"  name="phone" class="myform-control mb-1" required>
 		        		<small class="text-danger">{{ errors.first('phone') }}</small>
 		        	</div>
 		        	<div class="form-group col-12 pt-2">
@@ -243,7 +243,7 @@
 					this.loading = false
 					return;
 				}
-				if(!this.phone.match('^([+]*[0-9]+)$')){
+				if(!this.phone.match('^([+]*[0-9]+)$') || this.phone.length > 10){
 					swal("Oops!", "Your phone number is not in the correct format", "error");
 					this.loading = false
 					return;

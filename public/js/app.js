@@ -3145,7 +3145,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				this.loading = false;
 				return;
 			}
-			if (!this.phone.match('^([+]*[0-9]+)$')) {
+			if (!this.phone.match('^([+]*[0-9]+)$') || this.phone.length > 10) {
 				__WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Oops!", "Your phone number is not in the correct format", "error");
 				this.loading = false;
 				return;
@@ -6399,186 +6399,6 @@ __webpack_require__("./node_modules/plyr/dist/plyr.css");
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -53469,8 +53289,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "validate",
       rawName: "v-validate",
-      value: ('regex:^([+]*[0-9]+)$'),
-      expression: "'regex:^([+]*[0-9]+)$'"
+      value: ('regex:^([+]*[0-9]+)$|max:10'),
+      expression: "'regex:^([+]*[0-9]+)$|max:10'"
     }, {
       name: "model",
       rawName: "v-model",
@@ -54709,8 +54529,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "background-color": "#fd0000",
       "color": "#ffffff",
       "border": "1px solid #991218"
+    },
+    attrs: {
+      "data-toggle": "modal",
+      "data-target": "#content-request-modal"
     }
-  }, [_vm._v("R2H Live")])])])
+  }, [_vm._v("Upload")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

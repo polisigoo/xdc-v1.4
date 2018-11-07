@@ -11,7 +11,7 @@
 			/*background-image: url('/images/r2h-card-bg.png');*/
 		/*	background-repeat: no-repeat;
 			background-position: center;*/
-			height: 600px;
+			/*height: 600px;*/
 		}
 		.pos-ab{
 			position: absolute;
@@ -20,16 +20,16 @@
 		}
 		.pos-abs{
 			position: absolute;
-			bottom: 30%;
+			bottom: 23%;
 			left: 10%
 		}
 	</style>
-	<img src="images/r2h-card-bg.png" class="pos mt-3 px-4 w-75"> 
-		<img src="images/logo.png" class="pos-ab ">
-		<div class="pos-abs">
-			<h3 style="color: #dcdcdc; font-weight: 400;">Registration No.</h3>
-			<h1 class="">{{$req->id}} </h1>
-			<h1>{{$req->first_name}} {{$req->last_name}}</h1>
-		</div>
+	<img src="images/r2h-card-bg.png" class="pos mt-3 px-4"> 
+	<img src="images/logo-beta-red.png" class="pos-ab ">
+	<div class="pos-abs">
+		<h3 style="color: #dcdcdc; font-weight: 400;">Registration No.</h3>
+		<h1 class="">{{$req->id}} </h1>
+		<h1>{{$req->first_name}} {{$req->last_name}}</h1>
+	</div>
 </body>
 </html>
