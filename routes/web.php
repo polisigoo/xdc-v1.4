@@ -12,14 +12,14 @@
 |
  */
 
-/*Route::get('test-blad','Cp\RequestController@test');
+Route::get('test-blad','Cp\RequestController@test');
 Route::get('test-blade',function(){
     
-    $data['req'] = \App\ContentProvider::where('email', 'jamesjay4199@gmail.com')->first();
-    $pdf = \PDF::loadView('docs.card', $data)->setPaper('a4', 'landscape');
-    return $pdf->download('invoice.pdf');
-    return view('docs.card', $data);
-});*/
+    $data['cp'] = \App\ContentProvider::where('email', 'jamesjay4199@gmail.com')->first();
+    $pdf = \PDF::loadView('docs.cpagg', $data);
+    return $pdf->download('agg.pdf');
+    // return view('docs.cpagg', $data);
+});
 Route::group(['prefix' => 'content-provider'], function() {
     Route::post('/request', 'Cp\RequestController@index')->name('content.request');
     Route::get('/content', function() { 

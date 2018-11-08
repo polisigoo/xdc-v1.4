@@ -30,13 +30,13 @@
         </style>
     </head>
     <body style="font-size: 15px;">
+        <div class="d-block px-0">
+            <img src="images/r2h-coverpage.jpg" height="950px" width="100%">
+        </div>
     	<div class="px-3">
-    		<div class="d-block py-2">
-        		<img src="images/image1.png" width="700px" height="900px">
-        	</div>
-	    	<div class="container-fluid">
+    		<div class="container-fluid">
 	    		<div class="">
-		    		<h4 class="text-capitalize text-center"> <u>R2H LIVE Content Provider (CP) Agreement</u></h4>
+		    		<h4 class="text-capitalize text-center"> <u>R2H LIVE Content Provider (CP) Agreement -Draft</u></h4>
 		    		<h5 class="text-capitalize text-center"> <u>Agreement Version 1.0.1</u></h5>
 		    		<h5 class="text-center"><u>Dated : {{now()->toDateString()}}</u></h5>
 		    	</div>
