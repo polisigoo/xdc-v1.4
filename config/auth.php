@@ -50,6 +50,11 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+
+        'cp' => [
+            'driver' => 'session',
+            'provider' => 'content_providers',
+        ],
     ],
     /*
     |--------------------------------------------------------------------------
@@ -76,6 +81,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
+        ],
+
+        'content_providers' => [
+            'driver' => 'eloquent',
+            'model' => App\ContentProvider::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

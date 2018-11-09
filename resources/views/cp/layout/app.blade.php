@@ -15,15 +15,19 @@
 	<title>Header</title>
 </head>
 <body>
-@include('contents.layout.header')
-<main class="d-flex">
+@include('cp.layout.header')
+<main>
+  @auth
    <div>
-      @include('contents.layout.sidebar') 
+      @include('cp.layout.sidebar') 
    </div>
    <div class="main-content pt-md-4 pt-2 ml-2 ml-md-4" style="width: 80%">
-        @include('contents.partial.breadcrumb')
+        @include('cp.partial.breadcrumb')
         @yield('content')       
    </div>
+   @else
+   @yield('content-nonauth')
+   @endauth
 </main>
 
 

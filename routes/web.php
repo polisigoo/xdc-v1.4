@@ -12,9 +12,11 @@
 |
  */
 
+
+
 Route::get('test-blad','Cp\RequestController@test');
 Route::get('test-blade',function(){
-    
+    return base_path();
     $data['cp'] = \App\ContentProvider::where('email', 'jamesjay4199@gmail.com')->first();
     $pdf = \PDF::loadView('docs.cpagg', $data);
     return $pdf->download('agg.pdf');

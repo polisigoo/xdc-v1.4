@@ -83,7 +83,11 @@ class Handler extends ExceptionHandler
         if ($request->expectsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
-
+        if(str_contains($request->root(), "cp."))
+        {
+            return redirect("/login");
+         
+        }
         return redirect()->guest('/administrator/login');
     }
 }

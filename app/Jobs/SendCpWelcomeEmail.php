@@ -43,7 +43,7 @@ class SendCpWelcomeEmail implements ShouldQueue
         $this->card = $this->generatePdf($this->cp, 'card');
         $this->agreement = $this->generatePdf($this->cp, 'agreement');
         // dd('james');
-        // echo $this->card;
+        echo $this->password;
         // $this->aggrement = $this->generateAgreementPdf($cp);
         $this->sendWelcomeMail($this->cp->email, [$this->cp, $this->password, $this->card, $this->agreement]);
     }
