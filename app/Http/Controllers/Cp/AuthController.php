@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
 	use AuthenticatesUsers;
+    
 	function __construct()
 	{
 		# code...

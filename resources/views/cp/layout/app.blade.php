@@ -18,12 +18,13 @@
 @include('cp.layout.header')
 <main>
   @auth
-   <div>
+   <div class="d-flex">
       @include('cp.layout.sidebar') 
-   </div>
-   <div class="main-content pt-md-4 pt-2 ml-2 ml-md-4" style="width: 80%">
+   
+      <div class="main-content pt-md-4 pt-2 ml-2 ml-md-4" style="width: 80%">
         @include('cp.partial.breadcrumb')
         @yield('content')       
+      </div>
    </div>
    @else
    @yield('content-nonauth')

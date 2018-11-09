@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Cp;
 
 use App\Http\Controllers\Controller;
 use Auth;
-use App\ContentProvider;
+//use App\ContentProvider;
 /**
  * 
  */
@@ -18,6 +18,6 @@ class DashboardController extends Controller
 
 	public function home(){
 
-		return Auth::user();
+		return view('cp.dashboard');
 	}
 }

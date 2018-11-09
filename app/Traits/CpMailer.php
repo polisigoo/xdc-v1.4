@@ -9,17 +9,29 @@ use Illuminate\Support\Facades\Mail;
 
 trait CpMailer
 {
-	public function sendRequestMail($to, $data) : void
+    /**
+     * @param $to
+     * @param $data
+     */
+    public function sendRequestMail($to, $data) : void
 	{
 		Mail::to($to)->queue(new CpRequest($data));
 	}
 
-	public function sendRejectionMail($to, $data) : void
+    /**
+     * @param $to
+     * @param $data
+     */
+    public function sendRejectionMail($to, $data) : void
 	{
 		Mail::to($to)->queue(new CpRejection($data[0], $data[1]));
 	}
 
-	public function sendWelcomeMail($to, $data) : void
+    /**
+     * @param $to
+     * @param $data
+     */
+    public function sendWelcomeMail($to, $data) : void
 	{
 		Mail::to($to)->queue(new CpWelcome($data[0], $data[1], $data[2], $data[3]));
 	}
