@@ -34,7 +34,7 @@
 	background-color: #e6e6e6;
 	height: 88%;
 	position: sticky;
-	top: 12%
+	/*top: 12%*/
 }
 .mynav a{
 	font-weight: 400;
@@ -44,7 +44,7 @@
 	color: #989898;
 
 }
-.myactive{
+.router-link-exact-active{
 	background-color: #fdfdfd;
 }
  .main-content{
@@ -109,7 +109,7 @@ and (max-device-width : 480px) {
 	}
 	.mynav{
 		height: 93%;
-		top: 7%;
+		/*top: 7%;*/
 	}
 	#sm-100{
 		width: 96% !important;

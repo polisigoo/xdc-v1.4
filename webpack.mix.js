@@ -12,6 +12,7 @@ let mix = require('laravel-mix');
  */
 mix.js('resources/assets/js/users/app.js', 'public/js')
     .js('resources/assets/js/admin/app.js', 'public/js/admin-js/')
+    .js('resources/assets/js/cp/app.js', 'public/js/cp')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .extract([
             'vue',
