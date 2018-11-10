@@ -32,7 +32,7 @@
 </main>
 
 
-
+<script src="//npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 <script src="/js/cp/manifest.js"></script>
 <script src="/js/cp/vendor.js"></script>
 <script src="{{asset('js/cp/app.js')}}"></script>
