@@ -53,7 +53,6 @@
 </template>
 
 <script>
-    import swal from 'sweetalert';
     export default {
         name: "settings",
         data(){
@@ -145,7 +144,7 @@
                         localStorage.setItem('user', JSON.stringify(res.data.user))
                     })
                 }).catch(err => {
-                    swal("Oops","An error occurred", "error");
+                    swal("Oops",err.response.data.message, "error");
                     console.log(err);
                 });
             }

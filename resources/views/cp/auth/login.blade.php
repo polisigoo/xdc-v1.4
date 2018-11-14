@@ -7,15 +7,7 @@
 	}
 </style>
 @section('content-nonauth')
-@if(count($errors))
-	{{dd($errors)}}
-@endif
-@if ($errors->has('email'))
-    <span class="help-block" style="color: red;">
-    	<strong>{{ $errors->first('email') }}</strong>
-    </span>
-@endif
-	<section class="container pt-md-5 pt-3">
+    <section class="container pt-md-5 pt-3">
 		<div class="d-flex w-100 justify-content-center">
 			<form method="POST" action="/login" class="box p-3 col-md-8 col-11">
 				@csrf
@@ -25,6 +17,11 @@
 						Email ID
 					</label>
 					<input type="text" name="email" class="myform-control ">
+					@if ($errors->has('email'))
+						<span class="help-block" style="color: red;">
+							{{ $errors->first('email') }}
+						</span>
+					@endif
 				</div>
 				<div class="form-group mt-3 ">
 					<label>
