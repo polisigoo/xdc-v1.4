@@ -20,7 +20,7 @@
 				{{Auth::user()->first_name ." ". Auth::user()->last_name}}
 	  	</h5>
 	  	<div class="dropdown-menu mt-4 box border-0" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item mygrey" href="#">Setting</a>
+		    <a class="dropdown-item mygrey" href="/settings">Setting</a>
 		    <form method="POST" action="/logout">
 		    	@csrf
 		    	<button class="dropdown-item mygrey">Logout</button>

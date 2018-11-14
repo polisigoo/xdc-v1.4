@@ -11,8 +11,6 @@ let routes =[
         path: '/settings',
         component: require('./views/settings.vue')
     },
-
-
     {
         path: '/finance',
         component: require('./views/statements/app.vue'),
@@ -39,6 +37,17 @@ let routes =[
         path: 'contents/show',
         component: require('./views/contents/show.vue'),
     },
+    {
+        name: 'upload',
+        path: '/upload',
+        component: require('./views/uploads/edit.vue')
+    },
+    {
+        name: 'activation',
+        path: '/activation',
+        component: require('./views/activation.vue')
+    }
+
 
 ];
 export default new VueRouter({

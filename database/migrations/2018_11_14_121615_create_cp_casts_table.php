@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCpLivestreamTable extends Migration
+class CreateCpCastsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateCpLivestreamTable extends Migration
      */
     public function up()
     {
-        Schema::create('cp_livestream', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->string('channel_logo');
-            $table->string('channel_editor');
-            $table->string('fb_page')->nullable();
-            $table->string('content_id')->index();
+        Schema::create('cp_casts', function (Blueprint $table) {
+            $table->increments('id');
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ class CreateCpLivestreamTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cp_livestream');
+        Schema::dropIfExists('cp_casts');
     }
 }

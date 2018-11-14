@@ -15,6 +15,7 @@ class CpContent extends Model
     {
         return $this->hasOne('App\CpMovies', 'content_id');
     }
+
     public function livestream()
     {
         return $this->hasOne('App\CpLivestream', 'content_id');

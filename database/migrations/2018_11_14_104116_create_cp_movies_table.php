@@ -21,7 +21,7 @@ class CreateCpMoviesTable extends Migration
             $table->string('runtime');
             $table->string('rating_system');
             $table->string('director');
-            $table->string('fb_page');
+            $table->string('fb_page')->nullable();
             $table->string('content_id')->index();
             $table->timestamps();
         });
