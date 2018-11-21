@@ -55075,14 +55075,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         name: 'channels'
       }
     }
-  }, [_vm._v(_vm._s(_vm.$t('home.tv')) + " ")])], 1), _vm._v(" "), _c('li', {
-    staticClass: "nav-item"
-  }, [_c('a', {
-    staticClass: "nav-link ",
-    attrs: {
-      "href": "http://xaansa.com"
-    }
-  }, [_vm._v(_vm._s(_vm.$t('home.media')))])]), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.$auth.isAuthenticated() !== 'active') ? _c('li', {
+  }, [_vm._v(_vm._s(_vm.$t('home.tv')) + " ")])], 1), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.$auth.isAuthenticated() !== 'active') ? _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
     staticClass: "login nav-link",
@@ -55559,14 +55552,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         name: 'channels'
       }
     }
-  }, [_vm._v(_vm._s(_vm.$t('home.tv')) + " ")])], 1), _vm._v(" "), _c('li', {
-    staticClass: "nav-item"
-  }, [_c('a', {
-    staticClass: "nav-link mb-0 pt-3",
-    attrs: {
-      "href": "http://xaansa.com"
-    }
-  }, [_vm._v(_vm._s(_vm.$t('home.media')))])]), _vm._v(" "), (_vm.collections.length > 0) ? _c('li', {
+  }, [_vm._v(_vm._s(_vm.$t('home.tv')) + " ")])], 1), _vm._v(" "), (_vm.collections.length > 0) ? _c('li', {
     staticClass: "nav-item"
   }, [_c('div', {
     staticClass: "dropdown"
@@ -55705,14 +55691,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
-    staticClass: "navbar-brand hidden-sm-down"
+    staticClass: "navbar-brand hidden-sm-down",
+    attrs: {
+      "href": "/app"
+    }
   }, [_c('img', {
     staticStyle: {
       "height": "40px",
       "width": "80px"
     },
     attrs: {
-      "src": "/images/logo.png",
+      "src": "/images/logo-beta-red.png",
       "alt": "logo",
       "width": "100%"
     }
@@ -58448,9 +58437,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('exit-button')], 1), _vm._v(" "), _c('div', {
     staticClass: "col-12 col-md-8 offset-md-2 p-4 signup-form"
-  }, [_c('div', {
-    staticClass: "title"
-  }, [_c('h3', [_vm._v(_vm._s(_vm.$t('nav.logout')))])]), _vm._v(" "), _c('div', {
+  }, [_vm._m(0, false, false), _vm._v(" "), _c('div', {
     staticClass: " col-lg-10 offset-lg-1 "
   }, [_c('div', {
     staticClass: "form-group"
@@ -58668,7 +58655,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "btn-progress"
     }
   }), _vm._v("\n                                " + _vm._s(_vm.$t('register.loading')) + "\n                            ")]) : _vm._e()])])])])])])
-},staticRenderFns: []}
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "title"
+  }, [_c('h3', [_vm._v("Register")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

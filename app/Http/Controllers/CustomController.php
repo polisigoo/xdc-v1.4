@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use Session;
+
 
 class CustomController extends Controller
 {
@@ -12,9 +15,10 @@ class CustomController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed...
-            return response()->json(
-            	['user' => Auth::user()]
-            );
+            return response()->json([
+                    'user'  => Auth::user(),
+                    'session'=> $request->session()->token(),
+                ]);
         }
         else{
         	return response()->json(

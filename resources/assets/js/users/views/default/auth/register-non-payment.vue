@@ -12,7 +12,7 @@
             <div class="col-12 col-md-8 offset-md-2 p-4 signup-form">
 
                     <div class="title">
-                        <h3>{{$t('nav.logout')}}</h3>
+                        <h3>Register</h3>
                     </div>
 
                     <div class=" col-lg-10 offset-lg-1 ">

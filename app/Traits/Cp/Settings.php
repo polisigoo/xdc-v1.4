@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Traits\Cp;
+
 use Auth;
 use Illuminate\Http\Request;
 

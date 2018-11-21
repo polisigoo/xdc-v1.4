@@ -206,4 +206,6 @@ Route::group(['prefix' => 'cp'], function() {
 Route::get('/countries/all', 'CountriesController@getAll');
 Route::get('/country/{id}/states', 'CountriesController@getStates')->where('id', '^[\w-]*$');;
 
-Route::get('/user/login','CustomController@login');
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/user/login','CustomController@login');
+});

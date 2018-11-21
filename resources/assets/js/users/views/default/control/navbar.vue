@@ -82,9 +82,9 @@
                             <li class="nav-item">
                                 <router-link class="nav-link " :to="{name: 'channels'}">{{$t('home.tv')}} </router-link>
                             </li>
-                            <li class="nav-item"> 
-                                <a href="http://xaansa.com" class="nav-link ">{{$t('home.media')}}</a>
-                            </li>
+                            <!--<li class="nav-item"> -->
+                                <!--<a href="http://xaansa.com" class="nav-link ">{{$t('home.media')}}</a>-->
+                            <!--</li>-->
                             <hr>
                             <li class="nav-item" v-if="$auth.isAuthenticated() !== 'active'">
                                 <router-link class="login nav-link" :to="{name: 'login'}">{{$t('register.login')}}</router-link>
@@ -356,8 +356,8 @@
                     aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand hidden-sm-down">
-                    <img src="/images/logo.png" alt="logo" width="100%" style="height: 40px; width: 80px">
+                <a class="navbar-brand hidden-sm-down" href="/app">
+                    <img src="/images/logo-beta-red.png" alt="logo" width="100%" style="height: 40px; width: 80px">
                 </a>
 
                 <div class="offset-xl-1 collapse navbar-collapse " id="navbarTogglerDemo02">
@@ -377,9 +377,9 @@
                         <li class="nav-item">
                             <router-link class="nav-link mb-0 pt-3" :to="{name: 'channels'}">{{$t('home.tv')}} </router-link>
                         </li>
-                        <li class="nav-item"> 
-                            <a href="http://xaansa.com" class="nav-link mb-0 pt-3">{{$t('home.media')}}</a>
-                        </li>
+                        <!--<li class="nav-item"> -->
+                            <!--<a href="http://xaansa.com" class="nav-link mb-0 pt-3">{{$t('home.media')}}</a>-->
+                        <!--</li>-->
 
                         <li class="nav-item" v-if="collections.length > 0">
 
