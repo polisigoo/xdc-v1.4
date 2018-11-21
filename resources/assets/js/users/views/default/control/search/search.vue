@@ -483,7 +483,7 @@
         },
 
         mounted() {
-            if (this.data.length == 0 || this.data === null) {
+           /* if (this.data.length == 0 || this.data === null) {
 
                 if (this.$auth.isAuthenticated()) {
                     this.$store.dispatch("GET_SEARCH_LIST", this.$route.params.id);
@@ -494,7 +494,7 @@
             }
             setTimeout(() => {
                 this.showSlideUpAnimation = true;
-            }, 100);
+            }, 100);*/
         },
 
         methods: {
