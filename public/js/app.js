@@ -3078,7 +3078,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -3089,7 +3088,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		return {
 			countries: [],
 			states: [],
-			country: 100,
+			country: "India",
 			image: "",
 			phone: "",
 			zip: "",
@@ -3100,12 +3099,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	created: function created() {
 		var _this = this;
 
-		axios.get("api/countries/all").then(function (res) {
+		axios.get("/api/countries/all").then(function (res) {
 			_this.countries = res.data;
-			axios.get("/api/country/" + _this.countries[0].id + "/states").then(function (resp) {
+			console.log(_this.countries);
+			axios.get("/api/country/" + "India" + "/states").then(function (resp) {
 				_this.states = resp.data;
-			}).then(function () {
-				_this.country = 94;
 			});
 		});
 	},
@@ -8298,19 +8296,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     mounted: function mounted() {
-        var _this = this;
-
-        if (this.data.length == 0 || this.data === null) {
-
-            if (this.$auth.isAuthenticated()) {
-                this.$store.dispatch("GET_SEARCH_LIST", this.$route.params.id);
-            } else {
-                this.$store.dispatch("GET_GHOST_SEARCH_LIST", this.$route.params.id);
-            }
-        }
-        setTimeout(function () {
-            _this.showSlideUpAnimation = true;
-        }, 100);
+        /* if (this.data.length == 0 || this.data === null) {
+              if (this.$auth.isAuthenticated()) {
+                 this.$store.dispatch("GET_SEARCH_LIST", this.$route.params.id);
+             } else {
+                 this.$store.dispatch("GET_GHOST_SEARCH_LIST", this.$route.params.id);
+             }
+          }
+         setTimeout(() => {
+             this.showSlideUpAnimation = true;
+         }, 100);*/
     },
 
 
@@ -28621,7 +28616,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.primary{\n\tbackground-color: #44c5ed !important;\n}\n.text-black{\n\tcolor: #000;\n}\n.myform-control{\n\tpadding: 6px 12px;\n\tdisplay: block;\n\twidth: 100%;\n\tfont-size: 1rem;\n}\n@media screen and (max-width: 600px) {\n.content-request{\n\t\tfont-size: 0.8rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n.primary{\n\tbackground-color: #44c5ed !important;\n}\n.text-black{\n\tcolor: #000 !important;\n}\n.myform-control{\n\tpadding: 6px 12px;\n\tdisplay: block;\n\twidth: 100%;\n\tfont-size: 1rem;\n}\n@media screen and (max-width: 600px) {\n.content-request{\n\t\tfont-size: 0.8rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -53721,7 +53716,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-content"
   }, [_vm._m(0, false, false), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
-  }, [_c('form', {
+  }, [_vm._m(1, false, false), _vm._v(" "), _c('form', {
     staticClass: "content-request",
     attrs: {
       "enctype": "multipart/form-data",
@@ -53830,7 +53825,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('small', {
     staticClass: "text-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('phone')))])]), _vm._v(" "), _vm._m(1, false, false), _vm._v(" "), _vm._m(2, false, false), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.errors.first('phone')))])]), _vm._v(" "), _vm._m(2, false, false), _vm._v(" "), _vm._m(3, false, false), _vm._v(" "), _c('div', {
     staticClass: "d-flex"
   }, [_c('div', {
     staticClass: "form-group col-6"
@@ -53861,7 +53856,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.countries), function(country) {
     return _c('option', {
       domProps: {
-        "value": country.id
+        "value": country.name
       }
     }, [_vm._v(_vm._s(country.name))])
   }))]), _vm._v(" "), _c('div', {
@@ -53881,7 +53876,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_vm._v(_vm._s(state.name))])
   }))])]), _vm._v(" "), _c('div', {
     staticClass: "d-flex"
-  }, [_vm._m(3, false, false), _vm._v(" "), _c('div', {
+  }, [_vm._m(4, false, false), _vm._v(" "), _c('div', {
     staticClass: "form-group col-6"
   }, [_c('label', {
     staticClass: "text-black"
@@ -53913,7 +53908,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('small', {
     staticClass: "text-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('zip')))])])]), _vm._v(" "), _vm._m(4, false, false), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.errors.first('zip')))])])]), _vm._v(" "), _vm._m(5, false, false), _vm._v(" "), _c('div', {
     staticClass: "form-group col-12"
   }, [_c('label', {
     staticClass: "text-black d-block"
@@ -53983,16 +53978,29 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "button"
     }
-  }, [_vm._v("Loading...")]) : _vm._e()])]), _vm._v(" "), _vm._m(5, false, false)])]), _vm._v(" "), _vm._m(6, false, false)])])])
+  }, [_vm._v("Loading...")]) : _vm._e()])])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "modal-header req-header primary"
+    staticClass: "modal-header req-header primary d-flex w-100"
   }, [_c('h5', {
-    staticClass: "modal-title text-black text-uppercase text-center w-100",
+    staticClass: "modal-title text-black text-uppercase text-center col-11",
     attrs: {
       "id": "exampleModalLabel"
     }
-  }, [_vm._v("Content submission Request")])])
+  }, [_vm._v("Content submission Request")]), _vm._v(" "), _c('button', {
+    staticClass: "close text-black",
+    attrs: {
+      "type": "button",
+      "id": "mod-close",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("×")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', {
+    staticClass: "text-black col-12 mt-3"
+  }, [_c('span', {
+    staticClass: "text-danger"
+  }, [_vm._v("*")]), _vm._v("All of the above field types are mandatory")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-group col-12 pt-2"
@@ -54172,25 +54180,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('label', {
     staticClass: "text-black text-capitalize"
   }, [_vm._v("Talk Shows\n\t\t\t        \t\t\t\t\t\n\t\t\t        \t\t\t\t")])])])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "d-flex col-12 pt-4"
-  }, [_c('p', {
-    staticClass: "text-black col-12 mt-3"
-  }, [_c('span', {
-    staticClass: "text-danger"
-  }, [_vm._v("*")]), _vm._v("All of the above field types are mandatory")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal-footer"
-  }, [_c('button', {
-    staticClass: "btn btn-secondary",
-    attrs: {
-      "type": "button",
-      "id": "mod-close",
-      "data-dismiss": "modal"
-    }
-  }, [_vm._v("Close")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -60236,7 +60225,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             localStorage.setItem('caption', caption);
         },
         client_secret: function client_secret() {
-            return 'zPb3DOUMWX9tVh2cRLdtzTQFVU09KVx5QAWdJibu';
+            return 'A4mFk1RWpH8NxMULVaPnRn6WnlhGJMCJlbQkegIla';
         },
 
         // braintree public key

@@ -12,11 +12,17 @@ class CountriesController extends Controller
     {
     	return response()->json(Country::all());
     }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getStates($id){
-        if(is_numeric($id))
-    	    $country = Country::find($id);
         if (is_string($id))
             $country = Country::where('name', $id)->first();
+        else{
+            $country = Country::find($id);
+        }
     	return response()->json($country->states);
     }
 }

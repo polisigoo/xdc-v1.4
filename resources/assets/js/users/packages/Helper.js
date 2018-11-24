@@ -14,7 +14,7 @@ export default function (Vue) {
             localStorage.setItem('caption', caption);
         },
         client_secret() {
-            return 'zPb3DOUMWX9tVh2cRLdtzTQFVU09KVx5QAWdJibu';
+            return 'A4mFk1RWpH8NxMULVaPnRn6WnlhGJMCJlbQkegIla';
         },
         // braintree public key
         sandbox_key() {

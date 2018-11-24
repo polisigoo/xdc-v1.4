@@ -2,12 +2,15 @@
 	<div class="modal fade" id="content-request-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  	<div class="modal-dialog" role="document" style="margin-top: 8%">
 		    <div class="modal-content">
-		      <div class="modal-header req-header primary">
-		        <h5 class="modal-title text-black text-uppercase text-center w-100" id="exampleModalLabel">Content submission Request</h5>
+		      <div class="modal-header req-header primary d-flex w-100">
+                  <h5 class="modal-title text-black text-uppercase text-center col-11" id="exampleModalLabel">Content submission Request</h5>
+                  <button type="button" id="mod-close" class="close text-black" data-dismiss="modal">&times;</button>
 		      </div>
 		      <div class="modal-body">
+                  <p class="text-black col-12 mt-3"> <span class="text-danger">*</span>All of the above field types are mandatory</p>
+
 		        <form class="content-request" enctype="multipart/form-data" @submit="sendReq" id="reqForm">
-		        	<input type="hidden" name="_token" :value="csrf">
+                    <input type="hidden" name="_token" :value="csrf">
 		        	<div class="d-flex">
 		        		<div class="form-group col-6 pt-2">
 		        			<label class="text-black text-capitalize">First Name</label>
@@ -43,7 +46,7 @@
 		        		<div class="form-group col-6">
 		        			<label class="text-black">Country</label>
 		        			<select class="myform-control" v-model="country" name="country">
-		        				<option v-for="country in countries" v-bind:value="country.id">{{country.name}}</option>
+		        				<option v-for="country in countries" v-bind:value="country.name">{{country.name}}</option>
 		        			</select>
 		        		</div>
 		        		<div class="form-group col-6">
@@ -149,15 +152,11 @@
 						</div>
 						
 					</div> 
-					<div class="d-flex col-12 pt-4">
-						<p class="text-black col-12 mt-3"> <span class="text-danger">*</span>All of the above field types are mandatory</p>  
-					</div>
-					
-		        </form>
+                </form>
 		      </div>
-		      <div class="modal-footer">
-		        <button type="button" id="mod-close" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		      </div>
+		      <!--<div class="modal-footer">-->
+		        <!--<button type="button" id="mod-close" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+		      <!--</div>-->
 		    </div>
 	  	</div>
     </div>
@@ -167,7 +166,7 @@
 		background-color: #44c5ed !important;
 	}
 	.text-black{
-		color: #000;
+		color: #000 !important;
 	}
 	.myform-control{
 		padding: 6px 12px;
@@ -191,7 +190,7 @@
 			return {
 				countries: [],
 				states:[],
-				country: 100,
+				country: "India",
 				image: "",
 				phone: "",
 				zip: "",
@@ -200,14 +199,13 @@
 			};
 		},
 		created() {
-			axios.get("api/countries/all").then(res => {
+			axios.get("/api/countries/all").then(res => {
 				this.countries = res.data;
-				axios.get("/api/country/"+this.countries[0].id+"/states").then(resp => {
+				console.log(this.countries);
+				axios.get("/api/country/"+"India"+"/states").then(resp => {
 					this.states = resp.data;
 
-				}).then(() =>{
-					this.country = 94;
-				});
+				})
 		    });
 		},
 		watch: {
