@@ -364,7 +364,8 @@
                     name: null,
                     type: null,
                     index: null
-                }
+                },
+                player: "",
             };
         },
 
@@ -412,8 +413,11 @@
             },
             showplyrmodal() {
                 // Run plyr to show trailer
+                if(!this.showplyrmodal){
+                    this.player[0].stop();
+                }
                 setTimeout(() => {
-                    plyr.setup(".plyr");
+                   this.player = plyr.setup(".plyr");
                 }, 100);
             },
             showSearchPageEvent() {

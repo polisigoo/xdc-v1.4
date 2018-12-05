@@ -3131,7 +3131,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			e.preventDefault();
 			var myform = document.querySelector('#reqForm');
 			var data = new FormData(myform);
-			console.log();
 			this.loading = true;
 			if (data.getAll('content_type[]') == "") {
 				__WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Oops!", "You must select at least one content type", "error");
@@ -6226,7 +6225,8 @@ __webpack_require__("./node_modules/plyr/dist/plyr.css");
                 name: null,
                 type: null,
                 index: null
-            }
+            },
+            player: ""
         };
     },
 
@@ -6279,9 +6279,14 @@ __webpack_require__("./node_modules/plyr/dist/plyr.css");
             document.title = this.data.movie.name;
         },
         showplyrmodal: function showplyrmodal() {
+            var _this = this;
+
             // Run plyr to show trailer
+            if (!this.showplyrmodal) {
+                this.player[0].stop();
+            }
             setTimeout(function () {
-                plyr.setup(".plyr");
+                _this.player = plyr.setup(".plyr");
             }, 100);
         },
         showSearchPageEvent: function showSearchPageEvent() {
@@ -6397,6 +6402,31 @@ __webpack_require__("./node_modules/plyr/dist/plyr.css");
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -55489,7 +55519,59 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('nav', {
     staticClass: "navbar navbar-toggleable-sm navbar-inverse bg-inverse fixed-top"
-  }, [_vm._m(0, false, false), _vm._v(" "), _vm._m(1, false, false), _vm._v(" "), _c('div', {
+  }, [_vm._m(0, false, false), _vm._v(" "), (
+    _vm.$route.name === 'profile' ||
+    _vm.$route.name === 'security' ||
+    _vm.$route.name === 'payment-update' ||
+    _vm.$route.name === 'billing-details' ||
+    _vm.$route.name === 'change-plan' ||
+    _vm.$route.name === 'language' ||
+    _vm.$route.name === 'adjust-subtitles' ||
+    _vm.$route.name === 'viewing-history' ||
+    _vm.$route.name === 'support-inbox' ||
+    _vm.$route.name === 'support-request' ?
+    true : false) ? _c('a', {
+    staticClass: "navbar-brand hidden-sm-down",
+    attrs: {
+      "href": "/app"
+    }
+  }, [_c('img', {
+    staticStyle: {
+      "height": "40px",
+      "width": "80px"
+    },
+    attrs: {
+      "src": "/images/logo-beta-red.png",
+      "alt": "logo",
+      "width": "100%"
+    }
+  })]) : _vm._e(), _vm._v(" "), (
+    _vm.$route.name === 'profile' ||
+    _vm.$route.name === 'security' ||
+    _vm.$route.name === 'payment-update' ||
+    _vm.$route.name === 'billing-details' ||
+    _vm.$route.name === 'change-plan' ||
+    _vm.$route.name === 'language' ||
+    _vm.$route.name === 'adjust-subtitles' ||
+    _vm.$route.name === 'viewing-history' ||
+    _vm.$route.name === 'support-inbox' ||
+    _vm.$route.name === 'support-request' ?
+    false : true) ? _c('a', {
+    staticClass: "navbar-brand hidden-sm-down",
+    staticStyle: {
+      "cursor": "default"
+    }
+  }, [_c('img', {
+    staticStyle: {
+      "height": "40px",
+      "width": "80px"
+    },
+    attrs: {
+      "src": "/images/logo-beta-red.png",
+      "alt": "logo",
+      "width": "100%"
+    }
+  })]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "offset-xl-1 collapse navbar-collapse ",
     attrs: {
       "id": "navbarTogglerDemo02"
@@ -55571,7 +55653,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }, [_vm._v(_vm._s(item.name))])
-  }))])]) : _vm._e()]), _vm._v(" "), _vm._m(2, false, false)]), _vm._v(" "), _c('div', {
+  }))])]) : _vm._e()]), _vm._v(" "), _vm._m(1, false, false)]), _vm._v(" "), _c('div', {
     staticClass: "right-side"
   }, [_c('div', {
     staticClass: "register"
@@ -55677,23 +55759,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('span', {
     staticClass: "navbar-toggler-icon"
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "navbar-brand hidden-sm-down",
-    attrs: {
-      "href": "/app"
-    }
-  }, [_c('img', {
-    staticStyle: {
-      "height": "40px",
-      "width": "80px"
-    },
-    attrs: {
-      "src": "/images/logo-beta-red.png",
-      "alt": "logo",
-      "width": "100%"
-    }
   })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('ul', {

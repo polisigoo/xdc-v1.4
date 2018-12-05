@@ -356,7 +356,32 @@
                     aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand hidden-sm-down" href="/app">
+                <a class="navbar-brand hidden-sm-down" v-if="
+                   $route.name === 'profile' ||
+                   $route.name === 'security' ||
+                   $route.name === 'payment-update' ||
+                   $route.name === 'billing-details' ||
+                   $route.name === 'change-plan' ||
+                   $route.name === 'language' ||
+                   $route.name === 'adjust-subtitles' ||
+                   $route.name === 'viewing-history' ||
+                   $route.name === 'support-inbox' ||
+                   $route.name === 'support-request'
+                       ? true : false" href="/app">
+                    <img src="/images/logo-beta-red.png" alt="logo" width="100%" style="height: 40px; width: 80px">
+                </a>
+                <a class="navbar-brand hidden-sm-down" v-if="
+                   $route.name === 'profile' ||
+                   $route.name === 'security' ||
+                   $route.name === 'payment-update' ||
+                   $route.name === 'billing-details' ||
+                   $route.name === 'change-plan' ||
+                   $route.name === 'language' ||
+                   $route.name === 'adjust-subtitles' ||
+                   $route.name === 'viewing-history' ||
+                   $route.name === 'support-inbox' ||
+                   $route.name === 'support-request'
+                       ? false: true" style="cursor:default;">
                     <img src="/images/logo-beta-red.png" alt="logo" width="100%" style="height: 40px; width: 80px">
                 </a>
 
