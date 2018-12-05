@@ -2,6 +2,7 @@
 
 namespace App;
 
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\File;
 
 class Helpers
@@ -55,11 +56,14 @@ class Helpers
     /**
      * @return mixed
      *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public static function getIp()
     {
-        $ip = file_get_contents('https://api.ipify.org/');;
-        $query = json_decode(file_get_contents('https://ipapi.co/' . $ip . '/json'));
+        $ip = file_get_contents('https://api.ipify.org/');
+        $client = new Client();
+        $query = $client->request('GET', 'https://ipapi.co/' . $ip . '/json');
+        $query = json_decode($query->getBody()->getContents());
         if ($query) {
             $location['country'] = $query->country_name;
             $location['countryCode'] = $query->country;

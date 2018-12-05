@@ -228,7 +228,6 @@
 				e.preventDefault();
 				var myform = document.querySelector('#reqForm');
 				var data = new FormData(myform);
-				console.log()
 				this.loading = true;
 				if (data.getAll('content_type[]') == "") {
 					swal("Oops!", "You must select at least one content type", "error");
